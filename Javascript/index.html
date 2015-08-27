@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Javascript</title>
+</head>
+<body>
+
+
+<script type="text/javascript">
+
+	/****************** Array ******************/
+
+	// var mothers = ["Birte", "Katerina", "Line"];
+	// var fathers = ["Per", "John", "Mario"];
+	// var children = ["Santiago", "Jakob", "Stine"];
+
+	// for (var i = 0; i < mothers.length; i++) {
+	// var message = mothers[mothers.length-i-1] + 
+	// " is married to " + fathers[i] + 
+	// " and have a child called " 
++	// children[children.length-i-1];
+	// console.log(message);
+	// }
+
+/******************************/
+
+
+
+	var mothers = ["Birte","Katerina","Line"];
+	var fathers = ["Per","John","Mario"];
+	var children = ["Santiago","Jakob","Stine"];
+
+	var family = [];
+
+	// Line is married to Per and have a child called Stine
+	// Katerina is married to Jhon and the child is Jakob
+	// Birthe Mario Santiago
+
+	for (var i = 0; i < fathers.length; i++) {
+
+		family.push(fathers[i]);
+
+		for (var i = mothers.length-1; i >= 0; i--) {
+
+			family.push(mothers[i]);
+
+			for (var i = children.length-1; i >= 0; i--) {
+
+				family.push(children[i]);
+
+				console.log(family);
+
+				var family = [];
+
+			};
+
+		};
+		
+	};
+
+	console.log(father);
+
+	// var replacements = [1, "x", 2, "z", 0, "k"];
+	// var letters = ["a", "b", "c"]
+
+	// for (var i = 0; i < letters.length; i++) {
+	// 	if(i == 2) {
+	// 		var replace = i;
+	// 		for (var i = 0; i < replacements.length; i++) {
+	// 			if (replacements[i] == replace) {
+	// 				var next = i+1;
+	// 				letters[replace] = next;
+	// 			};
+	// 		};
+	// 	};
+	// };
+
+	// console.log(letters);
+
+	//console.log(replacements[0]);
+	//console.log(letters);
+
+	// var letters = ["a", "b", "c"];
+
+	// for (var i = 0; i < letters.length; i++) {
+	// 	if (letters[i] == "b") {
+	// 		letters[i] = "x";
+	// 	};
+	// };
+
+	// console.log(letters);
+
+	// var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t"];
+	// //var message = "you choose " + letters[1] + " and " + letters[1.5*2];
+	// //add element at the end - push
+	// letters.push("u");
+	// //delete last element from array - pop
+	// letters.pop();
+	// console.log(letters)
+
+	// var names = ["a", "b", "c"];
+
+	// for (var i = names.length-1; i >= 0; i--) {
+	// 	console.log("The letter is " + names[i]);
+	// };
+
+	// for (var i = 0; i <= 9; i++) {
+	// 	names.push("x")
+	// };
+	// console.log(names)
+
+	// var letter = "w";
+	// var response = "";
+
+	// switch(letter) {
+	// 	case "a":
+	// 		var response = "The letter is an 'A'";
+	// 	break;
+
+	// 	case "b":
+	// 		var response = "The letter is a 'B'";
+	// 	break;
+
+	// 	case "c":
+	// 		var response = "The letter is a 'C'";
+	// 	break;
+
+	// 	default:
+	// 		var response = "The letter is missing from the alphabet";
+	// };
+
+	// console.log(response);
+
+
+	// var clipsUsedMMD = "20";
+	// var clipsUsedBachelor = "1";
+	// var	ammountSUMMD = "5000";
+	// var ammountSUBachelor = "5500";
+
+	// var payTax = true;
+	// var tax = 0.90;
+
+	// var totalSum = (clipsUsedMMD * ammountSUMMD) + (clipsUsedBachelor * ammountSUBachelor);
+
+	// if (payTax == true) {
+	// 	totalSum = totalSum * tax;
+	// 	console.log(totalSum);
+	// }
+	// else if (payTax == false) {
+	// 	console.log(totalSum);
+	// }
+
+	// var firstName = "Daniel Kristian";
+	// var lastName = "Steffensen";
+	// var startedEducation = "2013";
+	// var usedSUClips = "24";
+
+	// var clipsLeft = 60 - usedSUClips;
+
+	// var response = "Hello, " + firstName + " " + lastName + " You started MMD on " + startedEducation + " and you used " + usedSUClips + " SU clips. Left you have " + clipsLeft + " SU clips, use them carefully."
+
+	// console.log(response);
+
+	// var name = "";
+	// var teacherMMD = "Kim";
+	// var teacherBacherlor = "Santiago";
+	// var education = "Bachelor";
+
+	// var mmd = "Your teacher was " + teacherMMD;
+	// var bachelor = "Your teacher is " + teacherBacherlor;
+
+	// if (education == "MMD") {
+	// 	console.log(mmd);
+	// }
+	// else if (education == "Bachelor") {
+	// 	console.log(bachelor);
+	// };
+
+	// var userName = "DKSteffensen";
+	// var email = "d_kristian_s@hotmail.com";
+	// var password = "12345";
+	// var userID = "1212";
+
+	// if ( (userName == "DKSteffensen" || email == "d_kristian_s@hotmail.com") && (password == "12345" && userID == "1212") ) {
+	// 	console.log("You are logged in!");
+	// }
+	// else {
+	// 	console.log("Something didnt match!");
+	// }
+	
+	// var firstName = "Daniel Kristian";
+	// var lastName = "Steffensen";
+	// var adress = "Stenstuegade 38 2.TH";
+
+	// var result = "My firstname is " + firstName + " and my last name is " + lastName + ". I live at " + adress;
+
+	// console.log(result);
+
+	// var year = "2015";
+	// var year = parseInt(year);
+
+	// var year = year + 1;
+	// console.log(year);
+
+	// while(year <= 2020){
+	// 	console.log(year);
+	// 	year++
+	// }
+
+	// var number = 6;
+
+	// if (number > 10) {
+	// 	console.log("Yes, the number is bigger than 10")
+	// }
+	// else {
+	// 	console.log("No, the number is lower than 10")
+	// };
+
+
+
+</script>
+
+</body>
+</html>
