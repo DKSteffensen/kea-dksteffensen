@@ -5,6 +5,20 @@
 </head>
 <body>
 
+<input type="text" value="" name="" id="txtMain" />
+<button onclick="copy();">Copy</button>
+<br />
+<input type="text" value="" name="" id="txtMainCopied0" />
+<br />
+<input type="text" value="" name="" id="txtMainCopied1" />
+<br />
+<input type="text" value="" name="" id="txtMainCopied2" />
+<br />
+<input type="text" value="" name="" id="txtMainCopied3" />
+<br />
+<input type="text" value="" name="" id="txtMainCopied4" />
+<br />
+<div id="alert"></div>
 
 <script type="text/javascript">
 
@@ -18,47 +32,80 @@
 	// var message = mothers[mothers.length-i-1] + 
 	// " is married to " + fathers[i] + 
 	// " and have a child called " 
-+	// children[children.length-i-1];
+	// children[children.length-i-1];
 	// console.log(message);
 	// }
 
 /******************************/
 
 
+	function copy () {
 
-	var mothers = ["Birte","Katerina","Line"];
-	var fathers = ["Per","John","Mario"];
-	var children = ["Santiago","Jakob","Stine"];
+		var txtMain = document.getElementById("txtMain").value;
 
-	var family = [];
+		for (var i = 0; i <= 4; i++) {
+		//var inputID = "txtMainCopied" + i;
 
-	// Line is married to Per and have a child called Stine
-	// Katerina is married to Jhon and the child is Jakob
-	// Birthe Mario Santiago
-
-	for (var i = 0; i < fathers.length; i++) {
-
-		family.push(fathers[i]);
-
-		for (var i = mothers.length-1; i >= 0; i--) {
-
-			family.push(mothers[i]);
-
-			for (var i = children.length-1; i >= 0; i--) {
-
-				family.push(children[i]);
-
-				console.log(family);
-
-				var family = [];
-
-			};
+		document.getElementById("txtMainCopied" + i).value = txtMain;
 
 		};
-		
-	};
 
-	console.log(father);
+		document.getElementById("alert").innerHTML = "Text copied 5 times."	
+
+
+	}
+
+	// var remove = ["e", "b", "d"];
+	// var letters = ["a", "b", "c", "d", "e"];
+
+	// for (var i = letters.length -1; i >= 0; i--) {
+	// 	console.log(letters[i]);
+	// 	for (var e = 0; e < remove.length; e++) {
+	// 		console.log(remove[e]);
+	// 		if(remove[e] == letters[i]){
+	// 			// console.log(letters[i]);
+	// 			// console.log(remove[e]);
+	// 			letters.splice(i, 1);
+
+	// 		}
+	// 	};
+	// };
+
+	// console.log(letters);
+
+	// var mothers = ["Birte","Katerina","Line"];
+	// var fathers = ["Per","John","Mario"];
+	// var children = ["Santiago","Jakob","Stine"];
+
+	// var family = [];
+
+	// // Line is married to Per and have a child called Stine
+	// // Katerina is married to Jhon and the child is Jakob
+	// // Birthe Mario Santiago
+
+	// for (var i = 0; i < fathers.length; i++) {
+
+	// 	family.push(fathers[i]);
+
+	// 	for (var i = mothers.length-1; i >= 0; i--) {
+
+	// 		family.push(mothers[i]);
+
+	// 		for (var i = children.length-1; i >= 0; i--) {
+
+	// 			family.push(children[i]);
+
+	// 			console.log(family);
+
+	// 			var family = [];
+
+	// 		};
+
+	// 	};
+		
+	// };
+
+	// console.log(father);
 
 	// var replacements = [1, "x", 2, "z", 0, "k"];
 	// var letters = ["a", "b", "c"]
