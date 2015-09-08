@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+	<!-- Font Awesome CDN -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+	<!-- Stylesheet Include -->
+	<link rel="stylesheet" href="jquery.css">
+
+</head>
+<body>
+
+	<div id="nav-wrap">
+		<ul id="nav-main">
+			<li class="nav-item"><a href="#">[ Living Room ]</a></li>
+			<li class="nav-item"><a href="#">[ Kitchen ]</a></li>
+			<li class="nav-item"><a href="#">[ Hallway ]</a></li>
+		</ul>
+	</div>
+
+	<div id="contWrap">
+
+<!-- 	<div>
+	<button id="btnAppend">Append</button>
+	</div>
+
+	<div id="consoleLog">
+	</div> -->
+
+<!-- 	<div>
+	<div>Bedroom</div>
+	<button class="btnGeneral" id="btnOne" data-state="on" data-room="Bedroom" data-device="light">On</button>
+	<button class="btnGeneral" id="btnTwo" data-state="off" data-room="Bedroom" data-device="light">Off</button>
+	</div> -->
+
+	<div id="btnLightWrap">
+		<div><button id="btnLight" class="btnLightOff">Light On</button></div>
+	</div>
+	<br>
+
+	
+	<div id="lightbulb" class="lightbulbOff"></div>
+	
+
+	<!----- Javascript & jQuery libraries ----->
+
+	<!-- jQuery 1.x snippet -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+	<!-- jQuery 2.x snippet -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+	<!-- jQuery 1.x UI -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+	<script>
+
+	var myInfo = {"adress":["Stenstuegade", "38", "2", "TH", "4200"], "education":["Sales Assistent", "AP degree in Multimedia Design and Communication", "Web Developer"]}
+
+	var iLive = "I live at " +myInfo.adress[0]+ " " +myInfo.adress[1]+ "." +myInfo.adress[2]+myInfo.adress[3]+ ".";
+	console.log(iLive);
+
+	// var myRooms = ["Bedroom", "fa-bed", "Bathroom", "fa-tint", "Office", "fa-briefcase"];
+
+	// $("#btnAppend").click(function(){
+	// 	for (var i = 0; i < myRooms.length; i+=2) {
+	// 		var theRoom = '<li class="nav-item"><a href="#">[ <i class="fa '+myRooms[i+1]+'"></i> ' + myRooms[i] + ' ]</a></li>';
+	// 		$("#nav-main").append(theRoom);
+	// 	};
+	// });
+
+	// $(".nav-item a").click(function(){
+	// 	var myLink = $(this).text();
+	// 	alert(myLink);
+	// });
+
+
+	// $(".btnGeneral").click(function(){
+	// 	var theRoom = $(this).attr('data-room');
+	// 	var theState = $(this).attr('data-state');
+	// 	var theDevice = $(this).attr('data-device');
+	// 	console.log("I am turning the " + theDevice + " " + theState + " in the " + theRoom);
+	// });
+
+	$("#btnLightWrap").click(function(){
+		$("#lightbulb").toggleClass("lightbulbOff lightbulbOn");
+		if ($("#lightbulb").hasClass("lightbulbOn")) {
+			$("#btnLight").text("Light Off").toggleClass("btnLightOff btnLightOn");
+		}
+		else {
+			$("#btnLight").text("Light On").toggleClass("btnLightOff btnLightOn");			
+		}
+	});
+
+	</script>
+
+	</div>
+
+</body>
+</html>

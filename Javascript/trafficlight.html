@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<button onclick="startLight();">Start Light</button>
+<script>
+
+	function showGreen (){
+		console.log("Green");
+	}
+
+	function showYellow (){
+		console.log("Yellow");		
+	}
+
+	function showRed (){
+		console.log("Red");		
+	}
+
+	function startLight (){	
+		console.log("Light Started!");
+		setInterval ("showRed();", 5000);
+		setTimeout ("showYellow()", 5000);
+		setTimeout ("showGreen()", 10000);
+	}
+
+</script>
+</body>
+</html>

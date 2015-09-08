@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<input type="number" id="time">
+<button onclick="setUserTime(); startCountingDown();">Start</button>
+<input type="text" id="message">
+<script type="text/javascript">
+
+
+function setUserTime () {
+	countFrom = document.getElementById("time").value;
+}
+
+function startCountingDown() {
+	document.getElementById("message").value = countFrom;
+	//console.log(countFrom);
+	console.log(countFrom);
+
+	if(countFrom == 0) {
+		document.getElementById("message").value = "Hi";
+	}
+	else {
+		countFrom--;
+		setTimeout("startCountingDown()", 1000);
+	}
+}
+
+
+
+// function start () {
+
+// 	//Clear message input.
+// 	document.getElementById('message').value = "";
+
+// 	count = document.getElementById('time').value;
+// 	currentNumber = document.getElementById('message').value = count;
+
+// 	var counter = setInterval ("countDown()", 1000);
+// }
+
+// function countDown () {
+
+// 	count = document.getElementById('message').value
+
+// 	if (count == 0) {
+// 		document.getElementById('message').value = "Hi";
+// 	} else {
+// 		count = count - 1;
+// 		document.getElementById('message').value = count;
+// 	}
+// }
+
+// function message (t) {
+// 	document.getElementById('message').value = "Hi";
+// }
+</script>
+</body>
+</html>

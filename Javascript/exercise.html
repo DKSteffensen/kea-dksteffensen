@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Selectors</title>
+
+<!-- Bootstrap -->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+<style>
+	body {
+		background-color: #333333;
+	}
+	#btnClick {
+		width:200px;
+		height: 200px;
+		margin-left: -100px;
+		margin-top: -100px;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		background-color: SkyBlue ;
+		border:3px solid LightBlue ;
+		border-radius:5px;
+		transition-duration:.5s ;
+		font-size:30px;
+		outline:none;
+	}
+	#btnClick:hover {
+		transform: rotate(360deg);
+		background-color: LightBlue  ;
+		border:3px solid SkyBlue ;
+		color:#333;
+		border-radius:50%;
+		animation: ani 1s infinite;
+	}
+	#btnClick:active {
+		background-color: SkyBlue ;
+		border:3px solid LightBlue ;
+		color:#333;
+
+	}
+	
+	#dataWrap {
+		padding: 10px;
+		width: 100%;
+	}
+
+	#txtBox {		
+		width:200px;
+		border-radius:5px;
+		background-color: LightBlue ;
+		border:3px solid LightBlue ;
+		font-size:24px;
+		text-align:center;
+		margin:auto;
+	}
+	#inpText {
+		width:200px;
+		border-radius:5px;
+		background-color: LavenderBlush ;
+		border:3px solid LightBlue ;
+		margin:0 auto 10px auto;
+		display:block;
+	}
+</style>
+
+
+</head>
+
+<body>
+
+<div id="dataWrap">
+
+	<input type="text" id="inpText" placeholder="Write Here">
+
+	<div id="txtBox"></div>
+
+</div>
+
+<button id="btnClick">Click Me!</button>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<script>
+
+var person = {"name":"Santiago"};
+
+function showName(data){
+	$("#txtBox").html(data);
+}
+
+$("#btnClick").click(function(){
+	var inpVal = $("#inpText").val()
+	if (inpVal == "") {
+		$("#txtBox").html("Input Missing!");
+	}
+	else {
+		showName(inpVal);		
+	}
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var test = 
+[
+	{"name":"Nice Job","icon":"fa-thumbs-o-up"},
+	{"name":"Very good Job","icon":"fa-bed"}
+];
+
+$("#btnClickShow").click(function(){
+	for (var i = 0; i < test.length; i++) {
+		var response = test[i].name + ' <i class="fa '+ test[i].icon +'"></i><br>';
+		$("#showInfo").append(response)
+	};
+});
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	<button class="playSound" id="btnOn" data-mode="soundOn">Sound On</button>
+	<button class="playSound" id="btnOff" data-mode="soundOff">Sound Off</button>
+	<button class="playSound" id="btnToggle">Sound Toggle</button>
+
+	<div id="soundWrap"></div>
+
+	<audio id="sounds">
+	</audio>
+
+	
+
+	<!----- Javascript & jQuery libraries ----->
+
+	<!-- jQuery 1.x snippet -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+	<!-- jQuery 2.x snippet -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+	<!-- jQuery 1.x UI -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	<script>
+
+	var sounds = 
+	[
+		{
+			"name":"soundOn",
+			"path":"http://www.gravas.lv/sounds/click-on.mp3",
+			"type":"audio/mp3"
+		},
+		{
+			"name":"soundOff",
+			"path":"http://www.gravas.lv/sounds/click-off.mp3",
+			"type":"audio/mp3"
+		},
+	];
+
+	//alert(sounds[0].name);
+
+	function playSound (soundMode) {
+		for (var i = 0; i < sounds.length; i++) {
+			if (soundMode == sounds[i].name) {
+
+				console.log(sounds[i].name);
+
+				$("#sounds").html("<source src='"+sounds[i].path+"' type='"+sounds[i].type+"' />");
+				$("#sounds")[0].play();
+
+			};
+		};
+	}
+
+	$(".playSound").click(function(){
+		var mode = $(this).attr('data-mode');
+		playSound (mode);
+	});
+
+	</script>
+
+
+</body>
+</html>
