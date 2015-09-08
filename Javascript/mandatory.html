@@ -7,13 +7,36 @@
 
 
 <script type="text/javascript">
-	var countries = [1,"DK",2,"USA",3,"Sweden"];
+	var countries = [1,"Denmark",2,"USA",3,"Sweden"];
 	var languages = [2,"English",1,"Danish",3,"Swedish"];
 	var population = [3,8000000,1,6000000,2,3000000000];
 
 	// In the USA people speak English and there live 300000000 people
 	// In DK they speak Danish and we are 6000000
 	// In Sweden speak Swedish ---- 8000000
+
+	for (var i = 0; i < countries.length; i++) {
+
+		for (var e = 0; e < languages.length; e++) {
+
+			for (var l = 0; l < population.length; l++) {
+
+				if(countries[i] == languages[e] && languages[e] == population[l]) {
+
+					var message = "In " + countries[i+1] + ", they speak " + languages[e+1] + " and the population is " + population[l+1] + " people.";
+					console.log(message);
+
+				}
+
+			};
+
+		};
+
+	};
+
+	// This way, its dynamicaly. So if there is added more information to the arrays it will create new lines.
+	// Created by Daniel Kristian Steffensen.
+
 </script>
 
 </body>
