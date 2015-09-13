@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+	<!-- Font-Awesome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+	<style>
+		body {
+			padding: 20px;
+		}
+		#createLight{
+			margin: 0 0 10px 0;
+		}
+		.house-icon{
+			font-size: 100px;
+			padding: 0 20px 0 0;
+		}
+
+		.house-light-on{
+			text-shadow: 0px 0px 50px Yellow;
+			transition-duration:1s;
+		}
+
+		.house-light-off{
+			color:white;
+			text-shadow: 0px 0px 10px black;
+			transition-duration:1s;
+		}
+
+
+		.house-window-on{
+			text-shadow: 0px 0px 25px lightskyblue;			
+		}
+
+		.house-window-off{
+			text-shadow: 0px 0px 5px darkorchid;
+		}
+	</style>
+</head>
+<body>
+
+<!-- <div>
+	<div>
+		<i id="light1" class="fa fa-lightbulb-o house-icon house-light-off"></i>
+		<button data-lightId="light1" class="btn btn-default btnOnOff">On/Off</button>
+	</div>
+
+	<div>
+		<i id="light2" class="fa fa-lightbulb-o house-icon house-light-off"></i>
+		<button data-lightId="light2" class="btn btn-default btnOnOff">On/Off</button>
+	</div>
+</div>
+
+<div>
+	<div>
+		<i id="window1" class="fa fa-windows house-icon house-window-off"></i>
+		<button data-windowId="window1" class="btn btn-default btnOnOff">On/Off</button>
+	</div>
+
+	<div>
+		<i id="window2" class="fa fa-windows house-icon house-window-off"></i>
+		<button data-windowId="window2" class="btn btn-default btnOnOff">On/Off</button>
+	</div>
+</div> -->
+
+
+<div id="pageWrap">
+	<div id="controlPanel">
+		<button id="createLight">Create</button>
+	</div>
+	<div id="pageContent">
+		
+	</div>
+</div>
+
+<!-- 	<div id="formWrap">
+		<div id="controlPanel">
+			<select id="colorName">
+				<option value="primary">Blue</option>
+				<option value="default">Grey</option>
+				<option value="success">Green</option>
+				<option value="warning">Yellow</option>
+				<option value="danger">Red</option>
+			</select>
+			<input type="text" id="btnIcon" placeholder="Icon Name">
+			<input type="number" id="numberOfButtons" placeholder="Number of Buttons"></input>
+			<button id="createButtons">Create Buttons</button>
+		</div>
+		<div id="formContent">
+			
+		</div>
+	</div> -->
+
+	
+<!-- 	<div id="formWrap">
+		<div id="formbtn">
+			<input type="number" id="numberOfButtons" value="" />
+			<button id="btnStart">Start</button>
+		</div>
+		<div id="formContent">
+			<div id="btnWrap">
+			</div>
+		</div>
+	</div> -->
+	
+
+	<!----- Javascript & jQuery libraries ----->
+
+	<!-- jQuery 1.x snippet -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+	<!-- jQuery 2.x snippet -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+	<!-- jQuery 1.x UI -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
+
+	<script>
+
+	// $(document).on("click",".btnOnOff",function(){
+	// var theExtractedWindowId = $(this).attr('data-windowId');
+	// $("#"+theExtractedWindowId).toggleClass('house-window-on house-window-off');
+	// });
+
+	$(document).on("click",".btnOnOff",function(){
+		var theExtractedLightId = $(this).attr('data-lightId');
+		$("#"+theExtractedLightId).toggleClass('house-light-on house-light-off');
+		var btnState = $(this).html();
+
+		if(btnState == "Lights on"){
+			$(this).html("Lights off");
+		}
+		else if (btnState == "Lights off"){
+			$(this).html("Lights on");
+		}
+	});
+
+	var house = {
+		"name":"KEA",
+		"lights":[
+			{
+				"id":1,
+				"icon":"fa-lightbulb-o",
+				"price": 25,
+				"energyUsage": 25,
+				"state": "off",
+				"color": "gold"
+			},
+			{
+				"id":2,
+				"icon":"fa-lightbulb-o",
+				"price": 50,
+				"energyUsage": 10,
+				"state": "off",
+				"color": "skyblue"
+			},
+			{
+				"id":3,
+				"icon":"fa-lightbulb-o",
+				"price": 50,
+				"energyUsage": 10,
+				"state": "off",
+				"color": "darkorchid"
+			},	
+			{
+				"id":4,
+				"icon":"fa-lightbulb-o",
+				"price": 50,
+				"energyUsage": 10,
+				"state": "off",
+				"color": "tomato"
+			},	
+			{
+				"id":5,
+				"icon":"fa-lightbulb-o",
+				"price": 50,
+				"energyUsage": 10,
+				"state": "off",
+				"color": "lawngreen"
+			},		
+		]
+	};
+
+
+	$(document).on("click", "#createLight", function(){
+		for (var i = 0; i < house.lights.length; i++) {
+			var lightID = house.lights[i].id;
+			var lightIcon = house.lights[i].icon;
+			var lightColor = house.lights[i].color;
+			var lightState = house.lights[i].state;
+			$("#pageContent").append('<div><i id="light'+lightID+'" class="fa '+lightIcon+' house-icon house-light-off" style="color:'+lightColor+'"></i> <button class="btnLight btnOnOff" data-lightId="light'+lightID+'">Lights '+lightState+'</button></div>');
+		};
+		$("#createLight").attr("disabled", true);
+	});
+
+	// $(document).on("click", ".btnLight", function(){
+	// 	var lightID = $(this).attr("data-lightID");
+	// 	var message = "You clicked on light number " + lightID;
+	// 	console.log(message);
+	// });
+
+	// var btnNumber = 1;
+
+	// $(document).on("click","#createButtons", function(){
+	// 	var buttonColor = $("#colorName").val();
+	// 	var buttonCount = $("#numberOfButtons").val();
+	// 	var buttonIcon = $("#btnIcon").val();
+	// 	var buttonText = $("#btnTxt").val();		
+	// 	createButtons(buttonColor, buttonCount, buttonIcon, buttonText);
+	// });
+
+	// function createButtons (btnColor, btnCount, btnIcon) {
+	// 	for (var i = 0; i < btnCount; i++) {
+	// 		$("#formContent").append('<button class="btn-'+btnColor+'" data-btnNumber="'+btnNumber+'"><i class="fa fa-'+btnIcon+'"></i> '+btnNumber+'</button>');
+	// 		btnNumber++;
+	// 	};
+	// };
+
+		// var btnCount = 1;
+
+		// 	function createButtons (noBtns)  {
+		// 		for (var i = 0; i < noBtns; i++) {
+		// 			$("#btnWrap").append('<button class="btn " id="btn'+btnCount+'" data-btnLightNumber="'+btnCount+'">Button '+btnCount+'</button><br />');
+		// 			btnCount++;
+		// 		};
+		// 	};
+
+		// 	$(document).on("click",".btn",function(){
+		// 		var btnNr = $(this).attr("data-btnlightnumber");
+		// 		console.log("This is a button number " + btnNr);
+		// 	});
+
+		// 	$(document).on("click","#btnStart",function(){
+		// 		var count = $("#numberOfButtons").val();
+		// 		createButtons(count);
+		// 	});
+	</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+*{
+	margin: 0;
+	padding: 0;
+	background-color: #333;
+}
+#pageWrap{
+}
+#house{
+	width: auto;
+}
+#controlPanel{
+	position: relative;
+	float: right;
+}	
+
+.lightOn{
+	background-color:black !important;
+}
+.lightOff{
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<!-- Font-Awesome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="house.css">
+
+</head>
+<body>
+
+<div id="pageWrap">
+	<div id="house">
+		
+	</div>
+
+	<div id="controlPanel">
+		<button class="btn btn-success btnLightSwitch" data-roomID="room1">On/Off</button>
+	</div>
+
+</div>	
+	
+
+<!-- Javascript & jQuery libraries -->
+<!-- jQuery 1.x snippet -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- jQuery 2.x snippet -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<!-- jQuery 1.x UI -->
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- END Javascript & jQuery libraries END -->
+
+<!-- User created Java/Jquery Scripts -->
+
+<script>
+
+var house = {
+	"name":"Your house",
+	"rooms":[
+		{
+			"id":1,
+			"width":"125px",
+			"height":"100px",
+			"top":"0px",
+			"left":"0px",
+			"color":"lightskyblue",
+			"lightState":"off",
+			"lightOn":"yellow",
+			"lightOff":"black",
+		},
+		{
+			"id":2,
+			"width":"300px",
+			"height":"50px",
+			"top":"100px",
+			"left":"0px",
+			"color":"blue",
+			"lightState":"off",
+			"lightOn":"yellow",
+			"lightOff":"black",
+		},
+		{
+			"id":3,
+			"width":"200px",
+			"height":"150px",
+			"top":"150px",
+			"left":"100px",
+			"color":"RoyalBlue ",
+			"lightState":"off",
+			"lightOn":"yellow",
+			"lightOff":"black",
+		},
+		{
+			"id":4,
+			"width":"175px",
+			"height":"100px",
+			"top":"0px",
+			"left":"125px",
+			"color":"DodgerBlue",
+			"lightState":"off",
+			"lightOn":"yellow",
+			"lightOff":"black",
+		},
+	]
+}
+for (var i = 0; i < house.rooms.length; i++) {
+	var roomId=house.rooms[i].id;
+	var roomWidth=house.rooms[i].width;
+	var roomHeight=house.rooms[i].height;
+	var roomTop = house.rooms[i].top;
+	var roomLeft = house.rooms[i].left;
+	var roomColor = house.rooms[i].color;
+	var lightState = house.rooms[i].lightState;
+	var lightOn = house.rooms[i].lightOn;
+	var lightOff = house.rooms[i].lightOff;
+
+	$("#house").append('<div id="room'+roomId+'" class="lightOff" style="position: absolute; top:'+roomTop+'; left:'+roomLeft+'; width:'+roomWidth+'; height:'+roomHeight+'; background-color:'+roomColor+';" data-roomID="room'+roomId+'"></div>');
+	$("#controlPanel").append('<button class="btn btn-success">On/Off</button>');
+};
+
+$(document).on("click", ".btnLightSwitch", function(){
+	var roomID = $(this).attr("data-roomID");
+	console.log(roomID);
+	$("#"+roomID).toggleClass("lightOff lightOn");
+
+	var lightState = $(this).hasClass("lightOn");
+	console.log(lightState);
+
+});
+
+
+</script>
+
+<!-- END User created Java/Jquery Scripts END -->
+
+
+	
+
+</body>
+</html>
