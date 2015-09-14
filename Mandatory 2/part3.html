@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Editing elements from a JSON object</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<!-- Font Awesome CDN -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<!-- Stylesheet Include -->
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	
+
+
+	
+
+	<!----- Javascript & jQuery libraries ----->
+	<!-- jQuery 1.x snippet -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- jQuery 2.x snippet -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<!-- jQuery 1.x UI -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	<script>
+	// Editing elements from a JSON object
+
+	var person = {"name":"Santiago", "lastName":"DUNUSU"};
+
+	person.lastName = "Donoso";
+	
+	var message = "Our teachers first name is " + person.name + " and the lastname is " + person.lastName;
+	console.log(message);
+
+	console.log(person);
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Adding, Editing & Deleting elements in a JSON object</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<!-- Font Awesome CDN -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<!-- Stylesheet Include -->
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	
+
+
+	
+
+	<!----- Javascript & jQuery libraries ----->
+	<!-- jQuery 1.x snippet -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- jQuery 2.x snippet -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<!-- jQuery 1.x UI -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	<script>
+	// Adding, Editing & Deleting elements in a JSON object
+
+	var person = {
+		"name":"Santiago",
+		"lastName":"Donoso",
+		"knownLanguages":
+			[
+				{"languange":"Spanish", "written":10, "reading":10, "speaking":10},
+				{"languange":"English", "written":8, "reading":8, "speaking":8},
+				{"languange":"Danish", "written":10, "reading":10, "speaking":10},
+				{"languange":"Japanese", "written":5, "reading":3, "speaking":8}
+			]
+	};
+
+	for (var i = 0; i < person.knownLanguages.length; i++) {
+		if(person.knownLanguages[i].languange == "Danish"){
+			person.knownLanguages[i].written = 6;
+			person.knownLanguages[i].reading = 9;
+			person.knownLanguages[i].speaking = 8;		
+		}
+		else if(person.knownLanguages[i].languange == "Japanese") {
+			delete person.knownLanguages[i];
+		}
+	};
+
+	person.knownLanguages.push({"languange":"Chinese", "written":4, "reading":6, "speaking":9});
+
+	console.log(person);
+
+	</script>
+</body>
+</html>
