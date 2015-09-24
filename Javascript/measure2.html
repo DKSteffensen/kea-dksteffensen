@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<!-- Font-Awesome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">	
+	<!-- Local CSS Files -->
+	<link rel="stylesheet" href="">
+</head>
+<body>
+<div id="lblWater">Water <span>0</span></div>
+	<div id="lblHeating">Heating <span>0</span></div>
+	<div id="lblElectricity">Electricity <span>0</span></div>
+<!-- 	<div id="container">
+		<div>
+			<div><button id="btnWaterSwitch">Switch</button></div>
+			<div id="lblWater">Water <span id="lblWaterCount">0</span></div>
+		</div>
+		<div>
+			<div><button id="btnHeatingSwitch">Switch</button></div>
+			<div id="lblHeating">Heating <span id="lblHeatingCount">0</span></div>
+		</div>
+		<div>
+			<div><button id="btnElectricitySwitch">Switch</button></div>
+			<div id="lblElectricity">Electricity <span id="lblElectricityCount">0</span></div>
+		</div>
+	</div>
+ -->
+
+<!-- Javascript & jQuery libraries -->
+<!-- jQuery 1.x snippet -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- jQuery 2.x snippet -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<!-- jQuery 1.x UI -->
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- END Javascript & jQuery libraries END -->
+<!-- User created Java/Jquery Scripts -->
+
+<script>
+
+
+// function updateWater() {
+// 	currentWaterCount = Number($("#lblWaterCount").text());
+// 	currentWaterCount += 1;
+// 	$("#lblWaterCount").text(currentWaterCount);
+// };
+// function updateHeating() {
+// 	currentWaterCount = Number($("#lblHeatingCount").text());
+// 	currentWaterCount += 1;
+// 	$("#lblHeatingCount").text(currentWaterCount);
+// };
+// function updateElectricity() {
+// 	currentWaterCount = Number($("#lblElectricityCount").text());
+// 	currentWaterCount += 1;
+// 	$("#lblElectricityCount").text(currentWaterCount);
+// };
+var utilities = [
+	{"name":"light", "type":"electricity", "consumption":"1", "state":"on"},
+	{"name":"tap", "type":"water", "consumption":"0.5", "state":"off"},
+	{"name":"radiator", "type":"heating", "consumption":"2", "state":"off"}
+];
+
+if (localStorage.waterConsumption == undefined) {
+	localStorage.waterConsumption = 0;
+}
+if (localStorage.heatingConsumption == undefined) {
+	localStorage.heatingConsumption = 0;	
+}
+if (localStorage.ElectricityConsumption == undefined) {
+	localStorage.ElectricityConsumption = 0;	
+}
+else {
+	$("#lblWater span").html(localStorage.waterConsumption);
+	$("#lblHeating span").html(localStorage.heatingConsumption);
+	$("#lblElectricity span").html(localStorage.ElectricityConsumption);
+}
+
+$.each(utilities, function(index, value){
+	$('body').append('<button data-id='+index+'>'+value.name+' On/Off</button>');
+});
+
+$(document).on('click', 'button', function(){
+	var btnId = $(this).attr('data-id');
+	if(utilities[btnId].state == 'off'){
+		utilities[btnId].state = 'on';
+	}
+	else {
+		utilities[btnId].state = 'off';
+	}
+	 
+});
+
+
+var water = Number(localStorage.waterConsumption);
+var heating = Number(localStorage.heatingConsumption);
+var electricity = Number(localStorage.ElectricityConsumption);
+
+function countWater(){
+	if(utilities[1].state == 'on'){
+		water += Number(utilities[1].consumption);
+		localStorage.waterConsumption = water;
+		$('#lblWater span').html(water);
+	}
+};
+
+function countHeating(){
+	if(utilities[2].state == 'on'){
+	heating += Number(utilities[2].consumption);
+	localStorage.heatingConsumption = heating;
+	$('#lblHeating span').html(heating);
+	};
+};
+
+function countElectricity(){
+	if(utilities[0].state == 'on'){
+	electricity += Number(utilities[0].consumption);
+	localStorage.ElectricityConsumption = electricity;
+	$('#lblElectricity span').html(electricity);
+	};
+};
+
+setInterval(countWater, 1000);
+setInterval(countHeating, 1000);
+setInterval(countElectricity, 1000);
+
+
+// setInterval("updateWater()", 1000);
+// setInterval("updateHeating()", 5000);
+// setInterval("updateElectricity()", 10000);
+</script>
+
+<!-- END User created Java/Jquery Scripts END -->
+</body>
+</html>

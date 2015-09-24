@@ -1,0 +1,49 @@
+{
+	"name":"Daniels House",
+	"address":"Stenstuegade 38 2.TH.",
+	"rooms":[
+		{
+			"id":1,
+			"name":"Kitchen",
+			"dimensions":
+			{
+				"width":"175px",
+				"height":"175px",
+				"top":"0px",
+				"left":"0px",
+				"z-index":"5",
+				"background-color":"#ccc"
+			},
+			"utilities":
+			[
+				{
+					"id":1,
+					"name":"light",
+					"type":"electricity",
+					"consumption":"30",
+					"state":"off"
+				},
+				{
+					"id":2,
+					"name":"refrigiator",
+					"type":"electricity",
+					"consumption":"500",
+					"state":"on"
+				}
+			],
+			"serramento":
+			[
+				{
+					"id":1,
+					"type":"door",
+					"state":"open",
+				},
+				{
+					"id":2,
+					"type":"window",
+					"state":"closed",					
+				}
+			]
+		}
+	]
+}

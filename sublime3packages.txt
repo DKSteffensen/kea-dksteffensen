@@ -1,0 +1,6 @@
+CSS3 (github.com/y0ssar1an/CSS3)
+Javascript Ultimate (github.com/joshuaWise/javascript-ultimate)
+JsFormat (github.com/jdc9589/JsFormat)
+Package Control
+PackageResourceViewer
+PyV8

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<!-- Font Awesome CDN -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<!-- Stylesheet Include -->
+	<link rel="stylesheet" href="house.css">
+</head>
+<body>
+
+	
+
+	<!-- Javascript & jQuery libraries -->
+	<!-- jQuery 1.x snippet -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- jQuery 2.x snippet -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<!-- jQuery 1.x UI -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<!-- Local Javascript files -->
+	<script src="house.js"></script>
+
+	<script>
+	function strHouse () {
+		var strHouse = JSON.stringify(house);
+		localStorage.myHouse = strHouse;		
+	}
+
+	var electricityConsumption = 0;
+
+	function countElectricity () {		
+		for (var i = 0; i < house.utilities.length; i++) {
+			switch (house.utilities[i].state) {
+				case 'on':
+					var intConsumption = Number(house.utilities[i].consumption);
+					electricityConsumption = electricityConsumption + intConsumption;
+					break;
+				case 'off':
+			}
+		}
+		$('.kwhCount').html(electricityConsumption);
+		console.log(electricityConsumption);
+	}
+		// Adds to localstorage.
+		if(localStorage.myHouse == undefined) {
+			strHouse ();
+		}
+		else {
+			var lsStrHouse = localStorage.myHouse;
+			var house = JSON.parse(lsStrHouse);
+		}
+
+	
+
+		// Creates rooms, and navigation.
+		for(i = 0; i<house.rooms.length; i++){
+			var menu = '<div class="button-panel" id="'+house.rooms[i].name+'"><div>'+house.rooms[i].name+'</div><div><button id="btnLightSwitch" data-roomID="'+house.rooms[i].name+'">Light Switch</button><div id="consumptionCounter"><span class="kwhCount">0</span> kWh</div></div>';
+			var room = '<div id="'+house.rooms[i].name+'" class="room" style="width: '+house.rooms[i].width+'px; height: '+house.rooms[i].height+'px; top: '+house.rooms[i].top+'px; left: '+house.rooms[i].left+'px; background-color: '+house.rooms[i].floor+';"></div>';
+			$('body').append(room);
+			$('body').append(menu);
+		}
+
+		// Checks state of light on load and create light div.
+		for(i = 0; i<house.utilities.length; i++){
+
+			switch (house.utilities[i].state) {
+				case 'on':
+				var light = '<div class="light lightOn"></div>';
+				break;
+				case 'off':
+				var light = '<div class="light"></div>';
+				break;
+			}
+			
+			// if (house.utilities[i].state == "on") {
+			// 	var light = '<div class="light lightOn"></div>';
+			// } else {
+			// 	var light = '<div class="light"></div>';				
+			// }
+			$('#'+house.utilities[i].room).append(light);
+		}
+
+		// Light Switch + updates JSON object.
+		$(document).on("click", "#btnLightSwitch", function(){
+			var roomID = $(this).attr("data-roomID");
+			$("#"+roomID+" > .light").toggleClass("lightOn");
+
+			for(i = 0; i<house.utilities.length; i++){
+				var roomMatchID = house.utilities[i].room;
+				if (roomMatchID == roomID) {
+					if($("#"+roomID+" > .light").hasClass("lightOn")){
+						house.utilities[i].state = "on";
+					}
+					else {	
+						house.utilities[i].state = "off";					
+					}
+					strHouse ();
+				}
+			}
+		});
+
+		// $(document).on('click', '.btn-light', function(){
+		// 	var btnId = $(this).attr('id');
+		// 	if(house.utilities[btnId].state == 'on'){
+		// 		house.utilities[btnId].state = 'off';
+		// 	}
+		// 	else {
+		// 		house.utilities[btnId].state = 'on';
+		// 	}
+		// 	$('#'+house.utilities[btnId].room+' .light').toggleClass('active');
+		// });
+
+
+		// Click to open navigation.
+		$(document).on('click', '.room', function(){
+			var roomId = $(this).attr('id');
+			$(".button-panel").not('#'+roomId).removeClass("active");
+			$('.button-panel#'+roomId).toggleClass('active')
+		});
+
+		setInterval ("countElectricity ()", 1000);
+
+	</script>
+	
+</body>
+</html>

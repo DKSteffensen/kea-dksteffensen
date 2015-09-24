@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<!-- Font-Awesome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">	
+	<!-- Local CSS Files -->
+	<link rel="stylesheet" href="">
+</head>
+<body>
+
+  <div><p id="lblMessage"></p></div>
+  <div>
+    <input id="txtName" class="personInput" type="text" placeholder="Name">
+  </div>
+  <div>
+    <input id="txtLastName" class="personInput" type="text" placeholder="Lastname">
+  </div>
+  <div>
+    <input id="txtAge" class="personInput" type="number" placeholder="Age">
+  </div>
+  <div>
+    <button id="btnSave">Save</button>
+  </div>
+
+
+<!-- Javascript & jQuery libraries -->
+<!-- jQuery 1.x snippet -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- jQuery 2.x snippet -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<!-- jQuery 1.x UI -->
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- END Javascript & jQuery libraries END -->
+<!-- User created Java/Jquery Scripts -->
+
+<script>
+
+  if(localStorage.name == undefined){
+    $("#lblMessage").text("Welcome Unknown Person with the age Unknown.");
+  }else{
+    var nameFromStorage = localStorage.name;
+    var lastNameFromStorage = localStorage.lastName;
+    var ageFromStorage = localStorage.age;
+    $("#lblMessage").text("Welcome " + nameFromStorage + " " + lastNameFromStorage + " with the age " + ageFromStorage);
+  }
+
+  $(document).on("click","#btnSave",function(){
+    var theName = $("#txtName").val();
+    var theLastName = $("#txtLastName").val();
+    var theAge = $("#txtAge").val();
+    // Save in the local storage
+    localStorage.name = theName;
+    localStorage.lastName = theLastName;
+    localStorage.age = theAge;
+    // Show the name in the message div
+    $("#lblMessage").text("Welcome " + theName + " " + theLastName + " with the age " + theAge);
+    $(".personInput").val('');
+  });
+
+</script>
+
+<!-- END User created Java/Jquery Scripts END -->
+</body>
+</html>

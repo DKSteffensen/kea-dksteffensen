@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<!-- Font-Awesome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">	
+	<!-- Local CSS Files -->
+	<link rel="stylesheet" href="">
+	<style>
+	#lightWrap {
+		font-size:300px;
+		text-align:center;
+	}
+	.lightStateOn {
+		text-shadow: 0 0 100px yellow;
+		color:yellow;
+		transition-duration: .5s;
+	}
+	.lightStateOff {
+		text-shadow:none;
+		transition-duration: .5s;		
+	}
+	</style>
+</head>
+<body>
+
+<div id="container">
+	<div><button id="btnLightSwitch">Light Switch</button></div>
+	<div id="lightWrap"><i id="icoLight" class="fa fa-lightbulb-o"></i></div>
+</div>
+
+<!-- Javascript & jQuery libraries -->
+<!-- jQuery 1.x snippet -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- jQuery 2.x snippet -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<!-- jQuery 1.x UI -->
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- END Javascript & jQuery libraries END -->
+<!-- User created Java/Jquery Scripts -->
+
+<script>
+	if(localStorage.lightState == 1) {
+		$("#icoLight").addClass("lightStateOn");
+	} 
+	else {		
+		$("#icoLight").addClass("lightStateOff");
+	}
+
+$(document).on("click", "#btnLightSwitch",function(){
+	if(localStorage.lightState == 1) {
+		$("#icoLight").toggleClass("lightStateOn lightStateOff");
+		localStorage.lightState = 0;
+	} 
+	else {		
+		$("#icoLight").toggleClass("lightStateOn lightStateOff");
+		localStorage.lightState = 1;
+	};	
+});
+
+</script>
+
+<!-- END User created Java/Jquery Scripts END -->
+</body>
+</html>

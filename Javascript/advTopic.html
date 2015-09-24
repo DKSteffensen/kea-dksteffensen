@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<!-- Font-Awesome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<!-- Personal Stylesheet -->
+	<link rel="stylesheet" href="">
+
+</head>
+<body>
+
+<div id="controlPanelWrap">
+	<input type="text" id="lblName" placeholder="First Name">
+	<input type="text" id="lblLastName" placeholder="Last Name">
+	<button id="btnSave">Save</button>
+	<button id="btnShow">Show</button>
+	<span id="lblAlert"></span>
+</div>
+<div id="contentWrap">
+	<div id="lblListStudents"></div>
+</div>
+
+<!-- Javascript & jQuery libraries -->
+<!-- jQuery 1.x snippet -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- jQuery 2.x snippet -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<!-- jQuery 1.x UI -->
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- END Javascript & jQuery libraries END -->
+
+<!-- User created Java/Jquery Scripts -->
+
+<script>
+
+
+var persons = {
+	"students":
+	[
+	]
+}
+
+function saveStudent(strStudentName)
+{
+	persons.students.push(strStudentName);
+}
+
+function showStudent()
+{
+	$("#lblListStudents").html("");
+	for (var i = 0; i < persons.students.length; i++) {
+		$("#lblListStudents").prepend("<div class='lblStudentName'>"+persons.students[i].name+" "+persons.students[i].lastName+"</div>");
+	};
+}
+
+$("#btnSave").click(function(){
+	strName = $("#lblName").val();	
+	strLastName = $("#lblLastName").val();	
+	var objStudent = {};
+	objStudent.name = strName;
+	objStudent.lastName = strLastName;
+	saveStudent(objStudent);
+	console.log("Student saved.");
+	$("#lblName, #lblLastName").val("");
+});
+
+$("#btnShow").click(function(){
+	showStudent();
+})
+	// var person = {
+	// 	"name":"Daniel",
+	// 	"lastName":"Steffensen",
+	// 	"membership":"Silver",
+	// 	"signup":function(){
+	// 		console.log("Signed up.");
+	// 	},
+	// 	"login":function(){
+	// 		console.log("Logged In.");
+	// 	},
+	// 	"updateMembershio":function(){
+	// 		console.log("Membership Updated.");
+	// 		person.membership = "Gold";
+	// 	},
+	// }
+
+	// person.signup();
+	// person.login();
+	// person.updateMembershio();
+
+
+
+	// var pet = 
+	// {
+	// 	"name":"Carl",
+	// 	"getName":function()
+	// 	{
+	// 		return this.name;
+	// 	}
+	// }
+
+	// var son = 
+	// {
+	// 	"name":"Bob",
+	// 	"pets":pet,
+	// 	"getPet":function()
+	// 	{
+	// 		return this.pets;
+	// 	}
+	// }
+
+	// var father = 
+	// {
+	// 	"name":"Alan",
+	// 	"sons":son,
+	// 	"getSon":function()
+	// 	{
+	// 		return this.sons;
+	// 	}
+	// }
+
+	// var thePet = father.getSon().getPet().getName();
+	// var message = "The pets name is " + thePet;
+	// console.log(message);
+</script>
+
+<!-- END User created Java/Jquery Scripts END -->
+
+
+	
+
+</body>
+</html>

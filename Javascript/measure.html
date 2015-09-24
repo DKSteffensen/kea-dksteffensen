@@ -1,0 +1,96 @@
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="style.css"/>
+<body >
+	<div id="lblElectricity"><i class="fa fa-bolt"></i> <span>0</span> kW-hours</div>
+	<div id="lblWater"><i class="fa fa-tint"></i> <span>0</span> m3</div>
+
+	
+	
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+	<script>
+		var oHouse = 
+		[
+			{
+				"room":"kitchen", 
+				"utilities":
+				[
+					{"name":"light", "type":"electricity", "consumption":"60", "state":"off"},
+					{"name":"over", "type":"electricity", "consumption":"60", "state":"off"},
+					{"name":"tap", "type":"water", "consumption":"0.005", "state":"off"},
+					{"name":"shower-tap", "type":"water", "consumption":"0.01", "state":"off"}
+				]
+			}
+		];
+
+		// function saveHouse(house){
+		// 	var sHouse = JSON.stringify(house);
+		// 	localStorage.house = sHouse;
+		// };
+
+		// function loadHouse(){
+		// 	var sHouse = localStorage.house;
+		// 	return JSON.parse(sHouse);
+		// }
+
+
+		for(i = 0; i<oHouse[0].utilities.length; i++){
+			var name = oHouse[0].utilities[i].name;
+			switch(oHouse[0].utilities[i].type)
+			{
+				case 'electricity':
+
+					$('body').append('<button data-id='+i+' class="btn btnElectric">'+name+'</button>');
+				break;
+				case 'water':
+					$('body').append('<button data-id='+i+' class="btn btnWater">'+name+'</button>');
+				break;
+			}
+		};
+
+
+
+		$(document).on('click', '.btn', function(){
+			$(this).toggleClass('active');
+			var btnId = $(this).attr('data-id');
+			//console.log(btnId);
+			var state = oHouse[0].utilities[btnId].state;
+			if(state == 'off'){
+				oHouse[0].utilities[btnId].state = 'on';
+			}
+			else {
+				oHouse[0].utilities[btnId].state = 'off';
+			}
+			//console.log(oHouse[0].utilities[btnId].state);
+		});
+
+		function consumptionMeter(){
+			for(i = 0; i<oHouse[0].utilities.length; i++){
+				switch(oHouse[0].utilities[i].type)
+				{
+				case 'electricity':
+					if(oHouse[0].utilities[i].state == 'on'){
+						var consumption = Number(oHouse[0].utilities[i].consumption);
+					var currentConsumption = Number($('#lblElectricity span').html());
+					$('#lblElectricity span').html(currentConsumption +consumption);
+					};
+				break;
+				case 'water':
+					 if(oHouse[0].utilities[i].state == 'on'){
+					 	var consumption = Number(oHouse[0].utilities[i].consumption);
+					var currentConsumption = Number($('#lblWater span').html());
+					$('#lblWater span').html(currentConsumption +consumption);
+					 }
+				break;
+				}
+			}
+		};
+
+setInterval("consumptionMeter()", 1000);
+
+	</script>
+</body>
+</html>

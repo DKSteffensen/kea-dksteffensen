@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<!-- Font-Awesome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">	
+	<!-- Local CSS Files -->
+	<link rel="stylesheet" href="">
+</head>
+<body>
+
+<div class="container">
+<input type="text" id="lblLastName" class="inputClear">
+<button id="btnSave">Save</button>
+</div>
+
+<!-- Javascript & jQuery libraries -->
+<!-- jQuery 1.x snippet -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- jQuery 2.x snippet -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<!-- jQuery 1.x UI -->
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- END Javascript & jQuery libraries END -->
+<!-- User created Java/Jquery Scripts -->
+
+<script>
+
+  // Object
+  var person = {"name":"Santiago"};
+  // Convert the object to a string
+  var theObjectAsString = JSON.stringify(person);
+  localStorage.thePerson = theObjectAsString;
+
+  $(document).on("click", "#btnSave", function(){
+    var lastName = $("#lblLastName").val();
+    person.lastName = lastName;    
+    var theObjectAsString = JSON.stringify(person);
+    localStorage.thePerson = theObjectAsString;
+
+    whoIsThis();
+
+  });
+
+  function whoIsThis(){
+    // To read from localStorage convert from String to JSON
+    var stringFromLocalStorage = localStorage.thePerson;
+    var objectFromString = JSON.parse(stringFromLocalStorage);
+    var message = "Your name is " + objectFromString.name + " " +objectFromString.lastName;
+    console.log(message);
+  }
+
+
+</script>
+
+<!-- END User created Java/Jquery Scripts END -->
+</body>
+</html>
