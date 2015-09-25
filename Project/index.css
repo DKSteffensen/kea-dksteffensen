@@ -1,0 +1,41 @@
+* {
+
+}
+body {
+	background-color: #ddd;
+}
+
+/***************************************/
+/********** Bootstrap Changes **********/
+
+.ha-navbar {
+	border-radius: 0;
+}
+.row-spacing {
+	margin: 10px 0px 0px 0px;
+}
+/********** Bootstrap Changes **********/
+/***************************************/
+
+.roomLightOff {
+	box-shadow:none;
+}
+.roomLightOn {
+	box-shadow: inset 0 0 50px LawnGreen;
+}
+#controlPanel {
+
+}
+#housePlanCanvas {
+	height: 450px;
+	width:375px;
+	position: relative;
+}
+.housePlanRooms {
+	color: #333 ;
+	font-size:18px;
+	padding: 5px;
+	background-color:Snow;
+	border: 3px solid #333;
+	position: absolute;
+}

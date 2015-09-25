@@ -1,5 +1,3 @@
-var gloIntHouseID = 0;
-
 	// Checking if rooms object i populated, if yes, then create rooms on canvas.
 	gloIntRoomsCount = houses.myHouse[gloIntHouseID].rooms.length;
 	if (gloIntRoomsCount > 0) {
@@ -9,7 +7,13 @@ var gloIntHouseID = 0;
 				var strRoomID = houses.myHouse[gloIntHouseID].rooms[i].id;
 				var strRoomName = houses.myHouse[gloIntHouseID].rooms[i].name;
 				buildControlPanel(strRoomName, strRoomID);	
-				buildCanvas(strRoomID);			
+				buildCanvas(strRoomID);	
+
+			createSelectWidth();
+			createSelectHeight();
+			createSelectPosTop();
+			createSelectPosLeft();
+			createSelectZIndex();		
 			}
 		};
 	}
@@ -72,6 +76,33 @@ var gloIntHouseID = 0;
 			pxHeightVal += 25;
 		};			
 	};
+	function createSelectZIndex () {
+		var zindexVal = 5;
+		for (var i = 0; i < 3; i++) {
+			$(".zIndex").append('<option value="'+zindexVal+'">'+[i+1]+'</option>');
+			zindexVal += 5;
+		};			
+	};
+	function selectSelectedVal (roomID) {
+		var roomPosTop = houses.myHouse[gloIntHouseID].rooms[roomID].dimensions.top;
+		var roomPosLeft = houses.myHouse[gloIntHouseID].rooms[roomID].dimensions.left;
+		var roomWidth = houses.myHouse[gloIntHouseID].rooms[roomID].dimensions.width;
+		var roomHeight = houses.myHouse[gloIntHouseID].rooms[roomID].dimensions.height;
+
+		var roomZIndex = houses.myHouse[gloIntHouseID].rooms[roomID].dimensions.zindex;
+		var roomPosTopParsed = parseInt(roomPosTop, 10);
+		var roomPosLeftParsed = parseInt(roomPosLeft, 10);
+		var roomWidthParsed = parseInt(roomWidth, 10);
+		var roomHeightParsed = parseInt(roomHeight, 10);
+
+		$(document).ready(function(){
+			$("#posTopRoom"+roomID+" > option[value='"+roomPosTopParsed+"']").attr("selected", "selected");
+			$("#posLeftTop"+roomID+" > option[value='"+roomPosLeftParsed+"']").attr("selected", "selected");
+			$("#widthRoom"+roomID+" > option[value='"+roomWidthParsed+"']").attr("selected", "selected");
+			$("#heightRoom"+roomID+" > option[value='"+roomHeightParsed+"']").attr("selected", "selected");
+			$("#zIndexRoomID"+roomID+" > option[value='"+roomZIndex+"']").attr("selected", "selected");
+		});
+	}
 	// Create dropdown end.
 	// Function to add room in the JSON object.
 	function addRoomJSON () {		
@@ -102,30 +133,27 @@ var gloIntHouseID = 0;
 		htmlControl += '<ul class="list-group">';
 		htmlControl += '<li class="list-group-item list-group-item-info">';
 		htmlControl += '<p><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span> Position Top</p>';
-		htmlControl += '<select class="buildChange posTop" data-roomID="'+roomID+'" data-inpCssKey="top">';
+		htmlControl += '<select id="posTopRoom'+roomID+'" class="buildChange posTop" data-roomID="'+roomID+'" data-inpCssKey="top">';
 		htmlControl += '</select>';				
 		htmlControl += '</li>';
 		htmlControl += '<li class="list-group-item list-group-item-info">';
 		htmlControl += '<p><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> Position Left</p>';
-		htmlControl += '<select class="buildChange posLeft" data-roomID="'+roomID+'" data-inpCssKey="left">';
+		htmlControl += '<select id="posLeftTop'+roomID+'" class="buildChange posLeft" data-roomID="'+roomID+'" data-inpCssKey="left">';
 		htmlControl += '</select>';
 		htmlControl += '</li>';
 		htmlControl += '<li class="list-group-item list-group-item-info">';
 		htmlControl += '<p><span class="glyphicon glyphicon-resize-horizontal"></span> Width</p>';
-		htmlControl += '<select class="buildChange sizeWidth" data-roomID="'+roomID+'" data-inpCssKey="width">';
+		htmlControl += '<select id="widthRoom'+roomID+'" class="buildChange sizeWidth" data-roomID="'+roomID+'" data-inpCssKey="width">';
 		htmlControl += '</select>';			
 		htmlControl += '</li>';
 		htmlControl += '<li class="list-group-item list-group-item-info">';
 		htmlControl += '<p><span class="glyphicon glyphicon-resize-vertical"></span> Height</p>';
-		htmlControl += '<select class="buildChange sizeHeight" data-roomID="'+roomID+'" data-inpCssKey="height">';
+		htmlControl += '<select id="heightRoom'+roomID+'" class="buildChange sizeHeight" data-roomID="'+roomID+'" data-inpCssKey="height">';
 		htmlControl += '</select>';
 		htmlControl += '</li>';
 		htmlControl += '<li class="list-group-item list-group-item-info">';
 		htmlControl += '<p><span class="glyphicon glyphicon-tasks"></span> Layer Position</p>';
-		htmlControl += '<select class="buildChange" data-roomID="'+roomID+'" data-inpCssKey="zindex">';
-		htmlControl += '<option value="5">Bottom</option>';
-		htmlControl += '<option value="10">Middle</option>';
-		htmlControl += '<option value="15">Top</option>';
+		htmlControl += '<select id="zIndexRoomID'+roomID+'" class="buildChange zIndex" data-roomID="'+roomID+'" data-inpCssKey="zindex">';
 		htmlControl += '</select>';
 		htmlControl += '</li>';
 		htmlControl += '<li class="list-group-item list-group-item-info">';
@@ -137,10 +165,13 @@ var gloIntHouseID = 0;
 
 		$("#buildRoomControlWrap").prepend(htmlControl);
 
-		createSelectPosTop();
-		createSelectPosLeft();
-		createSelectWidth();
-		createSelectHeight();
+		selectSelectedVal(roomID);
+
+		// createSelectWidth(roomWidth);
+		// createSelectHeight(roomHeight);
+		// createSelectPosTop(roomPosTop);
+		// createSelectPosLeft(roomPosLeft);
+		// createSelectZIndex(roomZIndex);
 	};
 	function buildCanvas (roomID) {
 		var roomName = houses.myHouse[gloIntHouseID].rooms[roomID].name;
@@ -175,6 +206,12 @@ var gloIntHouseID = 0;
 		// buildControlPanel() is the function that builds controlpanel for the room.
 		// buildCanvas() is the function that adds the room on the canvas.
 		addRoomJSON();
+
+		createSelectWidth();
+		createSelectHeight();
+		createSelectPosTop();
+		createSelectPosLeft();
+		createSelectZIndex();
 
 	});
 

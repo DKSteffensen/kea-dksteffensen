@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>My Layout</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<!-- Optional theme -->
@@ -11,21 +11,97 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	<!-- Stylesheet Include -->
 	<link rel="stylesheet" href="index.css">
+	<link rel="stylesheet" href="buildRooms.css">
 </head>
 <body>
-	
+	<nav class="navbar navbar-inverse ha-navbar">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+<!--         <li><a href="#">House Overview <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="#">House ControlPanel</a></li> -->
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Control Panel</a></li>
+        <li><a href="#">Edit Houseplan</a></li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Select Adress <span class="caret"></span></a>
+          <ul class="dropdown-menu" id="houseDropdown">
+          	<li role="separator" class="divider"></li>
+          	<li><a href="#" data-houseID="'+strHouseID+'">Add new adress</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+	<div class="container-fluid">
+
+			<div id="buildCanvasWrap" class="col-md-8">
+				<div class="row">
+					<div id="buildCanvasFixed">
+						<div id="buildCanvas"></div>
+					</div>
+				</div>
+			</div>
+
+			<div id="buildControlsWrap" class="col-md-4">
+				<div class="row">
+					<button type="button" id="btnNewRoom" class="btn btn-success btn-block">
+						<h5>Add Room</h5>
+					</button>					
+				</div>
+ 				<div class="row row-spacing col-md-12" id="buildRoomControlWrap">
+
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- Javascript & jQuery libraries -->
 	<!-- jQuery 1.x snippet -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+	<script src="js/jquery-1.11.3.min.js"></script>
 	<!-- jQuery 2.x snippet -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>-->
+	<script src="js/jquery-2.1.4.min.js"></script>
 	<!-- jQuery 1.x UI -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>-->
+	<script src="js/jquery-ui.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+	<script src="js/bootstrap.min.js"></script>
 	<!-- Local Javascript files -->
+	<script src="functions.js"></script>
 	<script src="index.js"></script>
-	
+	<script src="buildRooms.js"></script>
+
+	<script>
+	function populateHousesDropdown () {
+		for (var i = 0; i < houses.myHouse.length; i++) {
+			console.log(houses.myHouse[i].address);
+			var strHouseAdress = houses.myHouse[i].address;
+			var strHouseID = houses.myHouse[i].id;
+			$("#houseDropdown").prepend('<li><a href="#" data-houseID="'+strHouseID+'">'+strHouseAdress+'</a></li>');
+		};		
+	}
+
+	populateHousesDropdown();
+	</script>
+
 </body>
 </html>

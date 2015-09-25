@@ -1,3 +1,4 @@
+	var gloIntHouseID = 0;
 	var locStrHouses = localStorage.houses;
 
 	if(locStrHouses == undefined) {

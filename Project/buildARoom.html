@@ -12,7 +12,9 @@
 	<!-- Stylesheet Include -->
 	<link rel="stylesheet" href="">
 	<style>
-		#buildCanvasWrap {
+		body {
+		}
+		#buildControlsWrap {
 		}
 		#buildRoomControlWrap {
 			height:500px;
@@ -26,6 +28,7 @@
 			border:2px solid #333;
 			position:relative;
 			overflow:hidden;
+			background-image:url("bp.png");
 		}
 
 		.list-group:last-child {
@@ -37,8 +40,10 @@
 		}
 		.lblRoomName {
 			border:none;
-		    border-top-left-radius:3px;
-		    border-top-right-radius:3px;
+			font-size:16px;
+			font-weight:bold;
+			background:rgba(255,255,255,0.0);
+		    width:100%;
 		}
 		.room {
 			background-color: #fff;
