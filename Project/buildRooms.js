@@ -3,27 +3,40 @@
 	if (gloIntRoomsCount > 0) {
 		for (var i = 0; i < gloIntRoomsCount; i++) {
 			var test = houses.myHouse[gloIntHouseID].rooms[i];
-			if(houses.myHouse[gloIntHouseID].rooms[i].state == 1){
+			if(houses.myHouse[gloIntHouseID].rooms[i].deleted == 0){
 				var strRoomID = houses.myHouse[gloIntHouseID].rooms[i].id;
 				var strRoomName = houses.myHouse[gloIntHouseID].rooms[i].name;
 				buildControlPanel(strRoomName, strRoomID);	
 				buildCanvas(strRoomID);	
-
-			createSelectWidth();
-			createSelectHeight();
-			createSelectPosTop();
-			createSelectPosLeft();
-			createSelectZIndex();		
-			}
+			};
 		};
+		createSelectWidth();
+		createSelectHeight();
+		createSelectPosTop();
+		createSelectPosLeft();
+		createSelectZIndex();	
 	}
+	else {
+		// Remind user to add rooms to the house.
+	}
+
 	// Function to apply room size and position changes.
 	function changeRoomSize (cssKey, cssValue, roomID) {
 		if(cssKey == "zindex"){
 			$("#room"+roomID).css("z-index", cssValue);
 			houses.myHouse[gloIntHouseID].rooms[roomID].dimensions[cssKey] = cssValue;
 			stringifyHouse();
-		} else {
+		}
+		else if(cssKey == "height"){
+			cssValue += "px";
+			$("#room"+roomID).css({
+				"line-height":cssValue,
+				"height":cssValue
+			});
+			houses.myHouse[gloIntHouseID].rooms[roomID].dimensions[cssKey] = cssValue;
+			stringifyHouse();
+		}
+		else {
 			cssValue += "px";
 			$("#room"+roomID).css(cssKey, cssValue);
 			houses.myHouse[gloIntHouseID].rooms[roomID].dimensions[cssKey] = cssValue;
@@ -44,7 +57,7 @@
 		$(".room#room"+roomID).fadeOut(300, function(){
 			$(this).remove();
 		})
-		houses.myHouse[gloIntHouseID].rooms.state = 0;
+		houses.myHouse[gloIntHouseID].rooms[roomID].deleted = 1;
 		stringifyHouse();
 	};
 	// Functions to create Select dropdowns.
@@ -111,8 +124,10 @@
 		var strNewRoomName = "Room "+intNewRoomID;
 		objNewRoom.id = intNewRoomID;
 		objNewRoom.name = strNewRoomName;
-		objNewRoom.state = 1;
+		objNewRoom.deleted = 0;
 		objNewRoom.dimensions = {};
+		objNewRoom.utilities = [];
+		objNewRoom.doorsAndWindows = [];
 		houses.myHouse[gloIntHouseID].rooms.push(objNewRoom);
 
 		var pathDimensions = houses.myHouse[gloIntHouseID].rooms[intNewRoomID].dimensions;
@@ -121,6 +136,10 @@
 		pathDimensions.top = "5px";
 		pathDimensions.left = "5px";
 		pathDimensions.zindex = "5";
+
+
+		
+		stringifyHouse();
 
 		buildControlPanel(strNewRoomName, intNewRoomID);
 		buildCanvas(intNewRoomID);
@@ -166,23 +185,17 @@
 		$("#buildRoomControlWrap").prepend(htmlControl);
 
 		selectSelectedVal(roomID);
-
-		// createSelectWidth(roomWidth);
-		// createSelectHeight(roomHeight);
-		// createSelectPosTop(roomPosTop);
-		// createSelectPosLeft(roomPosLeft);
-		// createSelectZIndex(roomZIndex);
 	};
 	function buildCanvas (roomID) {
 		var roomName = houses.myHouse[gloIntHouseID].rooms[roomID].name;
-		var roomState = houses.myHouse[gloIntHouseID].rooms[roomID].state;
+		var roomdeleted = houses.myHouse[gloIntHouseID].rooms[roomID].deleted;
 		var roomWidth = houses.myHouse[gloIntHouseID].rooms[roomID].dimensions.width;
 		var roomHeight = houses.myHouse[gloIntHouseID].rooms[roomID].dimensions.height;
 		var roomPosTop = houses.myHouse[gloIntHouseID].rooms[roomID].dimensions.top;
 		var roomPosLeft = houses.myHouse[gloIntHouseID].rooms[roomID].dimensions.left;
 		var roomZIndex = houses.myHouse[gloIntHouseID].rooms[roomID].dimensions.zindex;
 
-		$("#buildCanvas").append('<div class="room" id="room'+roomID+'" style="width:'+roomWidth+';height:'+roomHeight+';top:'+roomPosTop+';left:'+roomPosLeft+';z-index:'+roomZIndex+';">'+roomName+'</div>');		
+		$("#buildCanvas").append('<div class="room" id="room'+roomID+'" style="width:'+roomWidth+';height:'+roomHeight+';line-height:'+roomHeight+';top:'+roomPosTop+';left:'+roomPosLeft+';z-index:'+roomZIndex+';">'+roomName+'</div>');		
 	}
 
 	// Button to change size, and position of the room.

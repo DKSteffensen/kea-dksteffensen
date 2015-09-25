@@ -11,10 +11,10 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	<!-- Stylesheet Include -->
 	<link rel="stylesheet" href="index.css">
-	<link rel="stylesheet" href="buildRooms.css">
 </head>
 <body>
-	<nav class="navbar navbar-inverse ha-navbar">
+
+<nav class="navbar navbar-inverse ha-navbar">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -34,14 +34,14 @@
         <li class="active"><a href="#">House ControlPanel</a></li> -->
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Control Panel</a></li>
-        <li><a href="#">Edit Houseplan</a></li>
+        <li><a href="#" class="btnNavbar" data-linkHref="controlPanelPage">Control Panel</a></li>
+        <li><a href="#" class="btnNavbar" data-linkHref="buildRoomPage">Edit Houseplan</a></li>
 
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Select Adress <span class="caret"></span></a>
           <ul class="dropdown-menu" id="houseDropdown">
           	<li role="separator" class="divider"></li>
-          	<li><a href="#" data-houseID="'+strHouseID+'">Add new adress</a></li>
+          	<li><a href="#">Add new adress</a></li>
           </ul>
         </li>
       </ul>
@@ -49,28 +49,76 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-	<div class="container-fluid">
 
-			<div id="buildCanvasWrap" class="col-md-8">
-				<div class="row">
-					<div id="buildCanvasFixed">
-						<div id="buildCanvas"></div>
-					</div>
-				</div>
-			</div>
+<div class="container-fluid">
 
-			<div id="buildControlsWrap" class="col-md-4">
-				<div class="row">
-					<button type="button" id="btnNewRoom" class="btn btn-success btn-block">
-						<h5>Add Room</h5>
-					</button>					
-				</div>
- 				<div class="row row-spacing col-md-12" id="buildRoomControlWrap">
 
+	<div class="pages inActive" id="controlPanelPage">
+		<div id="" class="col-md-8">
+			<div class="row">
+				<div id="showCanvasWrap">
+					<div id="showCanvas"></div>					
 				</div>
 			</div>
 		</div>
+
+		<div id="controlPanelWrap" class="col-md-4">
+			<div class="row row-spacing">
+				<div class="col-md-12">	
+				</div>			
+			</div>
+
+			<div class="row row-spacing">
+				<div class="col-md-12" id="controlPanelControlWrap">
+					
+				</div>
+			</div>
+
+			<div class="row row-spacing">
+				<div class="col-md-12">	
+				</div>
+			</div>	
+		</div>
 	</div>
+
+
+
+	<div class="pages inActive" id="buildRoomPage">
+		<div id="buildCanvasWrap" class="col-md-8">
+			<div class="row">
+				<div id="buildCanvasWrap">
+					<div id="buildCanvas">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="buildControlWrap" class="col-md-4">
+			<div class="row row-spacing">
+				<div class="col-md-12">
+					<button type="button" id="btnNewRoom" class="btn btn-info btn-block">
+						<h5>Add Room</h5>
+					</button>		
+				</div>			
+			</div>
+
+			<div class="row row-spacing">
+				<div class="col-md-12" id="buildRoomControlWrap">
+					
+				</div>
+			</div>
+
+			<div class="row row-spacing">
+				<div class="col-md-12">	
+				</div>
+			</div>	
+
+		</div>
+	</div>
+
+
+</div>
+
 
 	<!-- Javascript & jQuery libraries -->
 	<!-- jQuery 1.x snippet -->
@@ -93,7 +141,6 @@
 	<script>
 	function populateHousesDropdown () {
 		for (var i = 0; i < houses.myHouse.length; i++) {
-			console.log(houses.myHouse[i].address);
 			var strHouseAdress = houses.myHouse[i].address;
 			var strHouseID = houses.myHouse[i].id;
 			$("#houseDropdown").prepend('<li><a href="#" data-houseID="'+strHouseID+'">'+strHouseAdress+'</a></li>');

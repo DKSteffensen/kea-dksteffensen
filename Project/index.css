@@ -4,17 +4,69 @@
 body {
 	background-color: #ddd;
 }
-
 /***************************************/
-/********** Bootstrap Changes **********/
-
+/*** Bootstrap Changes *****************/
 .ha-navbar {
 	border-radius: 0;
 }
 .row-spacing {
 	margin: 10px 0px 0px 0px;
 }
-/********** Bootstrap Changes **********/
+
+/*** Bootstrap Changes End *************/
+/***************************************/
+/*** Menu ******************************/
+
+.inActive {
+	opacity: 0;
+	z-index:-1;
+	top:-100%;
+	position: fixed;
+}
+.active {
+	opacity: 1;
+	transition-duration:1s;
+}
+
+/*** Menu End **************************/
+/***************************************/
+/*** ControlPanel **********************/
+#showCanvasWrap {
+	display:flex;
+	justify-content:center;
+}
+#showCanvas {
+	width:816px;
+	height:516px;
+	border:2px solid #333;
+	position:relative;
+	overflow:hidden;
+	background-image:url("grass.jpg");	
+}
+#controlPanelWrap {
+	height:500px;
+	height:calc(100vh - 90px);
+	overflow-y:scroll;
+}
+#controlPanelControlWrap::-webkit-scrollbar {
+	width: 6px;
+	background-color: #d9edf7;
+}
+#controlPanelControlWrap::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #d9edf7;
+}
+#controlPanelControlWrap::-webkit-scrollbar-thumb {
+	background-color: #31708f;
+}
+#controlPanelWrap {
+	display: table-cell;
+	background-color: #333;
+	border-radius: 5px;
+}
+
+
+/*** ControlPanel End ******************/
 /***************************************/
 
 .roomLightOff {
@@ -23,9 +75,10 @@ body {
 .roomLightOn {
 	box-shadow: inset 0 0 50px LawnGreen;
 }
-#controlPanel {
 
-}
+/*** Menu End **************************/
+/***************************************/
+/*** BuildRoom ********** **************/
 #housePlanCanvas {
 	height: 450px;
 	width:375px;
@@ -39,3 +92,71 @@ body {
 	border: 3px solid #333;
 	position: absolute;
 }
+#buildRoomControlWrap {
+	height:500px;
+	height:calc(100vh - 171px);
+	overflow-y:scroll;
+}
+#buildRoomControlWrap::-webkit-scrollbar {
+	width: 6px;
+	background-color: #d9edf7;
+}
+#buildRoomControlWrap::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #d9edf7;
+}
+#buildRoomControlWrap::-webkit-scrollbar-thumb {
+	background-color: #31708f;
+}
+#buildControlWrap {
+	display: table-cell;
+	background-color: #333;
+	border-radius: 5px;
+}
+#buildCanvasWrap {
+	display:flex;
+	justify-content:center;
+}
+#buildCanvas {
+	width:816px;
+	height:516px;
+	border:2px solid #333;
+	position:relative;
+	overflow:hidden;
+	color:#31708f;
+	background-image:url("bp.png");
+}
+.buildChange {
+	width:100%;
+	height:25px;
+}
+.lblRoomName {
+	border:none;
+	font-size:16px;
+	font-weight:bold;
+	background:rgba(255,255,255,0.0);
+	width:100%;
+}
+.room {
+	background-color: #fff;
+	border: 3px solid #333;
+	box-sizing: border-box;
+	position:absolute;
+	overflow:hidden;
+	text-align:center;
+}
+.utility {
+	border: 1px solid #ccc;
+	width: 25px;
+	height: 25px;
+	line-height: 25px;
+	position: absolute;
+	overflow:hidden;
+	text-align:center;
+	z-index: 20px;
+	border-radius: 50%;
+}
+
+/*** BuildRoom End *********************/
+/***************************************/
+/*** X *********************************/

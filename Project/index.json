@@ -1,99 +1,191 @@
-var houses = {
-	"myHouse":
-	[
-		{
-			"id":0,
-			"name":"Daniels House",
-			"address":"Stenstuegade 38 2.TH.",
-			"rooms":
-			[
-				{
-					"id":0,
-					"name":"Kitchen",
-					"state":0,
-					"dimensions":
-					{
-						"width":"175px",
-						"height":"175px",
-						"top":"0px",
-						"left":"0px",
-						"zindex":"5"
-					},
-					"utilities":
-					[
-						{
-							"id":1,
-							"name":"light",
-							"type":"electricity",
-							"consumption":"30",
-							"state":"off"
-						},
-						{
-							"id":2,
-							"name":"refrigiator",
-							"type":"electricity",
-							"consumption":"500",
-							"state":"on"
-						}
-					],
-					"serramento":
-					[
-						{
-							"id":1,
-							"type":"door",
-							"state":"open",
-						},
-						{
-							"id":2,
-							"type":"window",
-							"state":"closed",					
-						}
-					]
-				},
-				{
-					"id":1,
-					"name":"Living Room",
-					"state":0,
-					"dimensions":
-					{
-						"width":"175px",
-						"height":"175px",
-						"top":"175px",
-						"left":"175px",
-						"zindex":"10"
-					},
-					"utilities":
-					[
-						{
-							"id":0,
-							"name":"light",
-							"type":"electricity",
-							"consumption":"30",
-							"state":"off"
-						},
-						{
-							"id":1,
-							"name":"refrigiator",
-							"type":"electricity",
-							"consumption":"500",
-							"state":"on"
-						}
-					],
-					"serramento":
-					[
-						{
-							"id":1,
-							"type":"door",
-							"state":"open",
-						},
-						{
-							"id":2,
-							"type":"window",
-							"state":"closed",					
-						}
-					]
-				}
-			]
-		}
-	]
-}
+{
+			  "myHouse": 
+			  [
+			    {
+			      "id": 0,
+			      "name": "Daniels House",
+			      "address": "Stenstuegade 38 2.TH.",
+			      "rooms": 
+			      [
+			        {
+			          "id": 0,
+			          "name": "Kitchen",
+			          "deleted": 0,
+			          "dimensions": 
+			          {
+			            "width": "250px",
+			            "height": "175px",
+			            "top": "255px",
+			            "left": "80px",
+			            "zindex": "5"
+			          },
+			          "utilities": 
+			          [
+			            {
+			              "id": 0,
+			              "name": "light",
+			              "electricityConsumption": "50",
+			              "waterConsumption": "0",
+			              "gasConsumption": "0",
+			              "state": "off",
+			              "icon": "glyphicon glyphicon-headphones",
+			              "position": 
+			              {
+			                "top": "5px",
+			                "left": "5px"
+			              }
+			            },
+			            {
+			              "id": 1,
+			              "name": "refrigiator",
+			              "electricityConsumption": "150",
+			              "waterConsumption": "0",
+			              "gasConsumption": "0",
+			              "state": "on",
+			              "icon": "glyphicon glyphicon-headphones",
+			              "position": 
+			              {
+			                "top": "5px",
+			                "left": "5px"
+			              }
+			            },
+			            {
+			              "id": 2,
+			              "name": "washingmachine",
+			              "electricityConsumption": "300",
+			              "waterConsumption": "50",
+			              "gasConsumption": "0",
+			              "state": "on",
+			              "icon": "glyphicon glyphicon-headphones",
+			              "position": 
+			              {
+			                "top": "5px",
+			                "left": "5px"
+			              }
+			            },
+			            {
+			              "id": 3,
+			              "name": "gasgrill",
+			              "electricityConsumption": "0",
+			              "waterConsumption": "0",
+			              "gasConsumption": "50",
+			              "state": "on",
+			              "icon": "glyphicon glyphicon-headphones",
+			              "position": 
+			              {
+			                "top": "5px",
+			                "left": "5px"
+			              }
+			            }
+			          ],
+			          "serramento": 
+			          [
+			            {
+			              "id": 1,
+			              "type": "door",
+			              "state": "open"
+			            },
+			            {
+			              "id": 2,
+			              "type": "window",
+			              "state": "closed"
+			            }
+			          ]
+			        },
+			        {
+			          "id": 1,
+			          "name": "Living Room",
+			          "deleted": 0,
+			          "dimensions": {
+			            "width": "325px",
+			            "height": "300px",
+			            "top": "55px",
+			            "left": "405px",
+			            "zindex": "10"
+			          },
+			          "utilities": [
+			            {
+			              "id": 0,
+			              "name": "light",
+			              "electricityConsumption": "100",
+			              "waterConsumption": "0",
+			              "gasConsumption": "0",
+			              "state": "off",
+			              "icon": "glyphicon glyphicon-headphones",
+			              "position": {
+			                "top": "5px",
+			                "left": "5px"
+			              }
+			            },
+			            {
+			              "id": 1,
+			              "name": "refrigiator",
+			              "electricityConsumption": "150",
+			              "waterConsumption": "0",
+			              "gasConsumption": "0",
+			              "state": "on",
+			              "icon": "glyphicon glyphicon-headphones",
+			              "position": {
+			                "top": "5px",
+			                "left": "5px"
+			              }
+			            }
+			          ],
+			          "serramento": [
+			            {
+			              "id": 1,
+			              "type": "door",
+			              "state": "open"
+			            },
+			            {
+			              "id": 2,
+			              "type": "window",
+			              "state": "closed"
+			            }
+			          ]
+			        },
+			        {
+			          "id": 2,
+			          "name": "Bedroom",
+			          "deleted": 0,
+			          "dimensions": {
+			            "width": "250px",
+			            "height": "200px",
+			            "top": "55px",
+			            "left": "80px",
+			            "zindex": "15"
+			          },
+			          "utilities": []
+			        },
+			        {
+			          "id": 3,
+			          "name": "Bathroom",
+			          "deleted": 0,
+			          "dimensions": {
+			            "width": "125px",
+			            "height": "150px",
+			            "top": "55px",
+			            "left": "280px",
+			            "zindex": "15"
+			          },
+			          "utilities": [],
+			          "doorsAndWindows": []
+			        },
+			        {
+			          "id": 4,
+			          "name": "Entrance",
+			          "deleted": 0,
+			          "dimensions": {
+			            "width": "75px",
+			            "height": "225px",
+			            "top": "205px",
+			            "left": "330px",
+			            "zindex": "5"
+			          },
+			          "utilities": [],
+			          "doorsAndWindows": []
+			        }
+			      ]
+			    }
+			  ]
+			}
