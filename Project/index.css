@@ -25,11 +25,11 @@ body {
 	z-index:-1;
 	top:-100%;
 	position: fixed;
-	transition-duration:1s;
+	transition-duration:0.2s;
 }
 .active {
 	opacity: 1;
-	transition-duration:1s;
+	transition-duration:0.5s;
 }
 
 /*** Menu End **************************/
@@ -91,7 +91,7 @@ body {
 	border:2px solid #333;
 	position:relative;
 	overflow:hidden;
-	background-color: yellow;
+	background-image: url(yellow.jpg);
 }
 #utilitiesPanelWrap {
 	height:500px;
@@ -114,19 +114,14 @@ body {
 	background-color: #333;
 	border-radius: 5px;
 }
-
+.utilityElectricityOn {
+	box-shadow: 0 0 100px 30px yellow;
+}
+.utilityWaterOn {
+	box-shadow: 0 0 100px 30px blue;
+}
 
 /*** Add Utilities End *****************/
-/***************************************/
-
-.roomLightOff {
-	box-shadow:none;
-}
-.roomLightOn {
-	box-shadow: inset 0 0 50px LawnGreen;
-}
-
-/*** Menu End **************************/
 /***************************************/
 /*** BuildRoom ********** **************/
 #housePlanCanvas {
@@ -205,9 +200,6 @@ body {
 	text-align:center;
 	z-index: 20px;
 	border-radius: 50%;
-}
-.utilityOn {
-	box-shadow: 0 0 100px 30px yellow;
 }
 
 /*** BuildRoom End *********************/

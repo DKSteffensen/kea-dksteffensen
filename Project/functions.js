@@ -7,6 +7,7 @@ function updatePage () {
 	loadRooms(gloIntHouseID);
 	loadUtilities(gloIntHouseID);
 	populateHousesDropdown();
+	loadGraphs(gloIntHouseID);
 }
 function populateHousesDropdown () {
 	$("#houseDropdown").empty();
@@ -48,6 +49,7 @@ function loadRooms (houseID) {
 	};
 };
 function loadUtilities (houseID) {
+	$("#canvasRoom, #controlPanelRoom").empty();
 	for (var i = 0; i < houses.myHouse[houseID].rooms.length; i++) {
 		var locRoomID = houses.myHouse[houseID].rooms[i].id;
 		for (var u = 0; u < houses.myHouse[houseID].rooms[i].utilities.length; u++) {
@@ -58,24 +60,34 @@ function loadUtilities (houseID) {
 			var locRoomUtilitiesState = houses.myHouse[houseID].rooms[i].utilities[u].state;
 			var locRoomUtilitiesName = houses.myHouse[houseID].rooms[i].utilities[u].name;
 
-			var utilityID = locRoomID+""+locRoomUtilitiesID
+			var utilityID = locRoomUtilitiesID;
+			var roomID = locRoomID;
+			var combinedIDs = locRoomID+""+utilityID;
 
 			var htmlControlSwitchesOn = '<li class="list-group-item list-group-item-success">';
 			htmlControlSwitchesOn += '<p><span class="'+locRoomUtilitiesIcon+'" aria-hidden="true"></span> '+locRoomUtilitiesName+'</p>';
-			htmlControlSwitchesOn += '<input type="checkbox" name="utilitySwitchCheckbox" class="utilitySwitchCheckbox" data-utilityID="'+utilityID+'" checked>';
+			htmlControlSwitchesOn += '<input type="checkbox" name="utilitySwitchCheckbox" class="utilitySwitchCheckbox" data-utilityID="'+utilityID+'" data-roomID="'+roomID+'" checked>';
 			htmlControlSwitchesOn += '</li>';
 
 			var htmlControlSwitchesOff = '<li class="list-group-item list-group-item-success">';
 			htmlControlSwitchesOff += '<p><span class="'+locRoomUtilitiesIcon+'" aria-hidden="true"></span> '+locRoomUtilitiesName+'</p>';
-			htmlControlSwitchesOff += '<input type="checkbox" name="utilitySwitchCheckbox" class="utilitySwitchCheckbox" data-utilityID="'+utilityID+'">';
+			htmlControlSwitchesOff += '<input type="checkbox" name="utilitySwitchCheckbox" class="utilitySwitchCheckbox" data-utilityID="'+utilityID+'" data-roomID="'+roomID+'">';
 			htmlControlSwitchesOff += '</li>';
 
 			if(locRoomUtilitiesState == "on"){
-				$("#canvasRoom"+locRoomID).append('<div id="utility'+utilityID+'" class="utility utilityOn" style="top:'+locRoomUtilitiesPosTop+';left:'+locRoomUtilitiesPosLeft+';"><span class="'+locRoomUtilitiesIcon+'" aria-hidden="true"></span></div>');
+				switch(houses.myHouse[houseID].rooms[i].utilities[u].type){
+					case 'electricity':
+						var utilityClass = "utilityElectricityOn";
+					break;
+					case 'water':
+						var utilityClass = "utilityWaterOn";
+					break;
+				}
+				$("#canvasRoom"+locRoomID).append('<div id="utility'+combinedIDs+'" class="utility '+utilityClass+'" style="top:'+locRoomUtilitiesPosTop+';left:'+locRoomUtilitiesPosLeft+';"><span class="'+locRoomUtilitiesIcon+'" aria-hidden="true"></span></div>');
 				$("#controlPanelRoom"+locRoomID).append(htmlControlSwitchesOn);
 			}
 			else {
-				$("#canvasRoom"+locRoomID).append('<div id="utility'+utilityID+'" class="utility" style="top:'+locRoomUtilitiesPosTop+';left:'+locRoomUtilitiesPosLeft+';"><span class="'+locRoomUtilitiesIcon+'" aria-hidden="true"></span></div>');
+				$("#canvasRoom"+locRoomID).append('<div id="utility'+combinedIDs+'" class="utility" style="top:'+locRoomUtilitiesPosTop+';left:'+locRoomUtilitiesPosLeft+';"><span class="'+locRoomUtilitiesIcon+'" aria-hidden="true"></span></div>');
 				$("#controlPanelRoom"+locRoomID).append(htmlControlSwitchesOff);
 			}
 
@@ -135,10 +147,26 @@ function loadGraphs (HouseID) {
 	htmlGraphElectricity += '</li>';
 
 	var htmlGraphWater = '<li class="graphsRows">';
-	htmlGraphWater += '<div class="controlPanelGraphs" id="myStat4" data-dimension="200" data-text="'+currentWaterUsage+' m3" data-info="Electricity Usage" data-width="20" data-fontsize="20" data-percent="46" data-fgcolor="#31708f" data-bgcolor="#d9edf7" data-total="'+totalWaterUsage+'" data-part="'+currentWaterUsage+'" data-border="inline" data-icon="users" data-icon-size="28" data-icon-color="#ccc"></div>';
+	htmlGraphWater += '<div class="controlPanelGraphs" id="myStat4" data-dimension="200" data-text="'+currentWaterUsage+' m3" data-info="Water Usage" data-width="20" data-fontsize="20" data-percent="46" data-fgcolor="#31708f" data-bgcolor="#d9edf7" data-total="'+totalWaterUsage+'" data-part="'+currentWaterUsage+'" data-border="inline" data-icon="users" data-icon-size="28" data-icon-color="#ccc"></div>';
 	htmlGraphWater += '</li>';
+
+	var currentConsumption = Number(currentElectricityUsage) + Number(currentWaterUsage);
+	var totalConsumption = Number(totalElectricityUsage) + Number(totalWaterUsage);
+
+	var dailyCostPercentage = currentConsumption / totalConsumption * 100;
+
+	var dailyCostCalc = currentConsumption / 100;
+
+	var htmlGraphCostCalc = '<li>';
+	htmlGraphCostCalc += '<div class="progress">';
+	htmlGraphCostCalc += '<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="'+dailyCostPercentage+'" aria-valuemin="0" aria-valuemax="100" style="width: '+dailyCostPercentage+'%">';
+	htmlGraphCostCalc += '<span class="">'+dailyCostCalc+' kroner / day</span>';
+	htmlGraphCostCalc += '</div>';
+	htmlGraphCostCalc += '</div>';
+	htmlGraphCostCalc += '</li>';
+
 	$("#controlPanelGraphsWrap").empty();
-	$("#controlPanelGraphsWrap").prepend(htmlGraphElectricity+htmlGraphWater);
+	$("#controlPanelGraphsWrap").prepend(htmlGraphElectricity+htmlGraphWater+htmlGraphCostCalc);
 
     $('.controlPanelGraphs').circliful();
 

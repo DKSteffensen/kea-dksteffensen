@@ -39,10 +39,10 @@
 			            {
 			              "id": 0,
 			              "name": "Light 1",
-			              "type": "water",
+			              "type": "electricity",
 			              "consumption": "20",
 			              "state": "off",
-			              "icon": "fa fa-bolt",
+			              "icon": "fa fa-lightbulb-o",
 			              "position": 
 			              {
 			                "top": "85%",
@@ -55,7 +55,7 @@
 			              "type": "electricity",
 			              "consumption": "40",
 			              "state": "on",
-			              "icon": "fa fa-bolt",
+			              "icon": "fa fa-lightbulb-o",
 			              "position": 
 			              {
 			                "top": "85%",
@@ -86,6 +86,19 @@
 			              {
 			                "top": "85%",
 			                "left": "15%"
+			              }
+			            },
+			            {
+			              "id": 4,
+			              "name": "Kitchen Sink",
+			              "type": "water",
+			              "consumption": "250",
+			              "state": "on",
+			              "icon": "fa fa-tint",
+			              "position": 
+			              {
+			                "top": "85%",
+			                "left": "60%"
 			              }
 			            }
 			          ],
@@ -123,7 +136,7 @@
 			              "type": "electricity",
 			              "consumption": "350",
 			              "state": "off",
-			              "icon": "fa fa-bolt",
+			              "icon": "fa fa-television",
 			              "position": 
 			              {
 			                "top": "0%",
@@ -136,7 +149,7 @@
 			              "type": "electricity",
 			              "consumption": "500",
 			              "state": "on",
-			              "icon": "fa fa-bolt",
+			              "icon": "fa fa-desktop",
 			              "position": 
 			              {
 			                "top": "90%",
@@ -178,13 +191,26 @@
 			              "type": "electricity",
 			              "consumption": "50",
 			              "state": "on",
-			              "icon": "fa fa-bolt",
+			              "icon": "fa fa-lightbulb-o",
 			              "position": 
 			              {
 			                "top": "50%",
 			                "left": "40%"
 			              }
 			            },
+			            {
+			              "id": 1,
+			              "name": "Television",
+			              "type": "electricity",
+			              "consumption": "450",
+			              "state": "off",
+			              "icon": "fa fa-television",
+			              "position": 
+			              {
+			                "top": "15%",
+			                "left": "70%"
+			              }
+			            }
 			          ]
 			        },
 			        {
@@ -207,11 +233,37 @@
 			              "type": "electricity",
 			              "consumption": "60",
 			              "state": "on",
-			              "icon": "fa fa-bolt",
+			              "icon": "fa fa-lightbulb-o",
 			              "position": 
 			              {
-			                "top": "50%",
+			                "top": "55%",
 			                "left": "5%"
+			              }
+			            },
+			            {
+			              "id": 1,
+			              "name": "Bathroom Sink",
+			              "type": "water",
+			              "consumption": "150",
+			              "state": "on",
+			              "icon": "fa fa-tint",
+			              "position": 
+			              {
+			                "top": "45%",
+			                "left": "5%"
+			              }
+			            },
+			            {
+			              "id": 2,
+			              "name": "Washing Machine",
+			              "type": "water",
+			              "consumption": "550",
+			              "state": "on",
+			              "icon": "fa fa-tint",
+			              "position": 
+			              {
+			                "top": "5%",
+			                "left": "85%"
 			              }
 			            },
 			          ],
@@ -290,15 +342,28 @@
 		}
 	});
 
-	$(document).ready(function(){
-		$('input[name="utilitySwitchCheckbox"]').on('switchChange.bootstrapSwitch', function(event, state) {
-			var utilityID = $(this).attr("data-utilityID");
-			if(state == true){
-				$("#utility"+utilityID).addClass("utilityOn");
-				// Change state in json.
-			}
-			else {
-				$("#utility"+utilityID).removeClass("utilityOn");			
-			}
-		});	
-	});
+	$(document).on('switchChange.bootstrapSwitch', 'input[name="utilitySwitchCheckbox"]', function(event, state) {
+		var utilityID = $(this).attr("data-utilityID");
+		var roomID = $(this).attr("data-roomID");
+		var combinedIDs = roomID+""+utilityID;
+
+		switch(houses.myHouse[gloIntHouseID].rooms[roomID].utilities[utilityID].type){
+			case 'electricity':
+				var utilityClass = "utilityElectricityOn";
+			break;
+			case 'water':
+				var utilityClass = "utilityWaterOn";
+			break;
+		}
+
+		if(state == true){
+			$("#utility"+combinedIDs).addClass(utilityClass);
+			houses.myHouse[gloIntHouseID].rooms[roomID].utilities[utilityID].state = "on";
+			stringifyHouse();
+		}
+		else {
+			$("#utility"+combinedIDs).removeClass(utilityClass);
+			houses.myHouse[gloIntHouseID].rooms[roomID].utilities[utilityID].state = "off";
+			stringifyHouse();	
+		}
+	});	
