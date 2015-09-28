@@ -4,13 +4,18 @@
 	<meta charset="UTF-8">
 	<title>My Layout</title>
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
 	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
+	<!-- Bootstrap SWITCH -->
+	<link rel="stylesheet" href="css/bootstrap-switch.min.css" />
 	<!-- Font Awesome CDN -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+	<!-- Circliful Plugin CSS -->
+	<link href="css/jquery.circliful.css" rel="stylesheet" type="text/css" />
+	<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<!-- Stylesheet Include -->
-	<link rel="stylesheet" href="index.css">
+	<link rel="stylesheet" href="index.css" />
 </head>
 <body>
 
@@ -33,15 +38,14 @@
 <!--         <li><a href="#">House Overview <span class="sr-only">(current)</span></a></li>
         <li class="active"><a href="#">House ControlPanel</a></li> -->
       </ul>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right">	
         <li><a href="#" class="btnNavbar" data-linkHref="controlPanelPage">Control Panel</a></li>
-        <li><a href="#" class="btnNavbar" data-linkHref="buildRoomPage">Edit Houseplan</a></li>
+        <li><a href="#" class="btnNavbar" data-linkHref="buildRoomPage">Houseplan</a></li>
+        <li><a href="#" class="btnNavbar" data-linkHref="addUtilitiesPage">Utilities</a></li>
 
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Select Adress <span class="caret"></span></a>
           <ul class="dropdown-menu" id="houseDropdown">
-          	<li role="separator" class="divider"></li>
-          	<li><a href="#">Add new adress</a></li>
           </ul>
         </li>
       </ul>
@@ -51,6 +55,35 @@
 
 
 <div class="container-fluid">
+
+
+	<div class="pages inActive" id="addUtilitiesPage">
+		<div id="" class="col-md-8">
+			<div class="row">
+				<div id="showUtilityCanvasWrap">
+					<div id="showUtilityCanvas"></div>					
+				</div>
+			</div>
+		</div>
+
+		<div id="controlPanelWrap" class="col-md-4">
+			<div class="row row-spacing">
+				<div class="col-md-12">	
+				</div>			
+			</div>
+
+			<div class="row row-spacing">
+				<div class="col-md-12" id="">
+					
+				</div>
+			</div>
+
+			<div class="row row-spacing">
+				<div class="col-md-12">	
+				</div>
+			</div>	
+		</div>
+	</div>
 
 
 	<div class="pages inActive" id="controlPanelPage">
@@ -65,12 +98,31 @@
 		<div id="controlPanelWrap" class="col-md-4">
 			<div class="row row-spacing">
 				<div class="col-md-12">	
+					<button type="button" id="btnShowControlPanel" class="btn btn-success ha-btnWidth btnControlPanel" data-linkControlPanelHref="controlPanelControlWrap">
+						<h5>Show ControlPanel</h5>
+					</button>	
+					<button type="button" id="btnShowGraphs" class="btn btn-warning ha-btnWidth btnControlPanel" data-linkControlPanelHref="graphsPanelWrap">
+						<h5>Show Graphs</h5>
+					</button>		
 				</div>			
 			</div>
 
 			<div class="row row-spacing">
-				<div class="col-md-12" id="controlPanelControlWrap">
-					
+				<div class="col-md-12 controlPanelPages inActive" id="controlPanelControlWrap">
+
+				</div>
+				<div class="col-md-12 controlPanelPages inActive" id="graphsPanelWrap">
+
+						<ul class="list-group" id="controlPanelGraphsWrap">
+							<li>
+								<div class="progress">
+									<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+									<span class="">Expenses per day, 6840 kr.</span>
+									</div>
+								</div>
+							</li>
+						</ul>
+
 				</div>
 			</div>
 
@@ -96,7 +148,7 @@
 		<div id="buildControlWrap" class="col-md-4">
 			<div class="row row-spacing">
 				<div class="col-md-12">
-					<button type="button" id="btnNewRoom" class="btn btn-info btn-block">
+					<button type="button" id="btnNewRoom" class="btn btn-primary btn-block">
 						<h5>Add Room</h5>
 					</button>		
 				</div>			
@@ -133,21 +185,20 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
 	<script src="js/bootstrap.min.js"></script>
+	<!-- Bootstrap SWITCH Javascript -->
+	<script src="js/bootstrap-switch.min.js"></script>
+	<!-- Circiful Plugin -->
+	<script src="js/jquery.circliful.min.js"></script>
 	<!-- Local Javascript files -->
 	<script src="functions.js"></script>
 	<script src="index.js"></script>
 	<script src="buildRooms.js"></script>
 
 	<script>
-	function populateHousesDropdown () {
-		for (var i = 0; i < houses.myHouse.length; i++) {
-			var strHouseAdress = houses.myHouse[i].address;
-			var strHouseID = houses.myHouse[i].id;
-			$("#houseDropdown").prepend('<li><a href="#" data-houseID="'+strHouseID+'">'+strHouseAdress+'</a></li>');
-		};		
-	}
 
-	populateHousesDropdown();
+    $('input[name="utilitySwitchCheckbox"]').bootstrapSwitch('state', true, true);
+
+
 	</script>
 
 </body>

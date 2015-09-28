@@ -2,7 +2,11 @@
 
 	$(document).ready(function(){
 		var activePageLoaded = localStorage.activePage;
-		$("#"+activePageLoaded).toggleClass("active inActive");
+		var activeControlPanelPageLoaded = localStorage.activeControlPanelPage;
+		$("#"+activePageLoaded+", #"+activeControlPanelPageLoaded).toggleClass("active inActive");
+
+		updatePage();
+
 	});
 
 	var locStrHouses = localStorage.houses;
@@ -34,10 +38,9 @@
 			          [
 			            {
 			              "id": 0,
-			              "name": "light",
-			              "electricityConsumption": "50",
-			              "waterConsumption": "0",
-			              "gasConsumption": "0",
+			              "name": "Light 1",
+			              "type": "water",
+			              "consumption": "20",
 			              "state": "off",
 			              "icon": "fa fa-bolt",
 			              "position": 
@@ -48,10 +51,9 @@
 			            },
 			            {
 			              "id": 1,
-			              "name": "light",
-			              "electricityConsumption": "25",
-			              "waterConsumption": "0",
-			              "gasConsumption": "0",
+			              "name": "Light 2",
+			              "type": "electricity",
+			              "consumption": "40",
 			              "state": "on",
 			              "icon": "fa fa-bolt",
 			              "position": 
@@ -62,10 +64,9 @@
 			            },
 			            {
 			              "id": 2,
-			              "name": "refrigiator",
-			              "electricityConsumption": "200",
-			              "waterConsumption": "0",
-			              "gasConsumption": "0",
+			              "name": "Refrigiator",
+			              "type": "electricity",
+			              "consumption": "200",
 			              "state": "on",
 			              "icon": "fa fa-bolt",
 			              "position": 
@@ -76,10 +77,9 @@
 			            },
 			            {
 			              "id": 3,
-			              "name": "stove",
-			              "electricityConsumption": "150",
-			              "waterConsumption": "0",
-			              "gasConsumption": "0",
+			              "name": "Stove",
+			              "type": "electricity",
+			              "consumption": "550",
 			              "state": "on",
 			              "icon": "fa fa-bolt",
 			              "position": 
@@ -119,10 +119,9 @@
 			          [
 			            {
 			              "id": 0,
-			              "name": "tv",
-			              "electricityConsumption": "200",
-			              "waterConsumption": "0",
-			              "gasConsumption": "0",
+			              "name": "Television",
+			              "type": "electricity",
+			              "consumption": "350",
 			              "state": "off",
 			              "icon": "fa fa-bolt",
 			              "position": 
@@ -133,10 +132,9 @@
 			            },
 			            {
 			              "id": 1,
-			              "name": "pc",
-			              "electricityConsumption": "400",
-			              "waterConsumption": "0",
-			              "gasConsumption": "0",
+			              "name": "Computer",
+			              "type": "electricity",
+			              "consumption": "500",
 			              "state": "on",
 			              "icon": "fa fa-bolt",
 			              "position": 
@@ -172,7 +170,22 @@
 			            "left": "80px",
 			            "zindex": "15"
 			          },
-			          "utilities": []
+			          "utilities":
+			          [
+			            {
+			              "id": 0,
+			              "name": "Light 1",
+			              "type": "electricity",
+			              "consumption": "50",
+			              "state": "on",
+			              "icon": "fa fa-bolt",
+			              "position": 
+			              {
+			                "top": "50%",
+			                "left": "40%"
+			              }
+			            },
+			          ]
 			        },
 			        {
 			          "id": 3,
@@ -186,7 +199,22 @@
 			            "left": "280px",
 			            "zindex": "15"
 			          },
-			          "utilities": [],
+			          "utilities":
+			          [
+			            {
+			              "id": 0,
+			              "name": "Light 1",
+			              "type": "electricity",
+			              "consumption": "60",
+			              "state": "on",
+			              "icon": "fa fa-bolt",
+			              "position": 
+			              {
+			                "top": "50%",
+			                "left": "5%"
+			              }
+			            },
+			          ],
 			          "doorsAndWindows": []
 			        },
 			        {
@@ -201,7 +229,22 @@
 			            "left": "330px",
 			            "zindex": "5"
 			          },
-			          "utilities": [],
+			          "utilities":
+			          [
+			            {
+			              "id": 0,
+			              "name": "Light 1",
+			              "type": "electricity",
+			              "consumption": "30",
+			              "state": "off",
+			              "icon": "fa fa-bolt",
+			              "position": 
+			              {
+			                "top": "50%",
+			                "left": "40%"
+			              }
+			            },
+			          ],
 			          "doorsAndWindows": []
 			        }
 			      ]
@@ -210,13 +253,14 @@
 			}
 		stringifyHouse();
 	}
-	else {
+	else {	
 		var locStrHouses = localStorage.houses;
 		var houses = JSON.parse(locStrHouses);
 	}
 
 	$(document).on("click", ".btnNavbar", function(){
-		gloIntHouseID = 0;
+
+		updatePage();
 
 		var linkHref = $(this).attr("data-linkHref");
 
@@ -228,7 +272,33 @@
 			$("#"+linkHref).toggleClass("active inActive");
 			localStorage.activePage = linkHref;
 		}
+	});	
+
+	$(document).on("click", ".btnControlPanel", function(){		
+
+		loadGraphs(gloIntHouseID);
+
+		var linkHref = $(this).attr("data-linkControlPanelHref");
+
+		if($("#"+linkHref).hasClass("active")) {
+			// Do something nice maybe?
+		}
+		else {
+			$(".controlPanelPages").not("#"+linkHref).removeClass("active").addClass("inActive");
+			$("#"+linkHref).toggleClass("active inActive");
+			localStorage.activeControlPanelPage = linkHref;
+		}
 	});
 
-	loadRooms(gloIntHouseID);
-	loadUtilities(0);
+	$(document).ready(function(){
+		$('input[name="utilitySwitchCheckbox"]').on('switchChange.bootstrapSwitch', function(event, state) {
+			var utilityID = $(this).attr("data-utilityID");
+			if(state == true){
+				$("#utility"+utilityID).addClass("utilityOn");
+				// Change state in json.
+			}
+			else {
+				$("#utility"+utilityID).removeClass("utilityOn");			
+			}
+		});	
+	});
