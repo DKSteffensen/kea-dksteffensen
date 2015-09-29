@@ -19,6 +19,21 @@
 </head>
 <body>
 
+<div id="login">
+	<div id="loginBox"><form class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inpUsername" class="sr-only">Email address</label>
+        <input type="username" id="inpUsername" class="form-control" placeholder="Username" required="" autofocus="">
+        <label for="inpPassword" class="sr-only">Password</label>
+        <input type="password" id="inpPassword" class="form-control" placeholder="Password" required="">
+        <div id="signup">
+        	No user? <a href="#">create new user here.</a>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" id="btnLogin">Sign in</button>
+      </form>
+	</div>
+</div>
+
 <nav class="navbar navbar-inverse ha-navbar">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -29,14 +44,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"></a>
+      <a class="navbar-brand" href="#">DKSteffensen HAS</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-<!--         <li><a href="#">House Overview <span class="sr-only">(current)</span></a></li>
-        <li class="active"><a href="#">House ControlPanel</a></li> -->
       </ul>
       <ul class="nav navbar-nav navbar-right">	
         <li><a href="#" class="btnNavbar" data-linkHref="controlPanelPage">Control Panel</a></li>
@@ -44,7 +57,7 @@
         <li><a href="#" class="btnNavbar" data-linkHref="addUtilitiesPage">Utilities</a></li>
 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Select Adress <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">account <span class="caret"></span></a>
           <ul class="dropdown-menu" id="houseDropdown">
           </ul>
         </li>
@@ -54,11 +67,16 @@
 </nav>
 
 
-<div class="container-fluid">
+<div class="container-fluid ha-container">
+
+
+	<div class="pages inActive" id="frontPage">
+		<p>Welcome to Daniel Kristian Steffensens Home Automation System!</p>
+	</div>
 
 
 	<div class="pages inActive" id="addUtilitiesPage">
-		<div id="" class="col-md-8">
+		<div id="" class="col-md-8 ha-leftRow">
 			<div class="row">
 				<div id="showUtilityCanvasWrap">
 					<div id="showUtilityCanvas"></div>					
@@ -68,13 +86,28 @@
 
 		<div id="utilitiesPanelWrap" class="col-md-4">
 			<div class="row row-spacing">
-				<div class="col-md-12">	
+				<div class="col-md-12">		
+					<button type="button" id="btnAddUtility" class="btn btn-warning ha-btnWidth" data-linkControlPanelHref="">
+						<h5>Add Utility</h5>
+					</button>
+					<div class="btn-group ha-btnWidth">
+						<button type="button" class="btn btn-default dropdown-toggle ha-btnWidth100 btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Choose Room <span class="caret"></span>
+						</button>
+							<ul class="dropdown-menu" id="btnChooseRoom">
+							</ul>
+					</div>
 				</div>			
 			</div>
 
 			<div class="row row-spacing">
 				<div class="col-md-12" id="addUtilityControlWrap">
-					
+					<div class="buildRoomControl panel panel-warning active" id="lblRoom'+roomID+'">
+						<div class="panel-heading" id="lblUtilityRoomName">Choose Room</div>
+						<div class="panel-body" id="utilityControlListWrap">
+
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -87,7 +120,7 @@
 
 
 	<div class="pages inActive" id="controlPanelPage">
-		<div id="" class="col-md-8">
+		<div id="" class="col-md-8 ha-leftRow">
 			<div class="row">
 				<div id="showCanvasWrap">
 					<div id="showCanvas"></div>					
@@ -101,7 +134,7 @@
 					<button type="button" id="btnShowControlPanel" class="btn btn-success ha-btnWidth btnControlPanel" data-linkControlPanelHref="controlPanelControlWrap">
 						<h5>Show ControlPanel</h5>
 					</button>	
-					<button type="button" id="btnShowGraphs" class="btn btn-warning ha-btnWidth btnControlPanel" data-linkControlPanelHref="graphsPanelWrap">
+					<button type="button" id="btnShowGraphs" class="btn btn-primary ha-btnWidth btnControlPanel" data-linkControlPanelHref="graphsPanelWrap">
 						<h5>Show Graphs</h5>
 					</button>		
 				</div>			
@@ -129,7 +162,7 @@
 
 
 	<div class="pages inActive" id="buildRoomPage">
-		<div id="buildCanvasWrap" class="col-md-8">
+		<div id="buildCanvasWrap" class="col-md-8 ha-leftRow">
 			<div class="row">
 				<div id="buildCanvasWrap">
 					<div id="buildCanvas">

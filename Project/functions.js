@@ -1,13 +1,37 @@
+// Function to login.
+function login (username, password) {
+	for (var i = 0; i < users.length; i++) {
+		var usersUsername = users[i].username;
+		var usersPassword = users[i].password;
+		var usersID = users[i].id;
+		if(usersUsername == username && usersPassword == password){
+			$("#login").fadeOut();
+			localStorage.userLoggedIn = usersID;
+		}
+	};
+}
+function logout () {
+	localStorage.removeItem("userLoggedIn");
+	$("#login").fadeIn();	
+}
 // Function to stringify JSON objects.
 function stringifyHouse () {  
-	var locObjhouses = JSON.stringify(houses);
-	localStorage.houses = locObjhouses;
+	var locObjHouses = JSON.stringify(houses);
+	localStorage.houses = locObjHouses;
+};
+function stringifyUsers () {  
+	var locObjUsers = JSON.stringify(users);
+	localStorage.users = locObjUsers;
 };
 function updatePage () {
 	loadRooms(gloIntHouseID);
 	loadUtilities(gloIntHouseID);
 	populateHousesDropdown();
 	loadGraphs(gloIntHouseID);
+	populateChooseRoomDropdown(gloIntHouseID);
+	$("#utilityControlListWrap").empty();	
+	$("#lblUtilityRoomName").html("Choose Room");
+	localStorage.addUtilityChooseRoom = null;
 }
 function populateHousesDropdown () {
 	$("#houseDropdown").empty();
@@ -16,13 +40,23 @@ function populateHousesDropdown () {
 		var strHouseID = houses.myHouse[i].id;
 		$("#houseDropdown").prepend('<li><a href="#" data-houseID="'+strHouseID+'">'+strHouseAdress+'</a></li>');
 	};
-	// var htmlDropDownAdress = '<li role="separator" class="divider"></li>';
-	// htmlDropDownAdress += '<li><a href="#">Add new adress</a></li>';
-	// $("#houseDropdown").append(htmlDropDownAdress);	
+	var htmlDropDownAdress = ' <li role="separator" class="divider"></li>';
+	htmlDropDownAdress += '<li><a href="#" id="btnLogout">Logout</a></li>';
+	$("#houseDropdown").append(htmlDropDownAdress);	
+}
+function populateChooseRoomDropdown (houseID) {
+	$("#btnChooseRoom").empty();
+	for (var i = 0; i < houses.myHouse[houseID].rooms.length; i++) {
+		if(houses.myHouse[houseID].rooms[i].deleted == 0){
+			var addUtilityRoomName = houses.myHouse[houseID].rooms[i].name;
+			var addUtilityRoomID = houses.myHouse[houseID].rooms[i].id;
+			$("#btnChooseRoom").append('<li><a href="#" class="addUtilityChooseRoom" data-roomID="'+addUtilityRoomID+'">'+addUtilityRoomName+'</a></li>');
+		}
+	};
 }
 // Function to load rooms onto my canvas.
 function loadRooms (houseID) {
-	$("#showCanvas, #controlPanelControlWrap").empty();
+	$("#showCanvas, #controlPanelControlWrap, #showUtilityCanvas").empty();
 	for (var i = 0; i < houses.myHouse[houseID].rooms.length; i++) {
 		roomDeleted = houses.myHouse[houseID].rooms[i].deleted;
 		if(roomDeleted == 0){
@@ -34,7 +68,7 @@ function loadRooms (houseID) {
 			var strRoomLeft = houses.myHouse[houseID].rooms[i].dimensions.left;
 			var strRoomZIndex = houses.myHouse[houseID].rooms[i].dimensions.zindex;
 
-			$("#showCanvas").append('<div class="room" id="canvasRoom'+strRoomID+'" style="width:'+strRoomWidth+';height:'+strRoomHeight+';line-height:'+strRoomHeight+';top:'+strRoomTop+';left:'+strRoomLeft+';z-index:'+strRoomZIndex+';">'+strRoomName+'</div>');
+			$("#showCanvas, #showUtilityCanvas").append('<div class="room roomSelect housePlan'+strRoomID+'" id="canvasRoom'+strRoomID+'" style="width:'+strRoomWidth+';height:'+strRoomHeight+';line-height:'+strRoomHeight+';top:'+strRoomTop+';left:'+strRoomLeft+';z-index:'+strRoomZIndex+';">'+strRoomName+'</div>');
 
 			var htmlControlRoomPanel = '<div class="panel panel-success active" id="">';
 			htmlControlRoomPanel += '<div class="panel-heading">'+strRoomName+'</div>';
@@ -53,44 +87,45 @@ function loadUtilities (houseID) {
 	for (var i = 0; i < houses.myHouse[houseID].rooms.length; i++) {
 		var locRoomID = houses.myHouse[houseID].rooms[i].id;
 		for (var u = 0; u < houses.myHouse[houseID].rooms[i].utilities.length; u++) {
-			var locRoomUtilitiesID = houses.myHouse[houseID].rooms[i].utilities[u].id;
-			var locRoomUtilitiesPosTop = houses.myHouse[houseID].rooms[i].utilities[u].position.top;
-			var locRoomUtilitiesPosLeft = houses.myHouse[houseID].rooms[i].utilities[u].position.left;
-			var locRoomUtilitiesIcon = houses.myHouse[houseID].rooms[i].utilities[u].icon;
-			var locRoomUtilitiesState = houses.myHouse[houseID].rooms[i].utilities[u].state;
-			var locRoomUtilitiesName = houses.myHouse[houseID].rooms[i].utilities[u].name;
+			if(houses.myHouse[houseID].rooms[i].utilities[u].deleted == 0){
+				var locRoomUtilitiesID = houses.myHouse[houseID].rooms[i].utilities[u].id;
+				var locRoomUtilitiesPosTop = houses.myHouse[houseID].rooms[i].utilities[u].position.top;
+				var locRoomUtilitiesPosLeft = houses.myHouse[houseID].rooms[i].utilities[u].position.left;
+				var locRoomUtilitiesIcon = houses.myHouse[houseID].rooms[i].utilities[u].icon;
+				var locRoomUtilitiesState = houses.myHouse[houseID].rooms[i].utilities[u].state;
+				var locRoomUtilitiesName = houses.myHouse[houseID].rooms[i].utilities[u].name;
 
-			var utilityID = locRoomUtilitiesID;
-			var roomID = locRoomID;
-			var combinedIDs = locRoomID+""+utilityID;
+				var utilityID = locRoomUtilitiesID;
+				var roomID = locRoomID;
+				var combinedIDs = locRoomID+""+utilityID;
 
-			var htmlControlSwitchesOn = '<li class="list-group-item list-group-item-success">';
-			htmlControlSwitchesOn += '<p><span class="'+locRoomUtilitiesIcon+'" aria-hidden="true"></span> '+locRoomUtilitiesName+'</p>';
-			htmlControlSwitchesOn += '<input type="checkbox" name="utilitySwitchCheckbox" class="utilitySwitchCheckbox" data-utilityID="'+utilityID+'" data-roomID="'+roomID+'" checked>';
-			htmlControlSwitchesOn += '</li>';
+				var htmlControlSwitchesOn = '<li class="list-group-item list-group-item-success">';
+				htmlControlSwitchesOn += '<p><i class="fa '+locRoomUtilitiesIcon+'" aria-hidden="true"></i> '+locRoomUtilitiesName+'</p>';
+				htmlControlSwitchesOn += '<input type="checkbox" name="utilitySwitchCheckbox" class="utilitySwitchCheckbox" data-utilityID="'+utilityID+'" data-roomID="'+roomID+'" checked>';
+				htmlControlSwitchesOn += '</li>';
 
-			var htmlControlSwitchesOff = '<li class="list-group-item list-group-item-success">';
-			htmlControlSwitchesOff += '<p><span class="'+locRoomUtilitiesIcon+'" aria-hidden="true"></span> '+locRoomUtilitiesName+'</p>';
-			htmlControlSwitchesOff += '<input type="checkbox" name="utilitySwitchCheckbox" class="utilitySwitchCheckbox" data-utilityID="'+utilityID+'" data-roomID="'+roomID+'">';
-			htmlControlSwitchesOff += '</li>';
+				var htmlControlSwitchesOff = '<li class="list-group-item list-group-item-success">';
+				htmlControlSwitchesOff += '<p><i class="fa '+locRoomUtilitiesIcon+'" aria-hidden="true"></i> '+locRoomUtilitiesName+'</p>';
+				htmlControlSwitchesOff += '<input type="checkbox" name="utilitySwitchCheckbox" class="utilitySwitchCheckbox" data-utilityID="'+utilityID+'" data-roomID="'+roomID+'">';
+				htmlControlSwitchesOff += '</li>';
 
-			if(locRoomUtilitiesState == "on"){
-				switch(houses.myHouse[houseID].rooms[i].utilities[u].type){
-					case 'electricity':
-						var utilityClass = "utilityElectricityOn";
-					break;
-					case 'water':
-						var utilityClass = "utilityWaterOn";
-					break;
+				if(locRoomUtilitiesState == "on"){
+					switch(houses.myHouse[houseID].rooms[i].utilities[u].type){
+						case 'electricity':
+							var utilityClass = "utilityElectricityOn";
+						break;
+						case 'water':
+							var utilityClass = "utilityWaterOn";
+						break;
+					}
+					$(".housePlan"+locRoomID).append('<div class="utility'+combinedIDs+' utility '+utilityClass+'" style="top:'+locRoomUtilitiesPosTop+';left:'+locRoomUtilitiesPosLeft+';"><i class="fa '+locRoomUtilitiesIcon+'" aria-hidden="true"></i></div>');
+					$("#controlPanelRoom"+locRoomID).append(htmlControlSwitchesOn);
 				}
-				$("#canvasRoom"+locRoomID).append('<div id="utility'+combinedIDs+'" class="utility '+utilityClass+'" style="top:'+locRoomUtilitiesPosTop+';left:'+locRoomUtilitiesPosLeft+';"><span class="'+locRoomUtilitiesIcon+'" aria-hidden="true"></span></div>');
-				$("#controlPanelRoom"+locRoomID).append(htmlControlSwitchesOn);
+				else {
+					$(".housePlan"+locRoomID).append('<div class="utility'+combinedIDs+' utility" style="top:'+locRoomUtilitiesPosTop+';left:'+locRoomUtilitiesPosLeft+';"><i class="fa '+locRoomUtilitiesIcon+'" aria-hidden="true"></i></div>');
+					$("#controlPanelRoom"+locRoomID).append(htmlControlSwitchesOff);
+				}
 			}
-			else {
-				$("#canvasRoom"+locRoomID).append('<div id="utility'+combinedIDs+'" class="utility" style="top:'+locRoomUtilitiesPosTop+';left:'+locRoomUtilitiesPosLeft+';"><span class="'+locRoomUtilitiesIcon+'" aria-hidden="true"></span></div>');
-				$("#controlPanelRoom"+locRoomID).append(htmlControlSwitchesOff);
-			}
-
 		};
 	};
 

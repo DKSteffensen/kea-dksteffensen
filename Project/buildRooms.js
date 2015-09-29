@@ -14,7 +14,7 @@
 		createSelectHeight();
 		createSelectPosTop();
 		createSelectPosLeft();
-		createSelectZIndex();	
+		createSelectZIndex();
 	}
 	else {
 		// Remind user to add rooms to the house.
@@ -136,8 +136,6 @@
 		pathDimensions.top = "5px";
 		pathDimensions.left = "5px";
 		pathDimensions.zindex = "5";
-
-
 		
 		stringifyHouse();
 

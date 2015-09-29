@@ -1,13 +1,82 @@
-	var gloIntHouseID = 0;
+var locStrUsers = localStorage.users;
+
+if(locStrUsers == undefined) {
+	var users =
+	[
+		{
+			"id":"0",
+			"username":"Daniel",
+			"password":"test123",
+			"firstname":"Daniel",
+			"lastname":"Steffensen",
+			"houses":
+			[
+				{
+					"id":"0",
+					"active":1
+				},
+				{
+					"id":"1",
+					"active":0
+				}
+
+			]
+		}
+	]
+	stringifyUsers();
+}
+
+var locStrUsers = localStorage.users;
+var users = JSON.parse(locStrUsers);
+
+var userLoggedIn = localStorage.userLoggedIn;	
+if(userLoggedIn == undefined){
+	$("#login").show();
+	gloIntHouseID = 0;
+}
+else {
+	for (var i = 0; i < users[userLoggedIn].houses.length; i++) {
+		var usersHouseActive = users[userLoggedIn].houses[i].active;
+		var usersHouseID = users[userLoggedIn].houses[i].id;
+			if(usersHouseActive == 1){
+				var gloIntHouseID = usersHouseID;
+			}
+	};
+}
 
 	$(document).ready(function(){
 		var activePageLoaded = localStorage.activePage;
 		var activeControlPanelPageLoaded = localStorage.activeControlPanelPage;
-		$("#"+activePageLoaded+", #"+activeControlPanelPageLoaded).toggleClass("active inActive");
+		if(activePageLoaded == undefined){
+			$("#frontPage").toggleClass("active inActive")
+		}
+		else {
+			$("#"+activePageLoaded+", #"+activeControlPanelPageLoaded).toggleClass("active inActive");
+		}
 
 		updatePage();
+		changeBackground();
 
 	});
+
+function changeBackground () {
+	var activePageLoaded = localStorage.activePage;
+
+	switch(activePageLoaded){
+	case 'frontPage':
+		$(".ha-leftRow").css("background-image", "none");
+	break;
+	case 'controlPanelPage':	
+		$(".ha-leftRow").css("background-image", "url(grassbig.jpg)");		
+	break;
+	case 'buildRoomPage':
+		$(".ha-leftRow").css("background-image", "url(bp2.jpg)");				
+	break;
+	case 'addUtilitiesPage':
+		$(".ha-leftRow").css("background-image", "url(yellow2.jpg)");			
+	break;
+	}
+}
 
 	var locStrHouses = localStorage.houses;
 
@@ -39,10 +108,11 @@
 			            {
 			              "id": 0,
 			              "name": "Light 1",
+			          	  "deleted": 0,
 			              "type": "electricity",
 			              "consumption": "20",
 			              "state": "off",
-			              "icon": "fa fa-lightbulb-o",
+			              "icon": "fa-lightbulb-o",
 			              "position": 
 			              {
 			                "top": "85%",
@@ -52,10 +122,11 @@
 			            {
 			              "id": 1,
 			              "name": "Light 2",
+			          	  "deleted": 0,
 			              "type": "electricity",
 			              "consumption": "40",
 			              "state": "on",
-			              "icon": "fa fa-lightbulb-o",
+			              "icon": "fa-lightbulb-o",
 			              "position": 
 			              {
 			                "top": "85%",
@@ -65,10 +136,11 @@
 			            {
 			              "id": 2,
 			              "name": "Refrigiator",
+			          	  "deleted": 0,
 			              "type": "electricity",
 			              "consumption": "200",
 			              "state": "on",
-			              "icon": "fa fa-bolt",
+			              "icon": "fa-bolt",
 			              "position": 
 			              {
 			                "top": "5%",
@@ -78,10 +150,11 @@
 			            {
 			              "id": 3,
 			              "name": "Stove",
+			          	  "deleted": 0,
 			              "type": "electricity",
 			              "consumption": "550",
 			              "state": "on",
-			              "icon": "fa fa-bolt",
+			              "icon": "fa-bolt",
 			              "position": 
 			              {
 			                "top": "85%",
@@ -91,10 +164,11 @@
 			            {
 			              "id": 4,
 			              "name": "Kitchen Sink",
+			          	  "deleted": 0,
 			              "type": "water",
 			              "consumption": "250",
 			              "state": "on",
-			              "icon": "fa fa-tint",
+			              "icon": "fa-tint",
 			              "position": 
 			              {
 			                "top": "85%",
@@ -133,10 +207,11 @@
 			            {
 			              "id": 0,
 			              "name": "Television",
+			          	  "deleted": 0,
 			              "type": "electricity",
 			              "consumption": "350",
 			              "state": "off",
-			              "icon": "fa fa-television",
+			              "icon": "fa-television",
 			              "position": 
 			              {
 			                "top": "0%",
@@ -146,14 +221,43 @@
 			            {
 			              "id": 1,
 			              "name": "Computer",
+			          	  "deleted": 0,
 			              "type": "electricity",
 			              "consumption": "500",
 			              "state": "on",
-			              "icon": "fa fa-desktop",
+			              "icon": "fa-desktop",
 			              "position": 
 			              {
 			                "top": "90%",
-			                "left": "5%"
+			                "left": "10%"
+			              }
+			            },
+			            {
+			              "id": 2,
+			              "name": "Dinner Table Light",
+			          	  "deleted": 0,
+			              "type": "electricity",
+			              "consumption": "70",
+			              "state": "off",
+			              "icon": "fa-lightbulb-o",
+			              "position": 
+			              {
+			                "top": "5%",
+			                "left": "15%"
+			              }
+			            },
+			            {
+			              "id": 3,
+			              "name": "Light Stand",
+			          	  "deleted": 0,
+			              "type": "electricity",
+			              "consumption": "100",
+			              "state": "on",
+			              "icon": "fa-lightbulb-o",
+			              "position": 
+			              {
+			                "top": "70%",
+			                "left": "90%"
 			              }
 			            }
 			          ],
@@ -188,10 +292,11 @@
 			            {
 			              "id": 0,
 			              "name": "Light 1",
+			          	  "deleted": 0,
 			              "type": "electricity",
 			              "consumption": "50",
 			              "state": "on",
-			              "icon": "fa fa-lightbulb-o",
+			              "icon": "fa-lightbulb-o",
 			              "position": 
 			              {
 			                "top": "50%",
@@ -201,14 +306,29 @@
 			            {
 			              "id": 1,
 			              "name": "Television",
+			          	  "deleted": 0,
 			              "type": "electricity",
 			              "consumption": "450",
 			              "state": "off",
-			              "icon": "fa fa-television",
+			              "icon": "fa-television",
 			              "position": 
 			              {
 			                "top": "15%",
 			                "left": "70%"
+			              }
+			            },
+			            {
+			              "id": 2,
+			              "name": "Night Lamp",
+			          	  "deleted": 0,
+			              "type": "electricity",
+			              "consumption": "50",
+			              "state": "off",
+			              "icon": "fa-lightbulb-o",
+			              "position": 
+			              {
+			                "top": "5%",
+			                "left": "5%"
 			              }
 			            }
 			          ]
@@ -230,10 +350,11 @@
 			            {
 			              "id": 0,
 			              "name": "Light 1",
+			          	  "deleted": 0,
 			              "type": "electricity",
 			              "consumption": "60",
 			              "state": "on",
-			              "icon": "fa fa-lightbulb-o",
+			              "icon": "fa-lightbulb-o",
 			              "position": 
 			              {
 			                "top": "55%",
@@ -243,27 +364,29 @@
 			            {
 			              "id": 1,
 			              "name": "Bathroom Sink",
+			          	  "deleted": 0,
 			              "type": "water",
 			              "consumption": "150",
 			              "state": "on",
-			              "icon": "fa fa-tint",
+			              "icon": "fa-tint",
 			              "position": 
 			              {
-			                "top": "45%",
+			                "top": "40%",
 			                "left": "5%"
 			              }
 			            },
 			            {
 			              "id": 2,
 			              "name": "Washing Machine",
+			          	  "deleted": 0,
 			              "type": "water",
 			              "consumption": "550",
 			              "state": "on",
-			              "icon": "fa fa-tint",
+			              "icon": "fa-tint",
 			              "position": 
 			              {
 			                "top": "5%",
-			                "left": "85%"
+			                "left": "80%"
 			              }
 			            },
 			          ],
@@ -286,10 +409,11 @@
 			            {
 			              "id": 0,
 			              "name": "Light 1",
+			          	  "deleted": 0,
 			              "type": "electricity",
 			              "consumption": "30",
 			              "state": "off",
-			              "icon": "fa fa-bolt",
+			              "icon": "fa-bolt",
 			              "position": 
 			              {
 			                "top": "50%",
@@ -312,9 +436,9 @@
 
 	$(document).on("click", ".btnNavbar", function(){
 
-		updatePage();
-
 		var linkHref = $(this).attr("data-linkHref");
+		$(".btnNavbar").not(this).parent().removeClass("active")
+		$(this).parent().addClass("active");
 
 		if($("#"+linkHref).hasClass("active")) {
 			// Do something nice maybe?
@@ -324,6 +448,8 @@
 			$("#"+linkHref).toggleClass("active inActive");
 			localStorage.activePage = linkHref;
 		}
+		updatePage();
+		changeBackground();
 	});	
 
 	$(document).on("click", ".btnControlPanel", function(){		
@@ -357,13 +483,24 @@
 		}
 
 		if(state == true){
-			$("#utility"+combinedIDs).addClass(utilityClass);
+			$(".utility"+combinedIDs).addClass(utilityClass);
 			houses.myHouse[gloIntHouseID].rooms[roomID].utilities[utilityID].state = "on";
 			stringifyHouse();
 		}
 		else {
-			$("#utility"+combinedIDs).removeClass(utilityClass);
+			$(".utility"+combinedIDs).removeClass(utilityClass);
 			houses.myHouse[gloIntHouseID].rooms[roomID].utilities[utilityID].state = "off";
 			stringifyHouse();	
 		}
-	});	
+	});
+
+	$("#btnLogin").click(function(){
+		var lblUsername = $("#inpUsername").val();
+		var lblPassword = $("#inpPassword").val();
+		console.log(lblUsername+lblPassword);
+
+		login(lblUsername, lblPassword);
+	})
+	$(document).on("click", "#btnLogout", function(){
+		logout();
+	})
