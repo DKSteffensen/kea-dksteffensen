@@ -1,0 +1,4 @@
+Login details for predefined user:
+
+Username: Daniel
+Password: test123
