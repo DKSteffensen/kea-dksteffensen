@@ -1,19 +1,3 @@
-// Function to login.
-function login (username, password) {
-	for (var i = 0; i < users.length; i++) {
-		var usersUsername = users[i].username;
-		var usersPassword = users[i].password;
-		var usersID = users[i].id;
-		if(usersUsername == username && usersPassword == password){
-			$("#login").fadeOut();
-			localStorage.userLoggedIn = usersID;
-		}
-	};
-}
-function logout () {
-	localStorage.removeItem("userLoggedIn");
-	$("#login").fadeIn();	
-}
 // Function to stringify JSON objects.
 function stringifyHouse () {  
 	var locObjHouses = JSON.stringify(houses);
@@ -23,27 +7,116 @@ function stringifyUsers () {
 	var locObjUsers = JSON.stringify(users);
 	localStorage.users = locObjUsers;
 };
+// Function to login.
+function login (username, password) {
+	for (var i = 0; i < users.length; i++) {
+		var usersUsername = users[i].username;
+		var usersPassword = users[i].password;
+		var usersID = users[i].id;
+		var intUsersHouseID = users[i].houses[0].id;
+		if(usersUsername == username && usersPassword == password){
+			$("#login").fadeOut();
+			localStorage.userLoggedIn = usersID;
+
+			gloIntHouseID = intUsersHouseID;
+			updatePage();
+		}
+	};
+}
+function logout () {
+	localStorage.removeItem("userLoggedIn");
+	$("#login, #loginBox").fadeIn();	
+}
+function signUp () {
+	var lblUsername = $("#inpUsernameSignup").val();
+	var lblPassword = $("#inpPasswordSignup").val();
+	var lblFirstname = $("#inpFirstnameSignup").val();
+	var lblLastname = $("#inpLastnameSignup").val();
+	var lblEmail = $("#inpEmailSignup").val();
+	var lblAddress = $("#inpAddressSignup").val();
+
+	if(lblUsername == ""){
+		$("#signupInfo").html("You need to enter a username.");
+	}
+	else if(lblPassword == ""){
+		$("#signupInfo").html("You need to enter a password.");
+	}
+	else if(lblFirstname == ""){
+		$("#signupInfo").html("You need to enter a first name.");
+	}
+	else if(lblLastname == ""){
+		$("#signupInfo").html("You need to enter a last name.");
+	}
+	else if(lblEmail == ""){
+		$("#signupInfo").html("You need to enter an Email.");
+	}
+	else if(lblAddress == ""){
+		$("#signupInfo").html("You need to enter an address.");
+	}
+	else {
+		$("#signupInfo").html("Everything seems fine.");
+		var objNewUser = {};
+		var intNewUserID = users.length;
+		objNewUser.id = intNewUserID;
+		objNewUser.username = lblUsername;
+		objNewUser.password = lblPassword;
+		objNewUser.firstname = lblFirstname;
+		objNewUser.lastname = lblLastname;
+		objNewUser.email = lblAddress;
+		objNewUser.houses = [];
+
+		users.push(objNewUser);
+
+		intNewUserHouseID = houses.myHouse.length;
+
+		objNewUserHouse = {};
+		objNewUserHouse.id = intNewUserHouseID;
+		objNewUserHouse.active = 1;
+
+		users[intNewUserID].houses.push(objNewUserHouse);
+
+		objNewHouse = {};
+		objNewHouse.id = intNewUserHouseID;
+		objNewHouse.address = lblAddress;
+		objNewHouse.rooms = [];
+
+		houses.myHouse.push(objNewHouse);
+
+
+		localStorage.userLoggedIn = intNewUserID;
+
+		stringifyHouse();
+		stringifyUsers();
+
+		gloIntHouseID = intNewUserHouseID;
+		$("#login, #signupBox").fadeOut();
+		updatePage();
+
+	}
+
+}
 function updatePage () {
 	loadRooms(gloIntHouseID);
 	loadUtilities(gloIntHouseID);
-	populateHousesDropdown();
+	// populateHousesDropdown();
 	loadGraphs(gloIntHouseID);
+	updateBuildRoom();
 	populateChooseRoomDropdown(gloIntHouseID);
 	$("#utilityControlListWrap").empty();	
 	$("#lblUtilityRoomName").html("Choose Room");
 	localStorage.addUtilityChooseRoom = null;
 }
-function populateHousesDropdown () {
-	$("#houseDropdown").empty();
-	for (var i = 0; i < houses.myHouse.length; i++) {
-		var strHouseAdress = houses.myHouse[i].address;
-		var strHouseID = houses.myHouse[i].id;
-		$("#houseDropdown").prepend('<li><a href="#" data-houseID="'+strHouseID+'">'+strHouseAdress+'</a></li>');
-	};
-	var htmlDropDownAdress = ' <li role="separator" class="divider"></li>';
-	htmlDropDownAdress += '<li><a href="#" id="btnLogout">Logout</a></li>';
-	$("#houseDropdown").append(htmlDropDownAdress);	
-}
+// function populateHousesDropdown () {
+// 	$("#houseDropdown").empty();
+// 	for (var i = 0; i < houses.myHouse.length; i++) {
+// 		var strHouseAdress = houses.myHouse[i].address;
+// 		var strHouseID = houses.myHouse[i].id;
+// 		$("#houseDropdown").prepend('<li><a href="#" data-houseID="'+strHouseID+'">'+strHouseAdress+'</a></li>');
+// 	};
+// 	var htmlDropDownAdress = ' <li role="separator" class="divider"></li>';
+// 	htmlDropDownAdress += '<li><a href="#" id="btnLogout">Logout</a></li>';
+// 	$("#houseDropdown").append(htmlDropDownAdress);	
+// }
 function populateChooseRoomDropdown (houseID) {
 	$("#btnChooseRoom").empty();
 	for (var i = 0; i < houses.myHouse[houseID].rooms.length; i++) {

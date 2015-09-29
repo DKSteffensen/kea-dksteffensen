@@ -41,15 +41,18 @@ body {
 	z-index: 99;
 	background: rgba(0,0,0,0.9);
 }
-#loginBox {
+#loginBox, #signupBox {
+	display: none;
 	position: fixed;
 	width: 500px;
-	height: 300px;
 	top: 50%;
 	left:50%;
 	margin: -150px 0 0 -250px;
 	background-color: #fff;
 	padding: 30px 50px 30px 50px;
+}
+#loginBox input, #signupBox input {
+	margin-bottom: 5px;
 }
 #signup {
 	color:#919191;

@@ -9,17 +9,13 @@ if(locStrUsers == undefined) {
 			"password":"test123",
 			"firstname":"Daniel",
 			"lastname":"Steffensen",
+			"email":"d_kristian_s@hotmail.com",
 			"houses":
 			[
 				{
 					"id":"0",
 					"active":1
-				},
-				{
-					"id":"1",
-					"active":0
 				}
-
 			]
 		}
 	]
@@ -31,7 +27,7 @@ var users = JSON.parse(locStrUsers);
 
 var userLoggedIn = localStorage.userLoggedIn;	
 if(userLoggedIn == undefined){
-	$("#login").show();
+	$("#login, #loginBox").show();
 	gloIntHouseID = 0;
 }
 else {
@@ -87,7 +83,6 @@ function changeBackground () {
 			  [
 			    {
 			      "id": 0,
-			      "name": "Daniels House",
 			      "address": "Stenstuegade 38 2.TH.",
 			      "rooms": 
 			      [
@@ -497,10 +492,23 @@ function changeBackground () {
 	$("#btnLogin").click(function(){
 		var lblUsername = $("#inpUsername").val();
 		var lblPassword = $("#inpPassword").val();
-		console.log(lblUsername+lblPassword);
 
 		login(lblUsername, lblPassword);
-	})
+	});
 	$(document).on("click", "#btnLogout", function(){
 		logout();
-	})
+	});
+
+	$("#btnSignup").click(function(){
+		signUp();
+	});
+
+	$("#btnSignupForm").click(function(){
+		$("#loginBox").fadeOut();
+		$("#signupBox").fadeIn();
+	});
+
+	$("#btnBackToLogin").click(function(){
+		$("#signupBox").fadeOut();
+		$("#loginBox").fadeIn();
+	});

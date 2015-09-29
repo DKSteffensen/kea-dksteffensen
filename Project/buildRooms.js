@@ -1,23 +1,25 @@
 	// Checking if rooms object i populated, if yes, then create rooms on canvas.
-	gloIntRoomsCount = houses.myHouse[gloIntHouseID].rooms.length;
-	if (gloIntRoomsCount > 0) {
-		for (var i = 0; i < gloIntRoomsCount; i++) {
-			var test = houses.myHouse[gloIntHouseID].rooms[i];
-			if(houses.myHouse[gloIntHouseID].rooms[i].deleted == 0){
-				var strRoomID = houses.myHouse[gloIntHouseID].rooms[i].id;
-				var strRoomName = houses.myHouse[gloIntHouseID].rooms[i].name;
-				buildControlPanel(strRoomName, strRoomID);	
-				buildCanvas(strRoomID);	
+	function updateBuildRoom() {
+		gloIntRoomsCount = houses.myHouse[gloIntHouseID].rooms.length;
+		if (gloIntRoomsCount > 0) {
+			$("#buildRoomControlWrap, #buildCanvas").empty();
+			for (var i = 0; i < gloIntRoomsCount; i++) {
+				var test = houses.myHouse[gloIntHouseID].rooms[i];
+				if(houses.myHouse[gloIntHouseID].rooms[i].deleted == 0){
+					var strRoomID = houses.myHouse[gloIntHouseID].rooms[i].id;
+					var strRoomName = houses.myHouse[gloIntHouseID].rooms[i].name;
+					buildControlPanel(strRoomName, strRoomID);	
+					buildCanvas(strRoomID);	
+				};
 			};
-		};
-		createSelectWidth();
-		createSelectHeight();
-		createSelectPosTop();
-		createSelectPosLeft();
-		createSelectZIndex();
-	}
-	else {
-		// Remind user to add rooms to the house.
+			createSelectWidth();
+			createSelectHeight();
+			createSelectPosTop();
+			createSelectPosLeft();
+			createSelectZIndex();
+		}
+		else {
+		}
 	}
 
 	// Function to apply room size and position changes.
