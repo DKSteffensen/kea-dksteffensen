@@ -105,6 +105,7 @@ function updatePage () {
 	$("#utilityControlListWrap").empty();	
 	$("#lblUtilityRoomName").html("Choose Room");
 	localStorage.addUtilityChooseRoom = null;
+	checkSoundState();
 }
 // function populateHousesDropdown () {
 // 	$("#houseDropdown").empty();
@@ -279,4 +280,46 @@ function loadGraphs (HouseID) {
     $('.controlPanelGraphs').circliful();
 
 
+}
+
+function playClickSound () {
+	var soundState = localStorage.soundState;
+
+	if (soundState == "on") {
+		var sounds = 
+		[
+			{
+				"name":"Utilities Switches",
+				"path":"clickSound.wav",
+				"type":"audio/mp3"
+			},
+		];
+
+		$("#soundWrap").html('<source src="'+sounds[0].path+'" type="'+sounds[0].type+'" />');
+		$("#soundWrap")[0].play();
+	}
+};
+
+function checkSoundState () {	
+	var soundState = localStorage.soundState;
+
+	if (soundState == "off") {
+		$("#soundSwitch").html('<span class="glyphicon glyphicon-volume-off"></span>');		
+	}
+	else if (soundState == "on") {
+		$("#soundSwitch").html('<span class="glyphicon glyphicon-volume-up"></span>');			
+	}
+}
+
+function searchRoom (houseID, searchString) {
+	for (var i = 0; i < houses.myHouse[houseID].rooms.length; i++) {
+		var roomName = houses.myHouse[houseID].rooms[i].name;
+		if(roomName == searchString){
+			for (var u = 0; u < houses.myHouse[houseID].rooms[i].utilities.length; u++) {
+				var foundRoomUtilities = houses.myHouse[houseID].rooms[i].utilities[u].name;
+			};
+		}
+		else {
+		}
+	};
 }

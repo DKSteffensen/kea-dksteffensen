@@ -487,6 +487,22 @@ function changeBackground () {
 			houses.myHouse[gloIntHouseID].rooms[roomID].utilities[utilityID].state = "off";
 			stringifyHouse();	
 		}
+
+		playClickSound();
+
+	});
+
+	$("#soundSwitch").click(function(){
+		var soundState = localStorage.soundState;
+
+		if (soundState == "off") {
+			localStorage.soundState = "on";
+			$("#soundSwitch").html('<span class="glyphicon glyphicon-volume-up"></span>');		
+		}
+		else if (soundState == "on") {
+			localStorage.soundState = "off";
+			$("#soundSwitch").html('<span class="glyphicon glyphicon-volume-off"></span>');			
+		}
 	});
 
 	$("#btnLogin").click(function(){
@@ -511,4 +527,15 @@ function changeBackground () {
 	$("#btnBackToLogin").click(function(){
 		$("#signupBox").fadeOut();
 		$("#loginBox").fadeIn();
+	});
+
+	$("#searchRoom").click(function(){
+		var searchString = $("#searchRoomField").val();
+
+		if(searchString == ""){
+			$("#searchRoomField").attr("placeholder", "No input detected!");
+		}
+		else {
+			searchRoom(gloIntHouseID, searchString);
+		}
 	});

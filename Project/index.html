@@ -72,7 +72,14 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
       </ul>
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" id="searchRoomField" placeholder="Search Room">
+        </div>
+        <button type="submit" class="btn btn-info" id="searchRoom">Submit</button>
+      </form>
       <ul class="nav navbar-nav navbar-right">	
+        <li><a href="#" class="" id="soundSwitch"><span class="glyphicon glyphicon-volume-up"></span></a></li>
         <li><a href="#" class="btnNavbar" data-linkHref="controlPanelPage">Control Panel</a></li>
         <li><a href="#" class="btnNavbar" data-linkHref="buildRoomPage">Houseplan</a></li>
         <li><a href="#" class="btnNavbar" data-linkHref="addUtilitiesPage">Utilities</a></li>
@@ -218,6 +225,8 @@
 
 
 </div>
+
+<audio id="soundWrap"></audio>
 
 
 	<!-- Javascript & jQuery libraries -->
