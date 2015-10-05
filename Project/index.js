@@ -496,6 +496,10 @@ function changeBackground () {
 	$("#soundSwitch").click(function(){
 		var soundState = localStorage.soundState;
 
+		if(soundState == undefined) {
+			localStorage.soundState = "off";
+		}
+
 		if (soundState == "off") {
 			localStorage.soundState = "on";
 			$("#soundSwitch").html('<span class="glyphicon glyphicon-volume-up"></span>');		
