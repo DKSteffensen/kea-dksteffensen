@@ -317,6 +317,7 @@ function searchRoom (houseID, searchString) {
 		if(roomName == searchString){
 			for (var u = 0; u < houses.myHouse[houseID].rooms[i].utilities.length; u++) {
 				var foundRoomUtilities = houses.myHouse[houseID].rooms[i].utilities[u].name;
+				console.log(foundRoomUtilities);
 			};
 		}
 		else {
