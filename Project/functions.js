@@ -100,7 +100,7 @@ function updatePage () {
 	loadUtilities(gloIntHouseID);
 	// populateHousesDropdown();
 	loadGraphs(gloIntHouseID);
-	updateBuildRoom();
+	updateBuildRoom(gloIntHouseID);
 	populateChooseRoomDropdown(gloIntHouseID);
 	$("#utilityControlListWrap").empty();	
 	$("#lblUtilityRoomName").html("Choose Room");

@@ -1,13 +1,13 @@
 	// Checking if rooms object i populated, if yes, then create rooms on canvas.
-	function updateBuildRoom() {
-		gloIntRoomsCount = houses.myHouse[gloIntHouseID].rooms.length;
+	function updateBuildRoom(houseID) {
+		gloIntRoomsCount = houses.myHouse[houseID].rooms.length;
+		$("#buildRoomControlWrap, #buildCanvas").empty();
 		if (gloIntRoomsCount > 0) {
-			$("#buildRoomControlWrap, #buildCanvas").empty();
 			for (var i = 0; i < gloIntRoomsCount; i++) {
-				var test = houses.myHouse[gloIntHouseID].rooms[i];
-				if(houses.myHouse[gloIntHouseID].rooms[i].deleted == 0){
-					var strRoomID = houses.myHouse[gloIntHouseID].rooms[i].id;
-					var strRoomName = houses.myHouse[gloIntHouseID].rooms[i].name;
+				var test = houses.myHouse[houseID].rooms[i];
+				if(houses.myHouse[houseID].rooms[i].deleted == 0){
+					var strRoomID = houses.myHouse[houseID].rooms[i].id;
+					var strRoomName = houses.myHouse[houseID].rooms[i].name;
 					buildControlPanel(strRoomName, strRoomID);	
 					buildCanvas(strRoomID);	
 				};

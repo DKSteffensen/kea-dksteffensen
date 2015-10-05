@@ -44,7 +44,8 @@ else {
 		var activePageLoaded = localStorage.activePage;
 		var activeControlPanelPageLoaded = localStorage.activeControlPanelPage;
 		if(activePageLoaded == undefined){
-			$("#frontPage").toggleClass("active inActive")
+			$("#controlPanelPage").toggleClass("active inActive");
+			localStorage.activePage = "controlPanelPage" ;
 		}
 		else {
 			$("#"+activePageLoaded+", #"+activeControlPanelPageLoaded).toggleClass("active inActive");

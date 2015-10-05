@@ -99,8 +99,78 @@
 <div class="container-fluid ha-container">
 
 
-	<div class="pages inActive" id="frontPage">
-		<p>Welcome to Daniel Kristian Steffensens Home Automation System!</p>
+	<div class="pages inActive" id="controlPanelPage">
+		<div id="" class="col-md-8 ha-leftRow">
+			<div class="row">
+				<div id="showCanvasWrap">
+					<div id="showCanvas"></div>					
+				</div>
+			</div>
+		</div>
+
+		<div id="controlPanelWrap" class="col-md-4">
+			<div class="row row-spacing">
+				<div class="col-md-12">	
+					<button type="button" id="btnShowControlPanel" class="btn btn-success ha-btnWidth btnControlPanel" data-linkControlPanelHref="controlPanelControlWrap">
+						<h5>Show ControlPanel</h5>
+					</button>	
+					<button type="button" id="btnShowGraphs" class="btn btn-primary ha-btnWidth btnControlPanel" data-linkControlPanelHref="graphsPanelWrap">
+						<h5>Show Graphs</h5>
+					</button>		
+				</div>			
+			</div>
+
+			<div class="row row-spacing">
+				<div class="col-md-12 controlPanelPages inActive" id="controlPanelControlWrap">
+
+				</div>
+				<div class="col-md-12 controlPanelPages inActive" id="graphsPanelWrap">
+
+						<ul class="list-group" id="controlPanelGraphsWrap">
+						</ul>
+
+				</div>
+			</div>
+
+			<div class="row row-spacing">
+				<div class="col-md-12">	
+				</div>
+			</div>	
+		</div>
+	</div>
+
+
+	<div class="pages inActive" id="buildRoomPage">
+		<div id="buildCanvasWrap" class="col-md-8 ha-leftRow">
+			<div class="row">
+				<div id="buildCanvasWrap">
+					<div id="buildCanvas">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="buildControlWrap" class="col-md-4">
+			<div class="row row-spacing">
+				<div class="col-md-12">
+					<button type="button" id="btnNewRoom" class="btn btn-primary btn-block">
+						<h5>Add Room</h5>
+					</button>		
+				</div>			
+			</div>
+
+			<div class="row row-spacing">
+				<div class="col-md-12" id="buildRoomControlWrap">
+					
+				</div>
+			</div>
+
+			<div class="row row-spacing">
+				<div class="col-md-12">	
+				</div>
+			</div>	
+
+		</div>
 	</div>
 
 
@@ -148,79 +218,8 @@
 	</div>
 
 
-	<div class="pages inActive" id="controlPanelPage">
-		<div id="" class="col-md-8 ha-leftRow">
-			<div class="row">
-				<div id="showCanvasWrap">
-					<div id="showCanvas"></div>					
-				</div>
-			</div>
-		</div>
-
-		<div id="controlPanelWrap" class="col-md-4">
-			<div class="row row-spacing">
-				<div class="col-md-12">	
-					<button type="button" id="btnShowControlPanel" class="btn btn-success ha-btnWidth btnControlPanel" data-linkControlPanelHref="controlPanelControlWrap">
-						<h5>Show ControlPanel</h5>
-					</button>	
-					<button type="button" id="btnShowGraphs" class="btn btn-primary ha-btnWidth btnControlPanel" data-linkControlPanelHref="graphsPanelWrap">
-						<h5>Show Graphs</h5>
-					</button>		
-				</div>			
-			</div>
-
-			<div class="row row-spacing">
-				<div class="col-md-12 controlPanelPages inActive" id="controlPanelControlWrap">
-
-				</div>
-				<div class="col-md-12 controlPanelPages inActive" id="graphsPanelWrap">
-
-						<ul class="list-group" id="controlPanelGraphsWrap">
-						</ul>
-
-				</div>
-			</div>
-
-			<div class="row row-spacing">
-				<div class="col-md-12">	
-				</div>
-			</div>	
-		</div>
-	</div>
-
-
-
-	<div class="pages inActive" id="buildRoomPage">
-		<div id="buildCanvasWrap" class="col-md-8 ha-leftRow">
-			<div class="row">
-				<div id="buildCanvasWrap">
-					<div id="buildCanvas">
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div id="buildControlWrap" class="col-md-4">
-			<div class="row row-spacing">
-				<div class="col-md-12">
-					<button type="button" id="btnNewRoom" class="btn btn-primary btn-block">
-						<h5>Add Room</h5>
-					</button>		
-				</div>			
-			</div>
-
-			<div class="row row-spacing">
-				<div class="col-md-12" id="buildRoomControlWrap">
-					
-				</div>
-			</div>
-
-			<div class="row row-spacing">
-				<div class="col-md-12">	
-				</div>
-			</div>	
-
-		</div>
+	<div class="pages inActive" id="frontPage">
+		<p>Welcome to Daniel Kristian Steffensens Home Automation System!</p>
 	</div>
 
 
