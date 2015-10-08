@@ -218,10 +218,11 @@ function createUtilityControls (houseID, roomID) {
 }
 
 $(document).on("click", ".addUtilityChooseRoom", function(){
+
 	var roomID = $(this).attr("data-roomid");
 
-	$(".roomSelect").not($("#canvasRoom"+roomID)).css("opacity", "0.1");
-	$("#canvasRoom"+roomID).css("opacity", "1.0");
+	$(".roomSelect").not($(".housePlan"+roomID)).css("opacity", "0.1");
+	$(".housePlan"+roomID).css("opacity", "1.0");
 
 	localStorage.addUtilityChooseRoom = roomID;
 
