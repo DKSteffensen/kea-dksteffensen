@@ -1,0 +1,12 @@
+[
+    {
+        "model": "Boeing 747",
+        "capacity": 300,
+        "bookedSeats": 0
+    },
+    {
+        "model": "Concorde",
+        "capacity": 120,
+        "bookedSeats": 17
+    }
+]

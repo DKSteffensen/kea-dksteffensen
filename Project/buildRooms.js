@@ -8,15 +8,10 @@
 				if(houses.myHouse[houseID].rooms[i].deleted == 0){
 					var strRoomID = houses.myHouse[houseID].rooms[i].id;
 					var strRoomName = houses.myHouse[houseID].rooms[i].name;
-					buildControlPanel(strRoomName, strRoomID);	
-					buildCanvas(strRoomID);	
+					buildControlPanel(strRoomName, strRoomID);
+					buildCanvas(strRoomID);
 				};
 			};
-			createSelectWidth();
-			createSelectHeight();
-			createSelectPosTop();
-			createSelectPosLeft();
-			createSelectZIndex();
 		}
 		else {
 		}
@@ -63,38 +58,38 @@
 		stringifyHouse();
 	};
 	// Functions to create Select dropdowns.
-	function createSelectPosTop () {
+	function createSelectPosTop (roomID) {
 		var pxTopVal = 5;
 		for (var i = 0; i < 19; i++) {
-			$(".posTop").append('<option value="'+pxTopVal+'">'+[i+1]+'</option>');
+			$("#posTopRoom"+roomID).append('<option value="'+pxTopVal+'">'+[i+1]+'</option>');
 			pxTopVal += 25;
 		};			
 	};
-	function createSelectPosLeft () {
+	function createSelectPosLeft (roomID) {
 		var pxLeftVal = 5;
 		for (var i = 0; i < 31; i++) {
-			$(".posLeft").append('<option value="'+pxLeftVal+'">'+[i+1]+'</option>');
+			$("#posLeftTop"+roomID).append('<option value="'+pxLeftVal+'">'+[i+1]+'</option>');
 			pxLeftVal += 25;
 		};			
 	};
-	function createSelectWidth () {
+	function createSelectWidth (roomID) {
 		var pxWidthVal = 25;
 		for (var i = 0; i < 32; i++) {
-			$(".sizeWidth").append('<option value="'+pxWidthVal+'">'+[i+1]+'</option>');
+			$("#widthRoom"+roomID).append('<option value="'+pxWidthVal+'">'+[i+1]+'</option>');
 			pxWidthVal += 25;
 		};			
 	};
-	function createSelectHeight () {
+	function createSelectHeight (roomID) {
 		var pxHeightVal = 25;
 		for (var i = 0; i < 20; i++) {
-			$(".sizeHeight").append('<option value="'+pxHeightVal+'">'+[i+1]+'</option>');
+			$("#heightRoom"+roomID).append('<option value="'+pxHeightVal+'">'+[i+1]+'</option>');
 			pxHeightVal += 25;
 		};			
 	};
-	function createSelectZIndex () {
+	function createSelectZIndex (roomID) {
 		var zindexVal = 5;
 		for (var i = 0; i < 3; i++) {
-			$(".zIndex").append('<option value="'+zindexVal+'">'+[i+1]+'</option>');
+			$("#zIndexRoomID"+roomID).append('<option value="'+zindexVal+'">'+[i+1]+'</option>');
 			zindexVal += 5;
 		};			
 	};
@@ -184,6 +179,12 @@
 
 		$("#buildRoomControlWrap").prepend(htmlControl);
 
+		createSelectWidth(roomID);
+		createSelectHeight(roomID);
+		createSelectPosTop(roomID);
+		createSelectPosLeft(roomID);
+		createSelectZIndex(roomID);
+
 		selectSelectedVal(roomID);
 	};
 	function buildCanvas (roomID) {
@@ -219,12 +220,6 @@
 		// buildControlPanel() is the function that builds controlpanel for the room.
 		// buildCanvas() is the function that adds the room on the canvas.
 		addRoomJSON();
-
-		createSelectWidth();
-		createSelectHeight();
-		createSelectPosTop();
-		createSelectPosLeft();
-		createSelectZIndex();
 
 	});
 

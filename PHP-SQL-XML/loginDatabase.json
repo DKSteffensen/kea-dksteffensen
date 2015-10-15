@@ -1,0 +1,39 @@
+{
+    "users": [
+        {
+            "username": "Daniel",
+            "password": "test123",
+            "firstname": "Daniel",
+            "lastname": "Steffensen",
+            "age": 28
+        },
+        {
+            "username": "Morten",
+            "password": "myLittlePony",
+            "firstname": "Morten",
+            "lastname": "Nielsen",
+            "age": 24
+        },
+        {
+            "username": "Brugernavn",
+            "password": "test",
+            "firstname": "Fornavn",
+            "lastname": "Efternavn",
+            "age": 30
+        },
+        {
+            "username": "Brugernavn",
+            "password": "test",
+            "firstname": "Fornavn",
+            "lastname": "Efternavn",
+            "age": 30
+        },
+        {
+            "username": "Brugernavn",
+            "password": "test",
+            "firstname": "Fornavn",
+            "lastname": "Efternavn",
+            "age": 30
+        }
+    ]
+}
