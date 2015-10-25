@@ -32,6 +32,13 @@ html, body{
     background-color: #aaa;
 }
 
+.pageShown {
+  display:block;
+}
+.pageHidden {
+  display: none;
+}
+
 
 h1 { 
 	font-size: 1.3em;
@@ -53,10 +60,6 @@ h1 {
 
 .wdw{
 	padding: 0px 10px;
-}
-
-#wdw-planes{
-	display: none;
 }
 
 
@@ -103,7 +106,7 @@ h1 {
 	margin: auto;
 	/*margin: -150px 0 0 -150px;*/
 	width:300px;
-	height:300px;
+  height:200px;
 }
 
 
@@ -113,7 +116,7 @@ h1 {
 	margin: auto;
 	/*margin: -150px 0 0 -150px;*/
 	width:300px;
-	height:400px;
+	height:350px;
 }
 
 .save-plane { 

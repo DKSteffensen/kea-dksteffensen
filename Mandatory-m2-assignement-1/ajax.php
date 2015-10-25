@@ -17,20 +17,23 @@ if($action == "signup"){
 	$strDataUsers = json_encode($arrDataUsers, JSON_PRETTY_PRINT);
 	file_put_contents('users.json', $strDataUsers);
 
-	echo "signupsucces";
+	$arrResponse = json_encode(array('firstname' => $firstname, 'lastname' => $lastname, 'email' => $email, 'mobile' => $mobile));
+
+	echo $arrResponse;
+
 }
 else if($action == "login"){
 	// Login handle goes here...
 }
 
-$sUsers = file_get_contents('users.json');
-$aUsers = json_decode($sUsers);
-if(!is_array($aUsers)) 
-{ 
-	echo '{"iError":"001"}';
-	exit;
-}
+// $sUsers = file_get_contents('users.json');
+// $aUsers = json_decode($sUsers);
+// if(!is_array($aUsers)) 
+// { 
+// 	echo '{"iError":"001"}';
+// 	exit;
+// }
 
-echo '{"iId":1, "sResponse":"Ajax Success"}';
-// echo "{'iId':1, 'sResponse':'Ajax Success'}";
+// echo '{"iId":1, "sResponse":"Ajax Success"}';
+// // echo "{'iId':1, 'sResponse':'Ajax Success'}";
 ?>

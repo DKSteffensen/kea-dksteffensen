@@ -1,3 +1,24 @@
+function checkLogin(){
+  if(typeof localStorage.UserLoggedIn != "undefined" || ""){
+    console.log("Logged in");
+    $("#userLoggedIn").addClass("pageShown").removeClass("pageHidden");
+    $("#nouserWrap").removeClass("pageShown").addClass("pageShown");
+  }
+  else{
+    console.log("Not logged in");
+    $("#userLoggedIn").addClass("pageHidden").removeClass("pageShown");
+    $("#nouserWrap").removeClass("pageHidden").addClass("pageShown");
+    $("#navbarLoggedIn").addClass("hidden");
+  }
+}
+checkLogin();
+function logout(){
+  localStorage.removeItem("UserLoggedIn");
+  checkLogin();
+}
+$("#btnLogout").click(function(){
+  logout();
+});
 
 function resizeLayout(){
   var iWindowHeight = $(window).height();
@@ -11,12 +32,20 @@ $( window ).resize(function() {
 
 resizeLayout();
 
+// Navigation system
+$(document).on("click", ".btnNavbar", function(){
+  var link = $(this).attr("data-link");
+  $(".btnNavbar").not(this).parent().removeClass("active")
+  $(this).parent().addClass("active");
 
-
-
-$(document).on('click','#btnViewPlanes', function(){
-  $(".wdw").fadeOut(1000);
-  $("#wdw-planes").fadeIn(1000);  
+  if($("#"+link).hasClass("pageShown")) {
+    // Do something nice maybe?
+  }
+  else {
+    $(".pages").not("#"+link).removeClass("pageShown").addClass("pageHidden");
+    $("#"+link).toggleClass("pageShown pageHidden");
+    localStorage.activePage = link;
+  }
 });
 
 
@@ -32,10 +61,28 @@ $(document).on('click','#btnSignup', function(){
   var strEmail = $("#lblEmail").val();
   var strMobile = $("#lblMobile").val();
   var strPassword = $("#lblPassword").val();
-  // $(this).text('please wait ...').attr("disabled","disabled").css("cursor", "wait").fadeTo(500, 0.5);
+
+  if(strFirstname == ""){
+     $(this).html("Empty field detected!");
+  }
+  else if(strLastname == ""){
+     $(this).html("Empty field detected!");
+  }
+  else if(strEmail == ""){
+     $(this).html("Empty field detected!");
+  }
+  else if(strMobile == ""){
+     $(this).html("Empty field detected!");
+  }
+  else if(strPassword == ""){
+     $(this).html("Empty field detected!");
+  }
+  else {
+     $(this).html("Signup Succesfull!");
   $.ajax({
     url: "ajax.php",
     type: "post",
+    dataType: "json",
     data: {
       action: "signup",
       firstname: strFirstname,
@@ -46,8 +93,15 @@ $(document).on('click','#btnSignup', function(){
     }
   })
   .done(function(response){
-    console.log(response);
-  })
+    var firstname = response.firstname;
+    var lastname = response.lastname;
+    var email = response.email;
+    var mobile = response.mobile;
+
+    $("#lblFirstnameProfile").val(firstname);
+
+  })    
+  }
 });
 
 
@@ -182,7 +236,7 @@ function setMarkers(){
 
 
   for(var i = 0; i < jMarkers.length; i++){
-    console.log(jMarkers[i]);
+    //console.log(jMarkers[i]);
 
 
     var marker = new MarkerWithLabel({
@@ -220,7 +274,7 @@ var oAjax = $.ajax({
 }).done(function(jData){
   $("#lblTest").text(jData.sResponse);
 }).fail(function(sData){
-  console.log("the system killed/aborted the ajax call");
+  //console.log("the system killed/aborted the ajax call");
 });
 
 // oAjax.abort();

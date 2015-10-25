@@ -48,24 +48,24 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">home <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">about us</a></li>
-                    <li><a href="#">contact us</a></li>
-                    <li><a id="btnViewPlanes" data-show="wdw-planes" href="#">planes</a></li>
-                    <li><a id="btnViewPlanes" data-show="wdw-planes" href="#">statistics</a></li>
+                  <ul class="nav navbar-nav" id="navbarLoggedIn">
+                    <li class="active"><a id="btnViewHome" data-link="homeWrap" class="btnNavbar" href="#">home <span class="sr-only">(current)</span></a></li>
+                    <li><a id="btnViewAboutUs" data-link="aboutusWrap" class="btnNavbar" href="#">about us</a></li>
+                    <li><a id="btnViewContactUs" data-link="contactusWrap" class="btnNavbar" href="#">contact us</a></li>
+                    <li><a id="btnViewPlanes" data-link="planesWrap" class="btnNavbar" data-show="wdw-planes" href="#">planes</a></li>
+                    <li><a id="btnViewStatistics" data-link="statisticsWrap" class="btnNavbar" data-show="wdw-planes" href="#">statistics</a></li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Logout</a></li>
+                    <li><a id="btnLogout" href="#">Logout</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
             </nav>              
-          </div>
+          </div>        
 
-        
+          <div id="userLoggedIn">
 
-          <div id="wdw-planes" class="col-md-12 wdw">
+          <div id="planesWrap" class="col-md-12 wdw pageHidden pages">
 
             <div class="col-md-6">
               <div id="" class="save-plane">
@@ -122,27 +122,49 @@
             </div>
           </div>
 
-        
-          <div id="wdw-signup" class="wdw signup">
-            <h1>Signup</h1>
-            <input id="lblFirstname" type="text" placeholder="name" required="required" />
-            <input id="lblLastname" type="text" placeholder="last name" required="required" />
-            <input id="lblEmail" type="text" placeholder="email" required="required" />
-            <input id="lblMobile" type="text" placeholder="mobile" required="required" />
-            <input id="lblPassword" type="password" placeholder="password" required="required" />
-            <button id="btnSignup" type="button" class="btn btn-primary btn-block btn-large">sign me up</button>
+          <div id="aboutusWrap" class="pageHidden pages">about Us</div>
+
+          <div id="contactusWrap" class="pageHidden pages">Contact Us</div>
+
+          <div id="statisticsWrap" class="pageHidden pages">Statistics</div>
+
+          <div id="homeWrap" class="pageShown pages">
+
+            <div id="wdw-profile" class="wdw profile">
+              <h1 id="lblProfile">Profile</h1>
+              <input class="lblProfileForm" id="lblFirstnameProfile" type="text" placeholder="Firstname" required="required" />
+              <input class="lblProfileForm" id="lblLastnameProfile" type="text" placeholder="Lastname" required="required" />
+              <input class="lblProfileForm" id="lblEmailProfile" type="text" placeholder="Email" required="required" />
+              <input class="lblProfileForm" id="lblMobileProfile" type="text" placeholder="Mobile" required="required" />
+              <input class="lblProfileForm" id="lblPasswordProfile" type="password" placeholder="Password" required="required" />
+              <input class="lblProfileForm" id="lblPasswordRetypeProfile" type="password" placeholder="Confirm Password" required="required" />
+              <button id="btnDelete" type="button" class="btn btn-primary btn-block btn-large">Delete Profile</button>
+            </div>
+            
           </div>
 
-          <div id="wdw-login" class="wdw login">
-            <h1>Login</h1>
-            <input type="text" name="u" placeholder="email"  />
-            <input type="password" name="p" placeholder="password" />
-            <button id="btnLogin" type="button" class="btn btn-primary btn-block btn-large">let me in</button>
           </div>
 
+          <div id="nouserWrap" class="pageHidden">
 
-          <h1 id="lblTest">Santiago</h1>
+            <div id="wdw-login" class="wdw login">
+              <h1>Login</h1>
+              <input type="text" name="u" placeholder="email"  />
+              <input type="password" name="p" placeholder="password" />
+              <button id="btnLogin" type="button" class="btn btn-primary btn-block btn-large">Login</button>
+            </div>
 
+            <div id="wdw-signup" class="wdw signup">
+              <h1 id="lblTest">Signup</h1>
+              <input class="lblSignupForm" id="lblFirstname" type="text" placeholder="name" required="required" />
+              <input class="lblSignupForm" id="lblLastname" type="text" placeholder="last name" required="required" />
+              <input class="lblSignupForm" id="lblEmail" type="text" placeholder="email" required="required" />
+              <input class="lblSignupForm" id="lblMobile" type="text" placeholder="mobile" required="required" />
+              <input class="lblSignupForm" id="lblPassword" type="password" placeholder="password" required="required" />
+              <button id="btnSignup" type="button" class="btn btn-primary btn-block btn-large">Signup</button>
+            </div>
+            
+          </div>
 
 
         </div>
