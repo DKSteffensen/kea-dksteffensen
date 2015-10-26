@@ -9,6 +9,7 @@
 
     <!-- JQuery -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.8.3/jquery.timepicker.min.css">
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -27,10 +28,9 @@
   </head>
   <body>
 
+  <div id="" class="col-md-12 app-no-padding">
 
-    <div id="" class="col-md-12 app-no-padding">
-
-        <div id="wdw-control" class="col-md-6 app-no-padding">
+        <div id="wdw-control" class="col-md-7 app-no-padding">
 
           <div id="" class="">
             <nav class="navbar navbar-inverse app-navbar">
@@ -48,16 +48,19 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  <ul class="nav navbar-nav" id="navbarLoggedIn">
-                    <li class="active"><a id="btnViewHome" data-link="homeWrap" class="btnNavbar" href="#">home <span class="sr-only">(current)</span></a></li>
-                    <li><a id="btnViewAboutUs" data-link="aboutusWrap" class="btnNavbar" href="#">about us</a></li>
-                    <li><a id="btnViewContactUs" data-link="contactusWrap" class="btnNavbar" href="#">contact us</a></li>
-                    <li><a id="btnViewPlanes" data-link="planesWrap" class="btnNavbar" data-show="wdw-planes" href="#">planes</a></li>
-                    <li><a id="btnViewStatistics" data-link="statisticsWrap" class="btnNavbar" data-show="wdw-planes" href="#">statistics</a></li>
-                  </ul>
-                  <ul class="nav navbar-nav navbar-right">
-                    <li><a id="btnLogout" href="#">Logout</a></li>
-                  </ul>
+                  <div id="navbarLoggedIn">
+                    <ul class="nav navbar-nav">
+                      <li class="active"><a id="btnViewHome" data-link="homeWrap" class="btnNavbar" href="#">home <span class="sr-only">(current)</span></a></li>
+                      <li><a id="btnViewAboutUs" data-link="aboutusWrap" class="btnNavbar" href="#">about us</a></li>
+                      <li><a id="btnViewContactUs" data-link="contactusWrap" class="btnNavbar" href="#">contact us</a></li>
+                      <li><a id="btnViewPlanes" data-link="planesWrap" class="btnNavbar" data-show="wdw-planes" href="#">planes</a></li>
+                      <li><a id="btnViewStatistics" data-link="statisticsWrap" class="btnNavbar" data-show="wdw-planes" href="#">statistics</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a id="btnProfile" data-link="profileWrap" class="btnNavbar" href="#">Profile</a></li>
+                      <li><a id="btnLogout" href="#">Logout</a></li>
+                    </ul>
+                  </div>
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
             </nav>              
@@ -69,12 +72,14 @@
 
             <div class="col-md-6">
               <div id="" class="save-plane">
-                <h1>add plane</h1>
-                <input type="text" placeholder="model" required="required" />
-                <input type="text" placeholder="mx passengers"/>
-                <input type="text" placeholder="max distance" />
-                <input type="text" placeholder="flying to" />
-                <button id="btnSignup" type="button" class="btn btn-primary btn-block btn-large">save plane</button>
+                <h1>Add Plane</h1>
+                <input id="lblPlaneModel" type="text" placeholder="Model" required="required" />
+                <input id="lblPlaneCapacity" type="text" placeholder="Capacity"/>
+                <input id="lblPlaneTakeoff" class="timepicker" type="text" placeholder="Takeoff" />
+                <input id="lblPlaneTravelTime" class="timepicker" type="text" placeholder="Travel Time" />
+                <input id="lblPlaneDestination" type="text" placeholder="Destination" />
+                <button id="btnAddPlane" type="button" class="btn btn-primary btn-block btn-large">Save Airplane</button>
+                <p id="lblAddPlaneFormInfo"></p>
               </div>
             </div>
 
@@ -90,32 +95,42 @@
               <table class="app-table">
                 <thead>
                   <tr>
-                    <th><h1>ID</h1></th>
-                    <th><h1>model</h1></th>
-                    <th><h1>max passengers</h1></th>
-                    <th><h1>max distance</h1></th>
-                    <th><h1>from</h1></th>
-                    <th><h1>to</h1></th>
+                    <th><h1>Model</h1></th>
+                    <th><h1>Capacity</h1></th>
+                    <th><h1>Takeoff</h1></th>
+                    <th><h1>Travel Time</h1></th>
+                    <th><h1>Destination</h1></th>
+                    <th><h1>Status</h1></th>
+                    <th><h1></h1></th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="tblPlanesInfo">
                   <tr>
-                    <td>B1-747</td>
-                    <td>9518</td>
-                    <td>6369</td>
+                    <td>Boing 747</td>
+                    <td>300</td>
                     <td>01:32:50</td>
+                    <td>1:30</td>
+                    <td>Beijing</td>
+                    <td>Grounded</td>
+                    <td><a class="removePlane" href="#" data-planeID="'+i+'">remove</a></td>                    
                   </tr>
                   <tr>
-                    <td>EB-209</td>
-                    <td>7326</td>
-                    <td>10437</td>
+                    <td>Concorde</td>
+                    <td>100</td>
                     <td>00:51:22</td>
+                    <td>1:30</td>
+                    <td>New York</td>
+                    <td>Grounded</td>
+                    <td><a href="#">X</a></td>
                   </tr>
                   <tr>
-                    <td>B2-747</td>
-                    <td>4162</td>
-                    <td>5327</td>
+                    <td>Airbus A380</td>
+                    <td>840</td>
                     <td>00:24:34</td>
+                    <td>1:30</td>
+                    <td>Sao Paulo</td>
+                    <td>Grounded</td>
+                    <td><a href="#">X</a></td>
                   </tr>                 
                 </tbody>
               </table>
@@ -126,10 +141,31 @@
 
           <div id="contactusWrap" class="pageHidden pages">Contact Us</div>
 
-          <div id="statisticsWrap" class="pageHidden pages">Statistics</div>
+          <div id="statisticsWrap" class="pageHidden pages">
+            <div class="col-md-12 app-vertical-md">
+              <table class="app-table">
+                <thead>
+                  <tr>
+                    <th><h1>Number of users</h1></th>
+                    <th><h1>Number of Airplanes</h1></th>
+                    <th><h1>Number of planes flying</h1></th>
+                  </tr>
+                </thead>
+                <tbody id="tblPlanesInfo">
+                  <tr>
+                    <td id="lblNumberOfUsers"></td>
+                    <td id="lblNumberOfPlanes"></td>
+                    <td id="lblNumberOfPlanesFlying"></td>                
+                  </tr>
+                  <tr>               
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-          <div id="homeWrap" class="pageShown pages">
+          <div id="homeWrap" class="pageShown pages"></div>
 
+          <div id="profileWrap" class="pageHidden pages">
             <div id="wdw-profile" class="wdw profile">
               <h1 id="lblProfile">Profile</h1>
               <input class="lblProfileForm" id="lblFirstnameProfile" type="text" placeholder="Firstname" required="required" />
@@ -137,10 +173,10 @@
               <input class="lblProfileForm" id="lblEmailProfile" type="text" placeholder="Email" required="required" />
               <input class="lblProfileForm" id="lblMobileProfile" type="text" placeholder="Mobile" required="required" />
               <input class="lblProfileForm" id="lblPasswordProfile" type="password" placeholder="Password" required="required" />
-              <input class="lblProfileForm" id="lblPasswordRetypeProfile" type="password" placeholder="Confirm Password" required="required" />
-              <button id="btnDelete" type="button" class="btn btn-primary btn-block btn-large">Delete Profile</button>
+              <button id="btnUpdate" type="button" class="btn btn-primary btn-block btn-large">Update Profile</button>
+              <button id="btnDelete" type="button" class="btn btn-danger btn-block btn-large">Delete Profile</button>
+              <p id="lblUpdateProfileInfo"></p>
             </div>
-            
           </div>
 
           </div>
@@ -149,9 +185,10 @@
 
             <div id="wdw-login" class="wdw login">
               <h1>Login</h1>
-              <input type="text" name="u" placeholder="email"  />
-              <input type="password" name="p" placeholder="password" />
+              <input id="lblLoginEmail" type="text" name="u" placeholder="email"  />
+              <input id="lblLoginPassword" type="password" name="p" placeholder="password" />
               <button id="btnLogin" type="button" class="btn btn-primary btn-block btn-large">Login</button>
+              <p id="lblLoginFormInfo"></p>
             </div>
 
             <div id="wdw-signup" class="wdw signup">
@@ -162,14 +199,14 @@
               <input class="lblSignupForm" id="lblMobile" type="text" placeholder="mobile" required="required" />
               <input class="lblSignupForm" id="lblPassword" type="password" placeholder="password" required="required" />
               <button id="btnSignup" type="button" class="btn btn-primary btn-block btn-large">Signup</button>
+              <p id="lblSignupFormInfo"></p>
             </div>
             
           </div>
 
-
         </div>
 
-        <div id="map" class="col-md-6 app-map"></div>
+        <div id="map" class="col-md-5 app-map"></div>
 
     </div>
 
@@ -177,6 +214,7 @@
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.8.3/jquery.timepicker.min.js"></script>
 
     <!-- Latest compiled and minified JavaScript bootstrap -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

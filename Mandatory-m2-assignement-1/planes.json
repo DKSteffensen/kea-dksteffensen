@@ -1,0 +1,30 @@
+[
+    {
+        "model": "Boing 787",
+        "capacity": "300",
+        "takeoff": "1445817600000",
+        "travelTime": "05:00",
+        "destination": "Beijing"
+    },
+    {
+        "model": "Concorde",
+        "capacity": "100",
+        "takeoff": "1445817600000",
+        "travelTime": "06:00",
+        "destination": "New York"
+    },
+    {
+        "model": "Airbus A380",
+        "capacity": "840",
+        "takeoff": "1445898600000",
+        "travelTime": "11:45",
+        "destination": "Sydney"
+    },
+    {
+        "model": "Test",
+        "capacity": "123",
+        "takeoff": "1445821200000",
+        "travelTime": "02:00",
+        "destination": "Berlin"
+    }
+]

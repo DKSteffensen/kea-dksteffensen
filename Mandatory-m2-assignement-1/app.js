@@ -1,17 +1,30 @@
+onPageUpdate();
+function onPageUpdate(){
+  checkLogin();
+  getUserInfo();
+  clearInfoParagraphs();
+  getPlanesInfo();
+  getCountsJson();
+}
+function clearInfoParagraphs(){
+  $("#lblSignupFormInfo").html("");
+  $("#lblLoginFormInfo").html("");
+  $("#lblUpdateProfileInfo").html("");
+  $("#lblAddPlaneFormInfo").html("");
+}
 function checkLogin(){
   if(typeof localStorage.UserLoggedIn != "undefined" || ""){
-    console.log("Logged in");
     $("#userLoggedIn").addClass("pageShown").removeClass("pageHidden");
-    $("#nouserWrap").removeClass("pageShown").addClass("pageShown");
+    $("#nouserWrap").removeClass("pageShown").addClass("pageHidden");
+    $("#navbarLoggedIn").removeClass("hidden");
   }
   else{
-    console.log("Not logged in");
     $("#userLoggedIn").addClass("pageHidden").removeClass("pageShown");
     $("#nouserWrap").removeClass("pageHidden").addClass("pageShown");
     $("#navbarLoggedIn").addClass("hidden");
   }
 }
-checkLogin();
+
 function logout(){
   localStorage.removeItem("UserLoggedIn");
   checkLogin();
@@ -20,20 +33,113 @@ $("#btnLogout").click(function(){
   logout();
 });
 
+function getUserInfo(){
+  var intUserID = localStorage.UserLoggedIn;
+
+  $.ajax({
+    url: "ajax.php",
+    type: "post",
+    dataType: "json",
+    data: {
+      action: "getUserInfo",
+      userID: intUserID
+    }
+  })
+  .done(function(response){
+    var strFirstname = response.firstname;
+    var strLastname = response.lastname;
+    var strEmail = response.email;
+    var strMobile = response.mobile;
+    var strPassword = response.password;
+
+    $("#lblFirstnameProfile").val(strFirstname);
+    $("#lblLastnameProfile").val(strLastname);
+    $("#lblEmailProfile").val(strEmail);
+    $("#lblMobileProfile").val(strMobile);
+    $("#lblPasswordProfile").val(strPassword);
+  })
+}
+function getCountsJson(){
+  $.ajax({
+    url: "ajax.php",
+    type: "post",
+    dataType: "json",
+    data: {
+      action: "countJSON"
+    }
+  })
+  .done(function(response){
+    $("#lblNumberOfUsers").html(response.countedUsers);
+    $("#lblNumberOfPlanes").html(response.countedPlanes);
+  })
+
+  var countFlying = 0;
+  $(".flying").each(function(){
+    countFlying += 1;
+  })
+
+  $("#lblNumberOfPlanesFlying").html(countFlying);
+
+}
+
+function getPlanesInfo(){
+  $.getJSON("planes.json", function(data){
+
+    var planesHTML = '';
+
+    for (var i = 0; i < data.length; i++) {
+      var strModel = data[i].model;
+      var strCapacity = data[i].capacity;
+      var strTakeoff = data[i].takeoff;
+      var strTravelTime = data[i].travelTime;
+      var strDestination = data[i].destination;
+
+      var intCapacity = parseInt(strCapacity);
+      var intTakeoff = parseInt(strTakeoff);
+
+      var time = new Date(intTakeoff);
+      var hours = time.getHours();
+      hours = ("0" + hours).slice(-2);
+      var minutes = time.getMinutes();
+      minutes = ("0" + minutes).slice(-2);
+      var shownTime = hours+":"+minutes;
+
+
+      planesHTML += '<tr><td>'+strModel+'</td><td>'+intCapacity+'</td><td class="lblShownTime" data-planeID="'+i+'" data-timestamp="'+intTakeoff+'">'+shownTime+'</td><td>'+strTravelTime+'</td><td>'+strDestination+'</td><td class="status lblPlaneStatus'+i+'"></td><td class="btnEditPlane" href="#" data-planeID="'+i+'"><i class="fa fa-pencil-square-o"></i></td></tr>';
+    };
+
+    $("#tblPlanesInfo").html(planesHTML);
+
+  })
+}
+function updatePlaneStatus(){
+  $(".lblShownTime").each(function(){
+    var planeID = $(this).attr("data-planeID");
+    var takeoffTime = $(this).attr("data-timestamp");
+    var currentTime = Date.now();
+    if(takeoffTime < currentTime){
+      $(".lblPlaneStatus"+planeID).html("Flying!").addClass("flying");
+    }
+    else {      
+      $(".lblPlaneStatus"+planeID).html("Grounded!").removeClass("flying");
+    }
+  });
+}
+
+
 function resizeLayout(){
   var iWindowHeight = $(window).height();
   $("#map").height(iWindowHeight+25);  
   $("#wdw-control").height(iWindowHeight);
 }
-
 $( window ).resize(function() {
   resizeLayout();
 });
-
 resizeLayout();
 
 // Navigation system
 $(document).on("click", ".btnNavbar", function(){
+  onPageUpdate();
   var link = $(this).attr("data-link");
   $(".btnNavbar").not(this).parent().removeClass("active")
   $(this).parent().addClass("active");
@@ -49,12 +155,6 @@ $(document).on("click", ".btnNavbar", function(){
 });
 
 
-$(document).on('click','#btnLogin', function(){
-  $(this).text('please wait ...').attr("disabled","disabled").css("cursor", "wait").fadeTo(500, 0.5);
-  console.log("test");
-});
-
-
 $(document).on('click','#btnSignup', function(){
   var strFirstname = $("#lblFirstname").val();
   var strLastname = $("#lblLastname").val();
@@ -63,22 +163,21 @@ $(document).on('click','#btnSignup', function(){
   var strPassword = $("#lblPassword").val();
 
   if(strFirstname == ""){
-     $(this).html("Empty field detected!");
+    $("#lblSignupFormInfo").html("Empty field detected!");
   }
   else if(strLastname == ""){
-     $(this).html("Empty field detected!");
+    $("#lblSignupFormInfo").html("Empty field detected!");
   }
   else if(strEmail == ""){
-     $(this).html("Empty field detected!");
+    $("#lblSignupFormInfo").html("Empty field detected!");
   }
   else if(strMobile == ""){
-     $(this).html("Empty field detected!");
+    $("#lblSignupFormInfo").html("Empty field detected!");
   }
   else if(strPassword == ""){
-     $(this).html("Empty field detected!");
+    $("#lblSignupFormInfo").html("Empty field detected!");
   }
   else {
-     $(this).html("Signup Succesfull!");
   $.ajax({
     url: "ajax.php",
     type: "post",
@@ -93,22 +192,282 @@ $(document).on('click','#btnSignup', function(){
     }
   })
   .done(function(response){
-    var firstname = response.firstname;
-    var lastname = response.lastname;
-    var email = response.email;
-    var mobile = response.mobile;
+      var strResponse = response.answer;
+      var userID = response.userid;
+      console.log(response);
 
-    $("#lblFirstnameProfile").val(firstname);
+      if(strResponse == "succes"){
+
+      localStorage.UserLoggedIn = userID;
+      checkLogin();
+      getUserInfo();
+      }
+      else if(strResponse == "userexists"){
+        $("#lblSignupFormInfo").html("Email already in use.");
+      }
 
   })    
   }
 });
+$(document).on('click', '#btnLogin', function(){
+  var strEmail = $("#lblLoginEmail").val();
+  var strPassword = $("#lblLoginPassword").val();
+
+  if(strEmail == ""){
+     $("#lblLoginFormInfo").html("Empty field detected!");
+  }
+  else if(strPassword == ""){
+     $("#lblLoginFormInfo").html("Empty field detected!");
+  }
+  else {
+    $.ajax({
+      url: "ajax.php",
+      type: "post",
+      dataType: "json",
+      data: {
+        action: "login",
+        email: strEmail,
+        password: strPassword
+      }
+    })
+    .done(function(response){
+      var strResponse = response.answer;
+      var userID = response.userid;
+
+      if(strResponse == "succes"){
+        localStorage.UserLoggedIn = userID;
+        checkLogin();
+        getUserInfo();
+      }
+      else if(strResponse == "error"){
+        $("#lblLoginFormInfo").html("Fatal error, contact page admin.");
+      }
+      else if(strResponse == "nouser"){
+        $("#lblLoginFormInfo").html("Email or Password wrong.");
+      }
+
+    })
+  }
+})
+$(document).on('click', '#btnDelete', function(){
+  var intUserID = localStorage.UserLoggedIn;
+
+  $.ajax({
+      url: "ajax.php",
+      type: "post",
+      data: {
+        action: "deleteUser",
+        userid: intUserID
+      }  
+  })
+  .done(function(){
+    logout();
+  })
+})
+$(document).on('click', '#btnUpdate', function(){
+  var strFirstname = $("#lblFirstnameProfile").val();
+  var strLastname = $("#lblLastnameProfile").val();
+  var strEmail = $("#lblEmailProfile").val();
+  var strMobile = $("#lblMobileProfile").val();
+  var strPassword = $("#lblPasswordProfile").val();
+  var intUserID = localStorage.UserLoggedIn;
+
+  $.ajax({
+    url: "ajax.php",
+    type: "post",
+    data: {
+      action: "updateUser",
+      firstname: strFirstname,
+      lastname: strLastname,
+      email: strEmail,
+      mobile: strMobile,
+      password: strPassword,
+      userid: intUserID
+    }
+  })
+  .done(function(response){
+    if(response == "succes"){
+      $("#lblUpdateProfileInfo").html("Profile update succesfull.");
+      getUserInfo();
+    }
+    else if(response == "emailinuse"){
+      $("#lblUpdateProfileInfo").html("Email in use!");
+      getUserInfo();
+    }
+  })
+})
+$(document).on('click', '#btnAddPlane', function(){
+
+  var strTakeoff = 0;
+  var time = $("#lblPlaneTakeoff").timepicker('getTime', new Date());
+  var converted = Date.parse(time);
+  currentTime = Date.now();
+  if(currentTime > converted){
+    strTakeoff = converted + 86400000;
+  }
+  else {
+    strTakeoff = converted;
+  }
 
 
+  var strModel = $("#lblPlaneModel").val();
+  var strCapacity = $("#lblPlaneCapacity").val();
+  var strTravelTime = $("#lblPlaneTravelTime").val();
+  var strDestination = $("#lblPlaneDestination").val();  
+
+  if(strModel == ""){
+     $("#lblAddPlaneFormInfo").html("Empty field detected!");
+  }
+  else if(strCapacity == ""){
+     $("#lblAddPlaneFormInfo").html("Empty field detected!");
+  }
+  else if(strTakeoff == ""){
+     $("#lblAddPlaneFormInfo").html("Empty field detected!");
+  }
+  else if(strTravelTime == ""){
+     $("#lblAddPlaneFormInfo").html("Empty field detected!");
+  }
+  else if(strDestination == ""){
+     $("#lblAddPlaneFormInfo").html("Empty field detected!");
+  }
+  else {
+    $.ajax({
+      url: "ajax.php",
+      type: "post",
+      data: {
+        action: "addPlane",
+        model: strModel,
+        capacity: strCapacity,
+        takeoff: strTakeoff,
+        travelTime: strTravelTime,
+        destination: strDestination
+      }
+    })
+    .done(function(){    
+      getPlanesInfo();
+    })
+  }
+})
+function closeEditPlane(){
+
+  $("#editPlane").fadeOut('fast', function(){
+    $(this).remove();
+  });
+  $("#editPlaneFiller").fadeOut('fast', function(){
+    $(this).remove();
+  });
+
+}
+$(document).on('click', '.btnEditPlane', function(){
+  var planeID = $(this).attr("data-planeid");
+  $.getJSON("planes.json", function(data){
+
+    var strModel = data[planeID].model;
+    var strCapacity = data[planeID].capacity;
+    var strTakeoff = data[planeID].takeoff;
+    var strTravelTime = data[planeID].travelTime;
+    var strDestination = data[planeID].destination;
+
+    var intCapacity = parseInt(strCapacity);
+    var intTakeoff = parseInt(strTakeoff);
+
+    var time = new Date(intTakeoff);
+    var hours = time.getHours();
+    hours = ("0" + hours).slice(-2);
+    var minutes = time.getMinutes();
+    minutes = ("0" + minutes).slice(-2);
+    var shownTime = hours+":"+minutes;
+
+    var editPlaneHTML = '<div id="editPlaneFiller"></div>';
+    editPlaneHTML += '<div id="editPlane">';
+    editPlaneHTML += '<div id="" class="save-plane">';
+    editPlaneHTML += '<h1>Edit Plane</h1>';
+    editPlaneHTML += '<input id="lblPlaneModelEdit" type="text" placeholder="Model" value="'+strModel+'" required="required" />';
+    editPlaneHTML += '<input id="lblPlaneCapacityEdit" type="text" placeholder="Capacity" value="'+intCapacity+'"/>';
+    editPlaneHTML += '<input id="lblPlaneTakeoffEdit" class="timepicker" type="text" placeholder="Takeoff" value="'+shownTime+'" />';
+    editPlaneHTML += '<input id="lblPlaneTravelTimeEdit" class="timepicker" type="text" placeholder="Travel Time" value="'+strTravelTime+'" />';
+    editPlaneHTML += '<input id="lblPlaneDestinationEdit" type="text" placeholder="Destination" value="'+strDestination+'" />';
+    editPlaneHTML += '<button id="btnUpdatePlane" data-planeID="'+planeID+'" type="button" class="btn btn-primary btn-block btn-large">Update Airplane</button>';
+    editPlaneHTML += '<button id="btnDeletePlane" data-planeID="'+planeID+'" type="button" class="btn btn-danger btn-block btn-large">Delete Airplane</button>';
+    editPlaneHTML += '<p id="lblEditPlaneFormInfo"></p>';
+    editPlaneHTML += '</div>';
+    editPlaneHTML += '</div>';
+
+    $("body").prepend(editPlaneHTML);
+
+    $(".timepicker").timepicker({
+      timeFormat: 'H:i'
+    });
+
+  })
+})
+$(document).on('click', '#editPlaneFiller', function(){
+  closeEditPlane()
+})
+$(document).on('click', '#btnDeletePlane', function(){
+  var planeID = $(this).attr('data-planeID');
+  $.ajax({
+    url: "ajax.php",
+    type: "post",
+    data: {
+      action: "deletePlane",
+      planeid: planeID
+    }
+  })
+  .done(function(){ 
+    closeEditPlane();
+    getPlanesInfo();    
+  })
+})
+$(document).on('click', '#btnUpdatePlane', function(){
+
+  var strTakeoff = 0;
+  var time = $("#lblPlaneTakeoffEdit").timepicker('getTime', new Date());
+  var converted = Date.parse(time);
+  currentTime = Date.now();
+  if(currentTime > converted){
+    strTakeoff = converted + 86400000;
+  }
+  else {
+    strTakeoff = converted;
+  }
+
+  var strModel = $("#lblPlaneModelEdit").val();
+  var strCapacity = $("#lblPlaneCapacityEdit").val();
+  var strTravelTime = $("#lblPlaneTravelTimeEdit").val();
+  var strDestination = $("#lblPlaneDestinationEdit").val();
+
+  var planeID = $(this).attr('data-planeID');
+
+  $.ajax({
+    url: "ajax.php",
+    type: "post",
+    data: {
+      action: "updatePlane",
+      planeid: planeID,
+      model: strModel,
+      capacity: strCapacity,
+      takeoff: strTakeoff,
+      travelTime: strTravelTime,
+      destination: strDestination
+    }
+  })
+  .done(function(response){
+    closeEditPlane();
+    getPlanesInfo();     
+  })
+})
+
+$(".timepicker").timepicker({
+  timeFormat: 'H:i'
+});
 
 
-
-
+setInterval("updatePlaneStatus()", 1000);
+/***************************************************/
+/***************************************************/
+/***************************************************/
+/***************************************************/
 var map;
 var myCenter = new google.maps.LatLng(55.615338, 12.637713);
 var aMarkers = [];
