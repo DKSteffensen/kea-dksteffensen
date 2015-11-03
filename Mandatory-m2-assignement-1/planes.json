@@ -2,7 +2,7 @@
     {
         "model": "Boing 787",
         "capacity": "300",
-        "takeoff": "1445817600000",
+        "takeoff": "1445934600000",
         "travelTime": "05:00",
         "destination": "Beijing"
     },

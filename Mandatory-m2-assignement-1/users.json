@@ -5,5 +5,12 @@
         "email": "t",
         "mobile": "t",
         "password": "t"
+    },
+    {
+        "firstName": "Daniel",
+        "lastName": "Steffensen",
+        "email": "d_kristian_s@hotmail.com",
+        "mobile": "28975955",
+        "password": "test123"
     }
 ]
