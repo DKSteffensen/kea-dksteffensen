@@ -9,24 +9,24 @@
 
 	<nav>
 		<div id="navMain">
-			Logo etc..
+			<span id="logo">Logo etc..</span>
 		</div>
 		<div id="navAccount">
-			<div id="loggedIn">
+			<div id="loggedIn" class="hidden">
 				<ul>
 					<li>
-						<span id="accountMessage">Welcome Firstname lastname</span>
+						<span id="accountMessage">Welcome <span id="loggedInFirstname">Firstname</span> <span id="loggedInLastname">lastname</span></span>
 					</li>
-					<li><a href="#">Account</a>
+					<!--<li><a href="#">Account</a>
 						<ul>
 							<li><a href="#">Order History</a></li>
 							<li><a href="#">Account Details</a></li>
 						</ul>
-					</li>
-					<li><a href="#">Logout</a></li>
+					</li>-->
+					<li><a href="#" id="btnLogout">Logout</a></li>
 				</ul>
 			</div>
-			<div id="loggedOut">
+			<div id="loggedOut" class="hidden">
 				<ul>
 					<li>
 						<div id="loginWrap">
@@ -45,12 +45,12 @@
 	</nav>
 	<div id="container">
 
-		<div id="pageTravelTable">
+		<div id="pageTravelTable" class="pages">
 			<div id="travelTableWrap">
 				<table id="travelTable">
 					<thead>
 						<tr>
-							<td colspan="5">TRAVELS</td>
+							<td colspan="5">Choose your <span>Destination</span></td>
 						</tr>
 					</thead>
 					<tbody>
@@ -68,8 +68,8 @@
 							<td>Atlanta (ATL)</td>
 							<td>04/11 - 2015</td>
 							<td>DS7561</td>
-							<td><a href="#">9800,-</a></td>
-							<td><a href="#">14900,-</a></td>
+							<td><a href="#" data-ticketID="2" data-flightFrom="CPH" data-flightTo="ATL" class="ticket">9800,-</a></td>
+							<td><a href="#" data-ticketID="1" data-flightFrom="CPH" data-flightTo="ATL" class="ticket">14900,-</a></td>
 							<td>-</td>
 						</tr>
 						<tr>
@@ -77,8 +77,8 @@
 							<td>Paris (CDG)</td>
 							<td>05/11 - 2015</td>
 							<td>DS7486</td>
-							<td><a href="#">2400,-</a></td>
-							<td><a href="#">1300,-</a></td>
+							<td><a href="#" data-ticketID="3" data-flightFrom="CPH" data-flightTo="CDG" class="ticket">2400,-</a></td>
+							<td><a href="#" data-ticketID="4" data-flightFrom="CPH" data-flightTo="CDG" class="ticket">1300,-</a></td>
 							<td>-</td>
 						</tr>
 						<tr>
@@ -86,7 +86,7 @@
 							<td>Amsterdam (AMS)</td>
 							<td>06/11 - 2015</td>
 							<td>DS7451</td>
-							<td><a href="#">1100,-</a></td>
+							<td><a href="#" data-ticketID="5" data-flightFrom="CPH" data-flightTo="AMS" class="ticket">1100,-</a></td>
 							<td>-</td>
 							<td>-</td>
 						</tr>
@@ -95,8 +95,8 @@
 							<td>London (LHR)</td>
 							<td>07/11 - 2015</td>
 							<td>DS6921</td>
-							<td><a href="#">2200,-</a></td>
-							<td><a href="#">1300,-</a></td>
+							<td><a href="#" data-ticketID="6" data-flightFrom="CPH" data-flightTo="LHR" class="ticket">2200,-</a></td>
+							<td><a href="#" data-ticketID="7" data-flightFrom="CPH" data-flightTo="LHR" class="ticket">1300,-</a></td>
 							<td>-</td>
 						</tr>
 					</tbody>
@@ -104,7 +104,7 @@
 			</div>
 		</div>
 
-		<div id="pageUserDetails">
+		<div id="pageUserDetails" class="pages hidden">
 			<div id="userDetailsWrap">
 				<div id="userDetails" class="contentWidth">
 					<div id="userDetailsLogin">
@@ -114,6 +114,7 @@
 								<input type="text" id="lblLoginEmail" placeholder="Email" value="">
 								<input type="text" id="lblLoginPassword" placeholder="Password" value="">
 								<button id="btnLoginSubmit">LOGIN</button>
+								<span class="errorMessage"></span>
 						</div>
 
 					</div>
@@ -128,28 +129,29 @@
 								<input type="text" id="lblSignupCPR" placeholder="CPR" value="">
 								<input type="text" id="lblSignupPassword" placeholder="Password" value="">
 								<input type="text" id="lblSignupPasswordRetype" placeholder="Re-type Password" value="">
-								<button id="btnSignupSubmit">LOGIN</button>
-						</div>
+								<button id="btnSignupSubmit">SIGNUP</button>
+								<span class="signupErrorMessage"></span>
+						</div>	
 
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div id="pageTicketDetails">
+		<div id="pageTicketDetails" class="pages hidden">
 			<div id="ticketDetailsWrap">
 				<div id="ticketDetails" class="contentWidth">
 
-					<div id="ticketDetailsTravelTitle">
+					<div class="title">
 						<div>
-							Buying tickets from <span>CPH</span> to <span>ATL</span>
+							Buying tickets from <span id="ticketFlightFrom"></span> to <span id="ticketFlightTo"></span>
 						</div>
 						<div id="ticketsTotalCost">
-							Total cost <span>1498,-</span>
+							Total cost <span id="totalTicketCost"></span>,-
 						</div>
 					</div>
 					<div id="ticketDetailsAmount">
-						<div id="ticketAmount">
+<!-- 						<div id="ticketAmount">
 							<select name="" id="numberOfTickets">
 								<option value="1">1</option>
 								<option value="2">2</option>
@@ -158,7 +160,7 @@
 								<option value="5">5</option>
 							</select>
 							<span>Please select the number of tickets you want to buy.</span>
-						</div>
+						</div> -->
 
 						<div id="ticketsWrap">
 							<div class="tickets">								
@@ -166,12 +168,13 @@
 									<option value="Mr">Mr.</option>
 									<option value="Mrs">Mrs.</option>
 								</select>
-								<input type="text" id="inpFirstname" placeholder="Firstname">
-								<input type="text" id="inpLastname" placeholder="Lastname">
-								<input type="text" id="passport" placeholder="Passport nr.">
+								<input type="text" id="inpFirstname" placeholder="Firstname" value="">
+								<input type="text" id="inpLastname" placeholder="Lastname" value="">
+								<input type="text" id="passport" placeholder="Passport nr." value="">
 							</div>
 						</div>
 					</div>
+					<div class="ticketsError"></div>
 					<div id="ticketsContinue">
 						<button id="btnContinueToPayment">CONTINUE TO CHECK-OUT</button>
 					</div>
@@ -180,18 +183,18 @@
 			</div>
 		</div>
 
-		<div id="pagePaymentOptions">
+		<div id="pagePaymentOptions" class="pages hidden">
 			<div id="paymentOptionsWrap">
 				<div id="paymentOptions" class="contentWidth">
-					<div id="paymentOptionsTitle">
+					<div class="title">
 						Checkout
 					</div>
 
 					<div id="paymentCreditcard">
 						<div id="chooseCard">
-							<input type="checkbox"> Visa
-							<input type="checkbox"> Mastercard
-							<input type="checkbox"> Eurocard
+							<input type="radio" name="cardType" value="Visa"> Visa
+							<input type="radio" name="cardType" value="Mastercard"> Mastercard
+							<input type="radio" name="cardType" value="Eurocard"> Eurocard
 						</div>
 						<div id="cardInformation">
 							<input type="text" id="inpCardname" placeholder="Name on card" value="">
@@ -204,14 +207,29 @@
 						</div>
 					</div>
 					<div id="confirmOrder">
-						<button id="btnConfirmOrder">CONTINUE TO CHECK-OUT</button>
+						<div class="ticketsError"></div>
+						<button id="btnConfirmOrder">CONFIRM ORDER</button>
 					</div>
 
 				</div>
 			</div>			
 		</div>
 
+		<div id="pageAfterOrder" class="pages hidden">
+			<div id="afterOrderWrap">
+				<div id="afterOrder" class="contentWidth">
+					<div class="title">
+						Thank you for you purchase, we hope you will enjoy your flight with us.
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+	<script src="index.js"></script>
 	
 </body>
 </html>

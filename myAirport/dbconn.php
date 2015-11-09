@@ -1,7 +1,7 @@
 <?php
 	$db_host = 'localhost';
-	$db_user = 'root';
-	$db_password = '';
+	$db_user = 'myAirport';
+	$db_password = 'test123';
 	$db_database = 'my_airport';
 
 	try {
