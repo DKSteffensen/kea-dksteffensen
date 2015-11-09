@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<person>
+	<name>Santiago</name>
+	<sibblings>
+		<sibbling>
+			<name id="1">A</name>
+		</sibbling>
+		<sibbling>
+			<name id="2">B</name>
+		</sibbling>				
+	</sibblings>
+</person>

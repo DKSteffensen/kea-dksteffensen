@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript">
+	    // $.get("person.xml", function(sData){
+	    //   console.log(sData);
+	    // });
+	    $.ajax({
+	      method: "GET",
+	      url: "person.xml",
+	      dataType : "xml"
+	    }).done(function(oXml){
+	      $xml = $(oXml);
+	      $name =$xml.find("person>sibblings>sibbling>name").attr("id");
+	      console.log($name);
+	    });
+	</script>
+</body>
+</html>

@@ -1,0 +1,375 @@
+/*
+1. Basics
+2. Navigation
+3. Content
+4. Travel Table
+5. User Details
+6. Ticket Details
+7. Payment Options
+*/
+
+
+
+
+/****************************/
+/*** 1. Basics **************/
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	background-color: CornflowerBlue;
+	background-image: url('flightBig.jpg');
+	background-size: cover;
+	font-family: Helvetica, Arial, sans-serif;
+	color: #333;
+}
+a {
+	color: slategrey;
+	font-weight: bold;
+	text-decoration: none;
+}
+a:hover {
+	color: grey;
+}
+
+/****************************/
+/*** 2. Navigation *********/
+nav {
+	width: 100%;
+	height: 50px;
+	padding: 10px;
+	box-sizing: border-box;
+	background: #333333;
+	background: -moz-linear-gradient(top,  #333333 0%, #111111 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#333333), color-stop(100%,#111111));
+	background: -webkit-linear-gradient(top,  #333333 0%,#111111 100%);
+	background: -o-linear-gradient(top,  #333333 0%,#111111 100%);
+	background: -ms-linear-gradient(top,  #333333 0%,#111111 100%);
+	background: linear-gradient(to bottom,  #333333 0%,#111111 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#111111',GradientType=0 );
+	color: snow;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	z-index: 10;
+}
+#navAccount {
+	display: flex;
+	justify-content: space-between;
+}
+#loggedIn {
+	display: block;
+}
+#navAccount ul {
+	display: inline;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	height: 50px;
+	line-height: 50px;
+}
+#navAccount ul li {
+	float: left;
+	position: relative;
+	border-right: 1px solid #444;
+	border-left: 1px solid #444;
+}
+#navAccount ul li a {
+	text-align: center;
+	display: block;
+	width: 150px;
+	color: CornflowerBlue;
+}
+#navAccount ul li a:hover {
+	color:slategrey;
+}
+#navAccount ul li ul {
+	display: none;
+	position: absolute;
+	top:100%;
+}
+#navAccount ul li:hover > ul {
+	display: block;
+}
+#navAccount ul li ul li {
+	background-color: rgba(0,0,0,0.8);
+	width: 150px;
+}
+#navAccount ul li ul li:last-child{
+	border-radius: 0 0 5px 5px;
+}
+#accountMessage{
+	color: #999;
+	font-size: 14px;
+	padding: 0 15px;
+	font-style: italic;
+}
+#loggedOut {
+	display: none;
+}
+#loginWrap {
+	width: 300px;
+	height: 50px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+#loginButtonWrap {
+	width: 150px;	
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#navAccount input {
+	width: 140px;
+	height: 40px;
+	background-color: #333;
+	outline: 0;
+	border:1px solid CornflowerBlue;
+	padding: 0 0 0 10px;
+	box-sizing: border-box;
+	border-radius: 5px;
+}
+#navAccount button {
+	width: 140px;
+	height: 40px;
+	color: snow;
+	font-weight: bold;
+	border:none;
+	cursor:pointer;
+	background-color: CornflowerBlue;
+	border-radius: 5px;
+
+
+}
+/*** 3. Content ***/
+#container {
+}
+
+.contentWidth {
+	width: 1000px;
+}
+/****************************/
+/*** 4. Travel Table ********/
+#pageTravelTable{
+	display: none;
+	height: calc(100vh);
+	width: 100%;
+	position: relative;
+}
+#travelTableWrap{
+	width: 800px;
+	position: absolute;
+	left: 50%;
+	top:100px;
+	margin:0 0 0 -400px;
+	background-color: rgba(255,255,255,0.8);
+	border-radius: 5px;
+	padding: 10px;
+	box-sizing: border-box;
+	font-size: 14px;
+
+}
+#travelTable{
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+
+}
+#travelTable thead{
+	font-weight: bold;
+	font-size: 20px;
+}
+#travelTable td, #travelTable th{	
+	border: 1px solid transparent  #ccc;	
+	padding: 5px;
+}
+#travelTable tbody th{
+	font-weight: bold;
+	background-color: rgba(101,156,239,0.8);
+}
+#travelTable tbody td{
+	text-align: center;
+	background-color: rgba(0,0,0,0.2);	
+}
+#travelTable tbody td:hover{
+	background-color: rgba(0,0,0,0.3);
+}
+/****************************/
+/*** 5. User Details ********/
+#pageUserDetails{
+	display: none;
+	height: calc(100vh);
+	width: 100%;
+	position: relative;
+}
+#userDetailsWrap{
+	width: 100%;
+	top:100px;
+	position: absolute;
+	background-color: rgba(255,255,255,0.7);
+	display: flex;
+	justify-content: center;
+	padding: 50px;
+	box-sizing: border-box;
+}
+#userDetails {	
+	display: flex;
+	justify-content: space-around;
+}
+#userDetailsLogin{}
+#userDetailsLoginWrap {
+	width: 400px;
+}
+#userDetailsLoginWrap input, #userDetailsLoginWrap button, #userDetailsLoginWrap span {
+	width: 100%;
+	padding: 0;
+	margin-top: 0;
+	border:none;
+	outline: 0;
+}
+#userDetailsBorder {
+	border:1px solid #ccc;
+}
+#userDetailsSignup{
+	width: 400px;
+}
+#userDetailsSignup input, #userDetailsSignup button, #userDetailsSignup span {
+	width: 100%;
+	padding: 0;
+	margin-top: 0;
+	border:none;
+	outline: 0;
+}
+
+/****************************/
+/*** 6. Ticket Details ******/
+
+#pageTicketDetails {
+	display: none;
+	height: calc(100vh);
+	width: 100%;
+	position: relative;
+}
+#ticketDetailsWrap{
+	width: 100%;
+	top:100px;
+	position: absolute;
+	background-color: rgba(255,255,255,0.7);
+	padding: 50px;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+}
+#ticketDetailsAmount {
+	padding: 0 0 50px 0;
+	box-sizing: border-box;	
+}
+#ticketDetailsTravelitle {
+	font-size: 26px;
+	padding: 0 0 20px 0;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: space-between;
+}
+#ticketDetailsTravelitle span {
+	color: CornflowerBlue;
+}
+#ticketAmount {
+	padding: 0 0 20px 0;
+	box-sizing: border-box;	
+}
+#numberOfTickets {
+	width: 100px;
+	height: 50px;
+	border-radius: 5px;
+	border:1px solid CornflowerBlue;
+}
+#ticketsWrap {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+#ticketsContinue {
+	display: flex;
+	justify-content: flex-end;
+}
+#ticketsContinue button {
+	height: 50px;
+	width: 200px;
+	border-radius: 5px;
+	border:none;
+	background-color: CornflowerBlue;
+	color: snow;
+	font-weight: bold;
+	cursor:pointer;
+}
+
+/****************************/
+/*** 7. Payment Options *****/
+
+#pagePaymentOptions {
+	display: block;
+	height: calc(100vh);
+	width: 100%;
+	position: relative;
+}
+#paymentOptionsWrap{
+	width: 100%;
+	top:100px;
+	position: absolute;
+	background-color: rgba(255,255,255,0.7);
+	padding: 50px;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+}
+#paymentOptionsTitle {
+	font-size: 26px;
+	padding: 0 0 20px 0;
+	box-sizing: border-box;
+	width: 100%;
+}
+#paymentCreditcard {
+	padding: 0 0 50px 0;
+	box-sizing: border-box;	
+}
+#chooseCard {
+	padding: 0 0 20px 0;
+	box-sizing: border-box;	
+}
+#cardInformation {
+	width: 500px;
+}
+#cardInformation input {
+	margin: 5px 0;
+}
+#inpCardname, #inpCardNumber {
+	width: 100%;
+}
+#cardInformationTwo {
+	display: flex;
+	justify-content: space-between;	
+}
+#inpValidMonth, #inpValidYear, #inpSecurityCode {
+	width: 30%;
+}
+
+#confirmOrder {
+	display: flex;
+	justify-content: flex-end;
+}
+#confirmOrder button {
+	height: 50px;
+	width: 200px;
+	border-radius: 5px;
+	border:none;
+	background-color: CornflowerBlue;
+	color: snow;
+	font-weight: bold;
+	cursor:pointer;
+}
