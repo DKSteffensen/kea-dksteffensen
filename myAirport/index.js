@@ -58,6 +58,8 @@ function checkIfLoggedIn(){
 			order.customerID = customerID;
 			order.passengers[0].firstname = firstname;
 			order.passengers[0].lastname = lastname;
+			$("#inpFirstname").val(order.passengers[0].firstname);
+			$("#inpLastname").val(order.passengers[0].lastname);
 			loggedIn = 1;
 		}
 		else {
@@ -67,11 +69,6 @@ function checkIfLoggedIn(){
 		}
 	})
 };
-//
-// Order JSON Function
-function orderObject(){
-
-}
 //
 // Login Function
 function login(customerEmail, customerPassword){
@@ -108,8 +105,10 @@ function login(customerEmail, customerPassword){
 			$(".errorMessage").empty();
 
 			login(loginEmail, loginPassword);
+			if(loggedIn == 1){
+				changePage("pageTicketDetails");				
+			}
 
-			changePage("pageTicketDetails");
 		}
 	})
 	$("#btnLogin").click(function(){
@@ -129,10 +128,10 @@ function login(customerEmail, customerPassword){
 			$(".errorMessage").empty();
 			login(loginEmail, loginPassword);
 			var currentPage = $(".pages").not(".hidden").attr("id");
-			if(currentPage == "pageUserDetails"){	
-				changePage("pageTicketDetails");
-				$("#inpFirstname").val(order.passengers[0].firstname);
-				$("#inpLastname").val(order.passengers[0].lastname);
+			if(loggedIn == 1){		
+				if(currentPage == "pageUserDetails"){
+					changePage("pageTicketDetails");
+				}
 			}
 		}
 	})

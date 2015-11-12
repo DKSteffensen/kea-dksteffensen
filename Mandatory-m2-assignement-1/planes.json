@@ -26,5 +26,12 @@
         "takeoff": "1445821200000",
         "travelTime": "02:00",
         "destination": "Berlin"
+    },
+    {
+        "model": "Boeing",
+        "capacity": "123",
+        "takeoff": "1447333200000",
+        "travelTime": "01:00",
+        "destination": "CPH"
     }
 ]
