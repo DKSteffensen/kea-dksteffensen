@@ -1,0 +1,13 @@
+$("#btnFlightsNew").click(function(){
+	$("#flightsNew").addClass("pageActive").removeClass("hiddenPage");
+	$("#flightsMenu").addClass("hiddenPage").removeClass("pageActive");
+})
+$("#btnFlightsList").click(function(){
+	$("#flightsList").addClass("pageActive").removeClass("hiddenPage");
+	$("#flightsMenu").addClass("hiddenPage").removeClass("pageActive");
+})
+$(".btnFlightsBack").click(function(){
+	$("#flightsNew").addClass("hiddenPage").removeClass("pageActive");
+	$("#flightsList").addClass("hiddenPage").removeClass("pageActive");
+	$("#flightsMenu").addClass("pageActive").removeClass("hiddenPage");
+})

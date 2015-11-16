@@ -8,7 +8,7 @@
 /********** 2. Standard CSS *******/
 body {
 	background-color: CornflowerBlue;
-	background-image: url('airportBig.png');
+	background-image: url('airportBig.jpg');
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -24,13 +24,15 @@ a {
 a:hover {
 	color: grey;
 }
+button{
+	cursor: pointer;
+}
 
 /**********************************/
 /********** 3. Navigation *********/
 nav {
 	width: 100%;
 	height: 50px;
-	padding: 10px;
 	box-sizing: border-box;
 	background: #333333;
 	background: -moz-linear-gradient(top,  #333333 0%, #111111 100%);
@@ -41,19 +43,16 @@ nav {
 	background: linear-gradient(to bottom,  #333333 0%,#111111 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#111111',GradientType=0 );
 	color: snow;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 	position: fixed;
 	top: 0;
 	z-index: 10;
 }
 #navAccount {
-	display: flex;
-	justify-content: space-between;
+	display: table;
+	margin: 0 auto;
 }
 #navAccount ul {
-	display: inline;
+	display: inline-block;
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
@@ -148,5 +147,170 @@ nav {
 	height: Calc(100vh - 50px);
 	float:left;
 	padding: 30px;
-	border-box:box-sizing;
+	box-sizing: border-box;
+	overflow: auto;
+}
+
+
+
+.pageHeader{
+	font-size: 34px;
+}
+.pageHeader span{
+	color: CornFlowerBlue;
+}
+.pageContent{
+	padding: 50px 0;
+}
+.pageFooter{
+	text-align: right;
+}
+
+.clear{
+	clear: both;
+}
+
+.btnSubMenuWrap{
+	display: flex;
+	justify-content: space-around;
+}
+.onHover{
+	color: rgba(255,255,255,1.0);
+	width: 100%;
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+	font-size: 12px;
+	position: absolute;
+	bottom: 0;
+	border-radius: 0 0 10px 10px;
+	transition-duration: 0.5s;
+}
+.onHoverBG{
+	background-color: rgba(0,0,0,0.5);	
+}
+.btnSubMenuIcon{
+	width: 200px;
+	height: 200px;
+	line-height: 150px;
+	background-color: rgba(51,51,51,0.8);
+	border-radius: 10px;
+	cursor: pointer;
+	font-size: 100px;
+	position: relative;
+	text-align: center;
+}
+.btnFlightsBack{
+	height: 30px;
+	width: 100px;
+	border-radius: 5px;
+	background-color: snow;
+	border:none;
+}
+
+.activePage{
+	display: block;
+}
+.hiddenPage{
+	display: none;
+}
+
+.tableDesign{
+	width: 940px;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.tableDesign thead{
+	font-weight: bold;
+	background-color: #333;
+}
+.tableDesign td, .tableDesign th{	
+	border: 1px solid transparent  #ccc;
+}
+.tableDesign thead th{
+	padding: 10px;
+	box-sizing: border-box;
+}
+.tableDesign tbody tr:nth-child(odd){
+	background-color: rgba(51,51,51,0.2);		
+}
+.tableDesign tbody tr:nth-child(even){
+	background-color: rgba(51,51,51,0.4);	
+}
+.tableDesign tbody td{
+	text-align: center;
+}
+.tableDesign tbody td:hover{
+	background-color: rgba(100,149,237,0.3);
+}
+.tableLink{
+	background-color: rgba(51,51,51,0.6);	
+}
+.tableDesign td a {
+	display: block;
+	padding: 7px;
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	color: #ccc;
+}
+
+/**********************************/
+/********** 5. Flights ************/
+.fa-listFlights {
+	color: snow;
+}
+.fa-newFlight{
+	color: snow;
+}
+.btnSubMenuIcon:hover > .lblSubMenu{
+	color: rgba(255,255,255,0.0);
+}
+.lblClick{
+	color: rgba(255,255,255,0.0);
+}
+.btnSubMenuIcon:hover > .lblClick{
+	color: rgba(255,255,255,1.0);
+}
+
+.inputLabel{
+	height: 50px;
+	font-size: 22px;
+}
+
+#flightsNewWrap input, #flightsNewWrap select, #flightsNewWrap option{
+	height: 22px;
+	width: 200px;
+	border-radius: 5px;
+	outline: 0;
+	border:none;
+	padding: 0 0 0 5px;
+	box-sizing: border-box;
+	color: Cornflowerblue;
+}
+#flightsNewWrap button {
+	height: 22px;
+	width: 30px;
+	border-radius: 5px;
+	background-color: Cornflowerblue;
+	border:none;
+	color: snow;
+}
+#newFlightLeft{
+	width: 430px;
+	float: left;
+	text-align: right;
+	padding: 0 20px 0 0;
+	box-sizing: border-box;
+}
+#newFlightRight{
+	width: 460px;
+	float: left;
+	padding: 0 0 0 20px;
+	box-sizing: border-box;
+	border-left: 1px dashed cornflowerblue;
+}
+#airplaneSeats{
+	font-size: 12px;
+	color: #ccc;
 }
