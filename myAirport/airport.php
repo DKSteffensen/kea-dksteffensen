@@ -103,39 +103,29 @@
 							</div>
 							<div id="newFlightRight">
 								<div class="inputLabel">
-									<input type="text" placeholder="Flight Number">
-									<button><i class="fa fa-repeat"></i></button>
+									<input type="text" placeholder="Flight Number" id="newFlightNumber" value="">
+									<button id="btnNewFlightNumber"><i class="fa fa-repeat"></i></button>
 								</div>
 								<div class="inputLabel">
-									<select name="airplane" id="">
-										<option value="">Airplane 1</option>
-										<option value="">Airplane 2</option>
-										<option value="">Airplane 3</option>
-										<option value="">Airplane 4</option>
+									<select name="airplane" class="airplaneDropdown" id="newTravelAirplaneDropdown">
 									</select>
-									<span id="airplaneSeats">Seats: 0</span>
+									<span id="airplaneSeats">Seats: <span id="airplaneSeatsInsert">0</span></span>
 								</div>
 								<div class="inputLabel">
-									<select name="departureAirport" id="">
-										<option value="">Airport 1</option>
-										<option value="">Airport 2</option>
-										<option value="">Airport 3</option>
-										<option value="">Airport 4</option>
-									</select>
+									<select name="departureAirport" class="airportDeparture" id="newTravelAirportDeparture">
+									</select>								
 								</div>
 								<div class="inputLabel">
-									<input type="text" placeholder="Departure Time">
+									<input type="text" placeholder="Departure Time" id="newTravelDepartureTime">
+									<span id="airplaneSeats">YYYY-MM-DD HH:MM:SS</span>	
 								</div>
 								<div class="inputLabel">
-									<select name="arrivalAirport" id="">
-										<option value="">Airport 1</option>
-										<option value="">Airport 2</option>
-										<option value="">Airport 3</option>
-										<option value="">Airport 4</option>
+									<select name="arrivalAirport" class="airportArrival" id="newTravelAirportArrival">
 									</select>
 								</div>
 								<div class="inputLabel">
-									<input type="text" placeholder="Arrival Time">
+									<input type="text" placeholder="Arrival Time" id="newTravelArrivalTime">
+									<span id="airplaneSeats">YYYY-MM-DD HH:MM:SS</span>	
 								</div>
 							</div>
 						</div>
@@ -145,76 +135,12 @@
 						<br><hr><br>
 
 						<div id="flightsTicketsWrap">
-							<div class="ticketType">
-								<table class="ticketTypeTable">
-									<thead>
-											<tr>
-												<th colspan="3">													
-													<h4>
-														Ticket 1
-													</h4>
-												</th>
-											</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><input type="text" placeholder="Class"></td>
-											<td><input type="number" placeholder="Price"></td>
-											<td><input type="text" placeholder="Number of tickets"></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-
-
-							<div class="ticketType">
-								<table class="ticketTypeTable">
-									<thead>
-											<tr>
-												<th colspan="3">													
-													<h4>
-														Ticket 2
-													</h4>
-												</th>
-											</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><input type="text" placeholder="Class"></td>
-											<td><input type="number" placeholder="Price"></td>
-											<td><input type="text" placeholder="Number of tickets"></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-
-
-							<div class="ticketType">
-								<table class="ticketTypeTable">
-									<thead>
-											<tr>
-												<th colspan="3">													
-													<h4>
-														Ticket 3
-													</h4>
-												</th>
-											</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><input type="text" placeholder="Class"></td>
-											<td><input type="number" placeholder="Price"></td>
-											<td><input type="text" placeholder="Number of tickets"></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
 						</div>
 
 
 					</div>
 					<div class="pageFooter">
-						<button class="btnSave">Save</button>						
+						<button class="btnSave" id="btnNewFlightSave">Save</button>						
 					</div>
 				</div>
 
@@ -249,7 +175,7 @@
 									<th>DELETE</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="travelsTableBody">
 								<tr data-flightID="1">
 									<td>DS7561</td>
 									<td>OY-DKS</td>
@@ -274,14 +200,14 @@
 									<td class="tableLink"><a href="#" data-flightID="2" class=""><i class="fa fa-pencil-square-o"></i></a></td>
 									<td class="tableLink"><a href="#" data-flightID="2" class=""><i class="fa fa-ban"></i></a></td>
 								</tr>
-								<tr data-flightID="1">
-									<td><input class="tableInputEdit" type="text" value="DS7486"></td>
-									<td><input class="tableInputEdit" type="text" value="OY-JDE"></td>
-									<td><input class="tableInputEdit" type="text" value="CPH"></td>
-									<td><input class="tableInputEdit" type="text" value="21/11/15 - 07:00"></td>
-									<td><input class="tableInputEdit" type="text" value="AMS"></td>
-									<td><input class="tableInputEdit" type="text" value="21/11/15 - 08:45"></td>
-									<td colspan="4" class="tableLink"><a href="#" class="" data-flightID="2"><i class="fa fa-floppy-o"></i></a></td>
+								<tr id="travels1" data-flightID="1">
+									<td><input class="tableInputEdit lblEditTravelNumber" type="text" value="DS7486"></td>
+									<td><input class="tableInputEdit lblEditAirplane" type="text" value="OY-JDE"></td>
+									<td><input class="tableInputEdit lblEditDepartureAirport" type="text" value="CPH"></td>
+									<td><input class="tableInputEdit lblEditDepartureTime" type="text" value="21/11/15 - 07:00"></td>
+									<td><input class="tableInputEdit lblEditArrivalAirport" type="text" value="AMS"></td>
+									<td><input class="tableInputEdit lblEditArrivalTime" type="text" value="21/11/15 - 08:45"></td>
+									<td colspan="4" class="tableLink"><a href="#" class="btnSaveEditTravels" data-flightID="2"><i class="fa fa-floppy-o"></i></a></td>
 								</tr>
 							</tbody>
 						</table>
@@ -299,7 +225,8 @@
 							<button class="btnBack btnSubPage">Back</button>
 						</div>
 					</div>
-						<div class="pageContent">						
+						<div class="pageContent" id="currentTicketTypeEdit">
+
 							<div class="ticketType">
 								<table class="ticketTypeTable">
 									<thead>
@@ -342,9 +269,9 @@
 									</tbody>
 								</table>
 							</div>
-						</div>
 						<div class="pageFooter">
 							<button class="btnSave">Save</button>						
+						</div>
 						</div>
 					</div>
 
@@ -362,16 +289,18 @@
 						<table class="tableDesign">
 							<thead>
 								<tr>
-									<th>Ticket Number</th>
-									<th>Gender</th>
-									<th>Firstname</th>
-									<th>Lastname</th>
-									<th>Passport</th>
-									<th>EDIT</th>
-									<th>REMOVE</th>
+									<th>TICKET</th>
+									<th>GENDER</th>
+									<th>FIRSTNAME</th>
+									<th>LASTNAME</th>
+									<th>PASSPORT</th>
+									<th>CLASS</th>
+									<th>PRICE</th>
+									<th>EDIT </th>
+									<th>DELETE</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="travelsPassengersTableBody">
 								<tr>
 									<td>CABH1BL</td>
 									<td><i class="fa fa-male"></i></td>
@@ -530,11 +459,11 @@
 									<td><input class="tableInputEdit" type="text" value="Daniel"></td>
 									<td><input class="tableInputEdit" type="text" value="Steffensen"></td>
 									<td><input class="tableInputEdit" type="text" value="5436722111"></td>
-									<td><input class="tableInputEdit" type="text" value="Business"></td>
-									<td><input class="tableInputEdit" type="text" value="14900"></td>
-									<td><input class="tableInputEdit" type="text" value="16/11/15 - 16:00"></td>
-									<td><input class="tableInputEdit" type="text" value="CPH"></td>
-									<td><input class="tableInputEdit" type="text" value="ATL"></td>
+									<td>Business</td>
+									<td>14900</td>
+									<td>16/11/15 - 16:00</td>
+									<td>CPH</td>
+									<td>ATL</td>
 									<td colspan="2" class="tableLink"><a href="#" class=""><i class="fa fa-floppy-o"></i></a></td>
 								</tr>
 							</tbody>

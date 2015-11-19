@@ -42,11 +42,11 @@ $(document).on('click', '.btnEditCustomer', function(){
 
 $(document).on('click', '.btnSaveEditCustomer', function(){
 	var customerID = $(this).attr("data-customerID");
-	var newCustomerFirstname = $(".lblEditFirstname").val();
-	var newCustomerLastname = $(".lblEditLastname").val();
-	var newCustomerEmail = $(".lblEditEmail").val();
-	var newCustomerCPR = $(".lblEditCPR").val();
-	var newCustomerPassword = $(".lblEditPassword").val();
+	var newCustomerFirstname = $("#customer"+customerID).find(".lblEditFirstname").val();
+	var newCustomerLastname = $("#customer"+customerID).find(".lblEditLastname").val();
+	var newCustomerEmail = $("#customer"+customerID).find(".lblEditEmail").val();
+	var newCustomerCPR = $("#customer"+customerID).find(".lblEditCPR").val();
+	var newCustomerPassword = $("#customer"+customerID).find(".lblEditPassword").val();
 
 	$.ajax({
 		url: "customerDatabase.php",
@@ -123,7 +123,7 @@ function getCustomerTickets(customerID){
 			var ticketTravelArrivalAirport = oResponse[i].arrival_airport_code;
 			var ticketTravelArrivalAirportName = oResponse[i].arrival_airport_name;
 
-			var ticketRow = '<tr id="ticketID'+ticketID+'"><td class="ticketNumber">'+ticketNumber+'</td><td class="ticketGender" data-gender=""><i class="fa fa-male"></i></td><td class="ticketFirstname">'+ticketCustomerFirstname+'</td><td class="ticketLastname">'+ticketCustomerLastname+'</td><td class="ticketPassport">'+ticketCustomerPassport+'</td><td class="ticketClass">'+ticketClass+'</td><td class="ticketPrice">'+ticketPrice+'</td><td class="ticketDepartureDatetime">'+ticketTravelDepartureTime+'</td><td class="ticketDepartureAirport" title="'+ticketTravelDepartureAirportName+'">'+ticketTravelDepartureAirport+'</td><td class="ticketArrivalAirport" title="'+ticketTravelArrivalAirportName+'">'+ticketTravelArrivalAirport+'</td><td class="tableLink"><a href="#" class="btnEditTicket" data-ticketID="'+ticketID+'"><i class="fa fa-pencil-square-o"></i></a></td><td class="tableLink"><a href="#" class="btnDeleteTicket" data-ticketID="'+ticketID+'"><i class="fa fa-ban"></i></a></td></tr>';
+			var ticketRow = '<tr id="ticketID'+ticketID+'"><td class="ticketNumber">'+ticketNumber+'</td><td class="ticketGender" data-gender="">'+ticketCustomerGender+'</i></td><td class="ticketFirstname">'+ticketCustomerFirstname+'</td><td class="ticketLastname">'+ticketCustomerLastname+'</td><td class="ticketPassport">'+ticketCustomerPassport+'</td><td class="ticketClass">'+ticketClass+'</td><td class="ticketPrice">'+ticketPrice+'</td><td class="ticketDepartureDatetime">'+ticketTravelDepartureTime+'</td><td class="ticketDepartureAirport" title="'+ticketTravelDepartureAirportName+'">'+ticketTravelDepartureAirport+'</td><td class="ticketArrivalAirport" title="'+ticketTravelArrivalAirportName+'">'+ticketTravelArrivalAirport+'</td><td class="tableLink"><a href="#" class="btnEditTicket" data-customerID="'+customerID+'" data-ticketID="'+ticketID+'"><i class="fa fa-pencil-square-o"></i></a></td><td class="tableLink"><a href="#" class="btnDeleteTicket" data-ticketID="'+ticketID+'"><i class="fa fa-ban"></i></a></td></tr>';
 	
 			$("#customersTicketsTableBody").append(ticketRow);
 
@@ -152,4 +152,48 @@ $(document).on('click', '.btnCustomerTickets', function(){
 
 	var customerID = $(this).attr("data-customerID");
 	getCustomerTickets(customerID);
+})
+
+$(document).on('click', '.btnEditTicket', function(){
+	var ticketID = $(this).attr("data-ticketID");
+	var customerID = $(this).attr("data-customerID");
+
+	var ticketNumber = $("#ticketID"+ticketID+" > .ticketNumber").html();
+	var ticketGender = $("#ticketID"+ticketID+" > .ticketGender").html();
+	var ticketFirstname = $("#ticketID"+ticketID+" > .ticketFirstname").html();
+	var ticketLastname = $("#ticketID"+ticketID+" > .ticketLastname").html();
+	var ticketPassport = $("#ticketID"+ticketID+" > .ticketPassport").html();
+	var ticketClass = $("#ticketID"+ticketID+" > .ticketClass").html();
+	var ticketPrice = $("#ticketID"+ticketID+" > .ticketPrice").html();
+	var ticketDepartureDatetime = $("#ticketID"+ticketID+" > .ticketDepartureDatetime").html();
+	var ticketDeparture = $("#ticketID"+ticketID+" > .ticketDepartureAirport").html();
+	var ticketArrival = $("#ticketID"+ticketID+" > .ticketArrivalAirport").html();
+
+	var editTicketRow = '<td>'+ticketNumber+'</td><td><input class="tableInputEdit lblEditTicketGender" type="text" value="'+ticketGender+'"></td><td><input class="tableInputEdit lblEditTicketFirstname" type="text" value="'+ticketFirstname+'"></td><td><input class="tableInputEdit lblEditTicketLastname" type="text" value="'+ticketLastname+'"></td><td><input class="tableInputEdit lblEditTicketPassport" type="text" value="'+ticketPassport+'"></td><td>'+ticketClass+'</td><td>'+ticketPrice+'</td><td>'+ticketDepartureDatetime+'</td><td>'+ticketDeparture+'</td><td>'+ticketArrival+'</td><td colspan="2" class="tableLink"><a href="#" class="btnSaveEditTicket" data-ticketID="'+ticketID+'" data-customerID="'+customerID+'"><i class="fa fa-floppy-o"></i></a></td>';
+	$("#ticketID"+ticketID).html(editTicketRow);
+})
+
+$(document).on('click', '.btnSaveEditTicket', function(){
+	var ticketID = $(this).attr("data-ticketID");
+	var customerID = $(this).attr("data-customerID");
+	var newTicketGender = $(".lblEditTicketGender").val();
+	var newTicketFirstname = $(".lblEditTicketFirstname").val();
+	var newTicketLastname = $(".lblEditTicketLastname").val();
+	var newTicketPassport = $(".lblEditTicketPassport").val();
+
+	$.ajax({
+		url: "customerDatabase.php",
+		type: "post",
+		data: {
+			action: "udpdateTicket",
+			tID: ticketID,
+			tGender: newTicketGender,
+			tFirstname: newTicketFirstname,
+			tLastname: newTicketLastname,
+			tPassport: newTicketPassport
+		}
+	})
+	.done(function(sResponse){
+		getCustomerTickets(customerID);
+	})
 })
