@@ -27,12 +27,12 @@ body {
 	color: #333;
 }
 a {
-	color: slategrey;
+	color: GhostWhite;
 	font-weight: bold;
 	text-decoration: none;
 }
 a:hover {
-	color: grey;
+	color: LightSteelBlue ;
 }
 
 /****************************/
@@ -141,6 +141,9 @@ nav {
 	background-color: CornflowerBlue;
 	border-radius: 5px;
 }
+.mainNavMargin{
+	margin: 0 0 0 20px;
+}
 /*** 3. Content ***/
 #container {
 }
@@ -175,6 +178,13 @@ nav {
 	font-size: 12px;
 	font-style: italic;;
 }
+.subPages{
+	display: none;
+	height: calc(100vh);
+	width: 100%;
+	position: relative;
+	transition-duration:1s;
+}
 /****************************/
 /*** 4. Travel Table ********/
 #travelTableWrap{
@@ -205,13 +215,22 @@ nav {
 	border: 1px solid transparent  #ccc;	
 	padding: 5px;
 }
-#travelTable tbody th{
+#travelTable thead th{
 	font-weight: bold;
+	font-size: 12px;
 	background-color: rgba(101,156,239,0.8);
 }
 #travelTable tbody td{
-	text-align: center;
+	text-align: center;	
+}
+#travelTable tbody tr:nth-child(odd){
+	background-color: rgba(0,0,0,0.3);	
+}
+#travelTable tbody tr:nth-child(even){
 	background-color: rgba(0,0,0,0.2);	
+}
+#travelTable tbody td:nth-child(2), #travelTable tbody td:nth-child(1){
+	text-align: left;
 }
 #travelTable tbody td:hover{
 	background-color: rgba(0,0,0,0.3);
@@ -236,7 +255,7 @@ nav {
 #userDetailsLoginWrap {
 	width: 400px;
 }
-#userDetailsLoginWrap input, #userDetailsLoginWrap button, #userDetailsLoginWrap span {
+#btnDeleteAccountInformation, #btnSaveAccountInformation, #accountInformation input, #userDetailsLoginWrap input, #userDetailsLoginWrap button, #userDetailsLoginWrap span,#userDetailsSignup input, #userDetailsSignup button, #userDetailsSignup span {
 	width: 100%;
 	padding: 0;
 	margin: 0 0 10px;
@@ -248,25 +267,29 @@ nav {
 #userDetailsSignup{
 	width: 400px;
 }
-#userDetailsSignup input, #userDetailsSignup button, #userDetailsSignup span {
-	width: 100%;
-	padding: 0;
-	margin: 0 0 10px;
-	outline: 0;
-}
-#userDetailsLoginWrap input, #userDetailsSignup input {
+#accountInformation input, #userDetailsLoginWrap input, #userDetailsSignup input {
 	height: 40px;
 	border: 1px solid CornflowerBlue;
 	padding: 0 0 0 5px;
 	box-sizing: border-box;
 	border-radius: 5px;
 }
-#userDetailsLoginWrap button, #userDetailsSignup button{
+#btnSaveAccountInformation, #userDetailsLoginWrap button, #userDetailsSignup button{
 	border: none;
 	height: 40px;
 	border-radius: 5px;
 	background-color: CornflowerBlue;
 	cursor: pointer;
+	font-size: bold;
+}
+#btnDeleteAccountInformation {
+	border: none;
+	height: 40px;
+	border-radius: 5px;
+	background-color: brown;
+	cursor: pointer;
+	font-size: bold;
+	color: snow;	
 }
 
 /****************************/
@@ -376,6 +399,22 @@ nav {
 #pageAfterOrder {
 }
 #afterOrderWrap{
+	width: 100%;
+	top:100px;
+	position: absolute;
+	background-color: rgba(255,255,255,0.7);
+	padding: 50px;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+}
+
+/****************************/
+/*** 9. Account *************/
+
+#pageAccount {
+}
+#accountWrap{
 	width: 100%;
 	top:100px;
 	position: absolute;

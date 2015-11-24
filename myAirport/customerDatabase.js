@@ -1,4 +1,4 @@
-function getCustomerList(){
+function getCustomerList(searchWord){
 	$("#customersDatabaseTableBody").empty();
 
 	$.ajax({
@@ -6,7 +6,8 @@ function getCustomerList(){
 		dataType: "json",
 		type: "post",
 		data: {
-			action: "getCustomers"
+			action: "getCustomers",
+			search: searchWord
 		}
 	})
 	.done(function(oResponse){
@@ -26,7 +27,11 @@ function getCustomerList(){
 	})	
 }
 $("#btnMainMenuCustomerDatabase").click(function(){
-	getCustomerList();
+	getCustomerList("");
+})
+$(document).on('keyup', '#customerSearchField', function(){
+	var searchWord = $("#customerSearchField").val();
+	getCustomerList(searchWord);
 })
 $(document).on('click', '.btnEditCustomer', function(){
 	var customerID = $(this).attr("data-customerID");

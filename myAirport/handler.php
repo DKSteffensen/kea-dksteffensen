@@ -3,7 +3,7 @@ include('dbconn.php');
 session_start();
 
 $action = $_POST['action'];
-// $action = "saveTicket";
+// $action = "sendSMS";
 
 if($action == "checkLogin"){
 	if(isset($_SESSION['customerInformation'])){
@@ -30,7 +30,7 @@ else if($action == "login"){
 	$email = $sResult['email'];
 	$cpr = $sResult['cpr'];
 
-	$sCustomer = '{"loggedIn":1,"customerID":'.$customerID.',"firstname":"'.$firstname.'","lastname":"'.$lastname.'","email":"'.$email.'","cpr":"'.$cpr.'"}';
+	$sCustomer = '{"loggedIn":1,"customerID":'.$customerID.',"firstname":"'.$firstname.'","lastname":"'.$lastname.'","email":"'.$email.'","cpr":"'.$cpr.'","password":"'.$customerPassword.'"}';
 	$oCustomer = json_decode($sCustomer);
 	$_SESSION['customerInformation'] = $oCustomer;
 }
@@ -77,6 +77,62 @@ else if($action == "saveTicket"){
 	$sQuery->bindParam(':tGender', $oOrder->passengers[0]->gender);
 	$sQuery->bindParam(':tPassport', $oOrder->passengers[0]->passport);
 	$sQuery->execute();
+}
+else if($action == "getTravelsForCustomer"){
+	$sQuery = $dbh->prepare("SELECT * FROM travels WHERE deleted = 0");
+	$sQuery->execute();
+
+	$oResults = $sQuery->fetchAll(PDO::FETCH_ASSOC);
+
+	$sResults = json_encode($oResults);
+	echo $sResults;
+}
+else if($action == "getTravelsForCustomerTickets"){
+	$tiID = $_POST['tiID'];
+	$sQuery = $dbh->prepare("SELECT id, price, class, number_of_tickets FROM tickets_type WHERE travel_information_id = :tiID");
+	$sQuery->bindParam(":tiID", $tiID);
+	$sQuery->execute();
+
+	$oResults = $sQuery->fetchAll(PDO::FETCH_ASSOC);
+	
+	$sResults = json_encode($oResults);
+	echo $sResults;
+}
+else if($action == "deleteAccount"){
+	$customerID = $_POST['cID'];
+
+	$sQuery = $dbh->prepare("UPDATE customers SET deleted = 1 WHERE id = :id");
+	$sQuery->bindParam(":id", $customerID);
+	$sQuery->execute();
+}
+else if($action == "updateAccount"){
+	$customerID = $_POST['cID'];
+	$firstname = $_POST['accFirstname'];
+	$lastname = $_POST['accLastname'];
+	$email = $_POST['accEmail'];
+	$cpr = $_POST['accCPR'];
+	$password = $_POST['accPassword'];
+
+	$sQuery = $dbh->prepare("UPDATE customers SET firstname = :firstname, lastname = :lastname, email = :email, cpr = :cpr, password = :password WHERE id = :id");
+	$sQuery->bindParam(":id", $customerID);
+	$sQuery->bindParam(":firstname", $firstname);
+	$sQuery->bindParam(":lastname", $lastname);
+	$sQuery->bindParam(":email", $email);
+	$sQuery->bindParam(":cpr", $cpr);
+	$sQuery->bindParam(":password", $password);
+	$sQuery->execute();
+}
+else if($action == "sendSMS"){
+	$phoneNumber = $_POST['phone'];
+	// $phoneNumber = 28975955;
+
+	$key = 'Yzc1-OTgw-NmZi-NTM4-ZjE1-NjM2-Nzdh-ZjNk-YjZl-ODhi-ZjE1';
+	$mobile = $phoneNumber;
+	$message = urlencode("Thank you for buying a ticket at DS Airlines"); // make the phrase URL friendly
+	$sUrl = "http://ecuanota.com/api-send-sms"; // point to this URL
+	$sLink = $sUrl."?key=".$key."&mobile=".$mobile."&message=".$message; // create the SMS
+	file_get_contents($sLink); // send the SMS
+	// echo file_get_contents($sLink); // to see the JSON response from the server
 }
 
 ?>

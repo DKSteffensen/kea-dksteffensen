@@ -12,22 +12,22 @@
 	<nav>
 		<div id="navAccount">		
 			<ul>
-				<span id="loggedIn" class="menuActive">
+				<span id="loggedIn" class="hiddenMenu">
 				<li><a href="#" id="btnMainMenuFlightsManagement" class="navScrollTo" data-page="flightsManagement">Flights Management</a></li>
 				<li><a href="#" id="btnMainMenuCustomerDatabase" class="navScrollTo" data-page="customerDatabase">Customer Database</a></li>		
 				<li><a href="#" id="btnMainMenuFleet" class="navScrollTo" data-page="fleet">Fleet</a></li>
 				<li><a href="#" class="navScrollTo" data-page="worldMap">World Map</a></li>
 					<li><a href="#" class="navScrollTo" data-page="account">Account</a>
 						<ul>
-							<li><p>Hello, Username</p></li>
-							<li><a href="#">Profile Settings</a></li>
-							<li><a href="#">Logout</a></li>
+							<li><p id="welcomeUser">Hello, Username</p></li>
+							<li><a href="#" class="navScrollTo" data-page="account">Profile Settings</a></li>
+							<li><a href="#" id="btnUserLogout">Logout</a></li>
 						</ul>
 					</li>
 				</span>
 				<span id="loggedOut" class="hiddenMenu">
 					<li>
-						<input type="text" id="loginUsername" placeholder="Username">
+						<input type="text" id="loginUserID" placeholder="Username / email">
 					</li>
 					<li>
 						<input type="password" id="loginPassword" placeholder="Password">
@@ -40,6 +40,12 @@
 			</ul>
 		</div>
 	</nav>
+
+
+	<div id="notLoggedIn">
+		<span id="loginStatus">Please login! Test login can be done with Username/Email = 1 & Password = 1</span>
+	</div>
+
 
 	<div id="contentBG">
 		<div id="contentMask">
@@ -80,8 +86,8 @@
 
 
 					<div id="" class="pageContent">
-						<div id="flightsNewWrap">
-							<div id="newFlightLeft">
+						<div class="formWrap">
+							<div class="formLeft">
 								<div class="inputLabel">
 									Flightnumber
 								</div>
@@ -101,7 +107,7 @@
 									Arrival Time
 								</div>
 							</div>
-							<div id="newFlightRight">
+							<div class="formRight">
 								<div class="inputLabel">
 									<input type="text" placeholder="Flight Number" id="newFlightNumber" value="">
 									<button id="btnNewFlightNumber"><i class="fa fa-repeat"></i></button>
@@ -345,6 +351,9 @@
 						<div id="headerText">
 							Customer <span>database</span>.
 						</div>
+						<div id="">
+							<input class="inputSearchField" id="customerSearchField" placeholder="Search for customer">
+						</div>
 					</div>
 					<div id="" class="pageContent">
 						<table class="tableDesign">
@@ -552,7 +561,61 @@
 
 
 
-			<div class="page" id="page5">World Map</div>
+			<div class="page" id="account">
+					<div id="" class="pageContent">
+						<div class="formWrap">
+							<div class="formLeft">
+								<div class="inputLabel">
+									Username
+								</div>
+								<div class="inputLabel">
+									Email
+								</div>
+								<div class="inputLabel">
+									Firstname
+								</div>
+								<div class="inputLabel">
+									Lastname
+								</div>
+								<div class="inputLabel">
+									Password
+								</div>
+								<div class="inputLabel">
+									CPR
+								</div>
+							</div>
+							<div class="formRight">
+								<div class="inputLabel">
+									<input type="text" placeholder="Username" id="profileUsername" value="">
+								</div>
+								<div class="inputLabel">
+									<input type="text" placeholder="Email" id="profileEmail" value="">
+								</div>
+								<div class="inputLabel">
+									<input type="text" placeholder="Firstname" id="profileFirstname" value="">							
+								</div>
+								<div class="inputLabel">
+									<input type="text" placeholder="Lastname" id="profileLastname" value="">
+								</div>
+								<div class="inputLabel">
+									<input type="password" placeholder="Passwprd" id="profilePassword" value="">
+								</div>
+								<div class="inputLabel">
+									<input type="text" placeholder="CPR" id="profileCPR" value="">
+								</div>
+							</div>
+						</div>
+
+						<div class="clear"></div>
+
+						<br><hr><br>
+
+						<div id="flightsTicketsWrap">
+						</div>
+
+
+					</div>
+			</div>
 
 
 
@@ -561,7 +624,6 @@
 
 
 
-			<div class="page" id="account">pageer - 6</div>
 		</div>
 	</div>
 	<script src="js/jquery-1.11.3.min.js"></script>

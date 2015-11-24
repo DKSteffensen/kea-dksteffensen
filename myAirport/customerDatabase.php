@@ -5,8 +5,11 @@ include('dbconn.php');
 $action = $_POST['action'];
 
 if($action == 'getCustomers'){
+	$keyWord = $_POST['search'];
+	$search = "%$keyWord%";
 
-	$sQuery = $dbh->prepare("SELECT id, firstname, lastname, email, cpr, password FROM customers WHERE deleted = 0");
+	$sQuery = $dbh->prepare("SELECT id, firstname, lastname, email, cpr, password FROM customers WHERE deleted = 0 AND firstname LIKE :search OR lastname LIKE :search OR email LIKE :search OR cpr LIKE :search");
+	$sQuery->bindParam(":search", $search);
 	$sQuery->execute();
 	$oResult = $sQuery->fetchAll(PDO::FETCH_ASSOC);
 

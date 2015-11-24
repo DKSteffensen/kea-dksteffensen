@@ -127,6 +127,12 @@ nav {
 #loggedOut input:last-child{
 	margin: 0 0 0 10px;
 }
+#notLoggedIn{
+	display: none;
+	padding: 30px;
+	margin-top: 50px;
+
+}
 /**********************************/
 /********** 4. Content ************/
 #contentBG {
@@ -249,7 +255,7 @@ nav {
 	border: 1px solid transparent  #ccc;
 }
 .tableDesign thead th{
-	padding: 10px;
+	padding: 5px;
 	box-sizing: border-box;
 }
 .tableDesign tbody tr:nth-child(odd){
@@ -281,6 +287,15 @@ nav {
 	border:none;
 	text-align: center;
 }
+.inputSearchField{
+	height: 22px;
+	width: 200px;
+	border-radius: 5px;
+	padding:0 0 0 5px;
+	box-sizing:border-box;
+	border:none;
+	color:cornflowerblue;
+}
 
 /**********************************/
 /********** 5. Flights ************/
@@ -305,7 +320,7 @@ nav {
 	font-size: 22px;
 }
 
-#flightsNewWrap input, #flightsNewWrap select, #flightsNewWrap option, .ticketType input{
+.formWrap input, .formWrap select, .formWrap option, .ticketType input{
 	height: 22px;
 	width: 200px;
 	border-radius: 5px;
@@ -315,7 +330,7 @@ nav {
 	box-sizing: border-box;
 	color: Cornflowerblue;
 }
-#flightsNewWrap button {
+.formWrap button {
 	height: 22px;
 	width: 30px;
 	border-radius: 5px;
@@ -323,14 +338,14 @@ nav {
 	border:none;
 	color: snow;
 }
-#newFlightLeft{
+.formLeft{
 	width: 430px;
 	float: left;
 	text-align: right;
 	padding: 0 20px 0 0;
 	box-sizing: border-box;
 }
-#newFlightRight{
+.formRight{
 	width: 460px;
 	float: left;
 	padding: 0 0 0 20px;

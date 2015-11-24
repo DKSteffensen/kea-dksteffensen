@@ -9,7 +9,8 @@
 
 	<nav>
 		<div id="navMain">
-			<span id="logo">Logo etc..</span>
+			<span id="logo"><a href="#" id="backToFrontpage">Buy Tickets</a></span>
+			<span class="mainNavMargin"><a href="airport.php">To admin system</a></span>
 		</div>
 		<div id="navAccount">
 			<div id="loggedIn" class="hidden">
@@ -17,12 +18,12 @@
 					<li>
 						<span id="accountMessage">Welcome <span id="loggedInFirstname">Firstname</span> <span id="loggedInLastname">lastname</span></span>
 					</li>
-					<!--<li><a href="#">Account</a>
+					<li><a href="#">Account</a>
 						<ul>
-							<li><a href="#">Order History</a></li>
-							<li><a href="#">Account Details</a></li>
+							<li><a href="#" id="orderHistory">Order History</a></li>
+							<li><a href="#" id="accountDetails">Account Details</a></li>
 						</ul>
-					</li>-->
+					</li>
 					<li><a href="#" id="btnLogout">Logout</a></li>
 				</ul>
 			</div>
@@ -39,7 +40,8 @@
 							<button id="btnLogin">LOGIN</button>
 						</div>
 					</li>
-				</ul>				
+				</ul>
+			<span class="mainNavMargin">For test login use: Email = 1 & Password = 1</span>				
 			</div>
 		</div>
 	</nav>
@@ -52,17 +54,17 @@
 						<tr>
 							<td colspan="5">Choose your <span>Destination</span></td>
 						</tr>
-					</thead>
-					<tbody>
 						<tr>
 							<th>From</th>
 							<th>Destination</th>
 							<th>Date</th>
 							<th>Flight nr.</th>
-							<th>Economy</th>
-							<th>Business</th>
-							<th>First</th>
+							<th>Ticket 1</th>
+							<th>Ticket 2</th>
+							<th>Ticket 3</th>
 						</tr>
+					</thead>
+					<tbody id="travelTableBody">
 						<tr>
 							<td>Copenhagen (CPH)</td>
 							<td>Atlanta (ATL)</td>
@@ -171,6 +173,7 @@
 								<input type="text" id="inpFirstname" placeholder="Firstname" value="">
 								<input type="text" id="inpLastname" placeholder="Lastname" value="">
 								<input type="text" id="passport" placeholder="Passport nr." value="">
+								<input type="text" id="phone" placeholder="Phonenumber(optinal)" value="">
 							</div>
 						</div>
 					</div>
@@ -220,6 +223,26 @@
 				<div id="afterOrder" class="contentWidth">
 					<div class="title">
 						Thank you for you purchase, we hope you will enjoy your flight with us.
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="pageAccount" class="pages hidden">
+			<div id="accountWrap">
+				<div id="account" class="contentWidth">
+					<div class="title">
+						Account
+					</div>
+
+					<div id="accountInformation">
+						<input type="text" id="accountFirstname" placeholder="Firstname" value="">
+						<input type="text" id="accountLastname" placeholder="Lastname" value="">
+						<input type="text" id="accountEmail" placeholder="Email" value="">
+						<input type="text" id="accountCPR" placeholder="CPR" value="">
+						<input type="password" id="accountPassword" placeholder="Password" value="">
+						<button id="btnSaveAccountInformation">SAVE</button>
+						<button id="btnDeleteAccountInformation">DELETE</button>
 					</div>
 				</div>
 			</div>
